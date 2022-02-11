@@ -1,0 +1,237 @@
+name: build-all
+
+on:
+  workflow_dispatch:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      rms-test-updated: ${{ fromJSON(steps.check.outputs.results).rms-test }}
+      rms-platform-updated: ${{ fromJSON(steps.check.outputs.results).rms-platform }}
+      rms-client-api-updated: ${{ fromJSON(steps.check.outputs.results).rms-client-api }}
+      rms-client-api-local-updated: ${{ fromJSON(steps.check.outputs.results).rms-client-api-local }}
+      rms-client-api-remote-updated: ${{ fromJSON(steps.check.outputs.results).rms-client-api-remote }}
+      rms-client-ui-console-updated: ${{ fromJSON(steps.check.outputs.results).rms-client-ui-console }}
+      rms-application-updated: ${{ fromJSON(steps.check.outputs.results).rms-application }}
+      rms-server-updated: ${{ fromJSON(steps.check.outputs.results).rms-server }}
+    steps:
+      - id: check
+        uses: mamezou-tech/monorepo-update-checker@main
+        with:
+          projectPaths: |
+           "rms-test:rms-test"
+           "rms-platform:rms-platform"
+           "rms-client-api:rms-client-api"
+           "rms-client-api-local:rms-client-api-local"
+           "rms-client-api-remote:rms-client-api-remote"
+           "rms-client-ui-console:rms-client-ui-console"
+           "rms-application:rms-application"
+           "rms-server:rms-server"
+      - run: echo ${{ toJSON(steps.check.outputs.results) }}
+
+  rms-application-parent:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Publish to GitHub Packages Apache Maven
+        run: |
+          mvn -Pcli clean deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  rms-test:
+    needs: [rms-application-parent, check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Publish to GitHub Packages Apache Maven
+        if: ${{ needs.check.outputs.rms-test-updated == 'true' }}
+        run: |
+          mvn -B -Pcli deploy --file pom.xml
+        working-directory: rms-test
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  rms-platform:
+    needs: [rms-test, check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Publish to GitHub Packages Apache Maven
+        if: ${{ needs.check.outputs.rms-platform-updated == 'true' }}
+        run: |
+          mvn -B -Pcli deploy --file pom.xml
+        working-directory: rms-platform
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  rms-client-api:
+    needs: [rms-platform, check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Publish to GitHub Packages Apache Maven
+        if: ${{ needs.check.outputs.rms-client-api-updated == 'true' }}
+        run: |
+          mvn -B -Pcli deploy --file pom.xml
+        working-directory: rms-client-api
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  rms-client-api-local:
+    needs: [rms-client-api, rms-application, check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Publish to GitHub Packages Apache Maven
+        if: ${{ needs.check.outputs.rms-client-api-local-updated == 'true' }}
+        run: |
+          mvn -B -Pcli deploy --file pom.xml
+        working-directory: rms-client-api-local
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  rms-client-api-remote:
+    if: ${{ needs.check.outputs.rms-client-api-remote-updated == 'true' }}
+    needs: [rms-client-api-local, check]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Java11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Publish to GitHub Packages Apache Maven
+      run: |
+        mvn -B -Pcli deploy --file pom.xml
+      working-directory: rms-client-api-remote
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+  rms-client-ui-console:
+    if: ${{ needs.check.outputs.rms-client-ui-console-updated == 'true' }}
+    needs: [rms-client-api, check]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Java11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Publish to GitHub Packages Apache Maven
+      run: |
+        mvn -B -Pcli deploy --file pom.xml
+      working-directory: rms-client-ui-console
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+  rms-application:
+    needs: [rms-platform, check]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Java11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Publish to GitHub Packages Apache Maven
+      if: ${{ needs.check.outputs.rms-application-updated == 'true' }}
+      run: |
+        mvn -B -Pcli deploy --file pom.xml
+      working-directory: rms-application
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+  rms-server:
+    if: ${{ needs.check.outputs.rms-server-updated == 'true' }}
+    needs: [rms-application, check]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Java11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Publish to GitHub Packages Apache Maven
+      run: |
+        mvn -B -Pcli deploy --file pom.xml
+      working-directory: rms-server
+      env:
+        GITHUB_TOKEN: ${{ github.token }}

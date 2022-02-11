@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.extact</groupId>
+    <artifactId>rms-parent</artifactId>
+    <version>1.0.0-beta.1</version>
+  </parent>
+  <artifactId>rms-client-ui-console</artifactId>
+  <packaging>jar</packaging>
+
+  <name>rms-client-ui-console</name>
+  <description>
+    Console UI to operate the rms application
+  </description>
+
+  <properties>
+    <mainClass>io.extact.rms.client.console.ConsoleMain</mainClass>
+    <target.env>develop</target.env>
+  </properties>
+
+  <dependencies>
+    <!-- ==================================== -->
+    <!-- *** module dependencies ***          -->
+    <!-- ==================================== -->
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-platform</artifactId>
+      <!-- beans.xml also excludes server module when client module is available -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.bitbucket.b_c</groupId>
+          <artifactId>jose4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.eclipse.persistence</groupId>
+          <artifactId>org.eclipse.persistence.jpa</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-client-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** provided scope dependencies ***      -->
+    <!-- ======================================== -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** compile scope dependencies ***       -->
+    <!-- ======================================== -->
+    <!-- dependent JakartaEE APIs -->
+    <dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+    </dependency>
+
+    <!-- dependent MicroProfile APIs -->
+    <dependency>
+      <groupId>org.eclipse.microprofile.config</groupId>
+      <artifactId>microprofile-config-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.microprofile.cdi</groupId>
+      <artifactId>helidon-microprofile-cdi</artifactId>
+      <scope>compile</scope><!-- for ConsoleMain -->
+    </dependency>
+
+    <!-- dependent Console framework -->
+    <dependency>
+      <groupId>org.beryx</groupId>
+      <artifactId>text-io</artifactId>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** runtime scope dependencies ***       -->
+    <!-- ======================================== -->
+    <dependency>
+      <groupId>io.helidon.microprofile.config</groupId>
+      <artifactId>helidon-microprofile-config</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** test scope dependencies ***          -->
+    <!-- ======================================== -->
+    <!-- for LayerDependencyArchUnitTest -->
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-server</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>env/profile/${target.env}</directory>
+      </resource>
+    </resources>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>remote</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>io.extact</groupId>
+          <artifactId>rms-client-api-remote</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>io.extact</groupId>
+          <artifactId>rms-client-api-local</artifactId>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>local</id>
+      <dependencies>
+        <dependency>
+          <groupId>io.extact</groupId>
+          <artifactId>rms-client-api-local</artifactId>
+          <version>${project.parent.version}</version>
+          <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>io.extact</groupId>
+          <artifactId>rms-client-api-remote</artifactId>
+          <version>${project.parent.version}</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>product</id>
+      <properties>
+        <target.env>product</target.env>
+      </properties>
+    </profile>
+  </profiles>
+
+</project>

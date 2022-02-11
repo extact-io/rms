@@ -1,0 +1,968 @@
+
+tags:
+- 
+  name: Admin
+- 
+  name: Authenticate
+- 
+  name: Common
+- 
+  name: Member
+components: 
+  schemas:
+    AddRentalItemDto: 
+      required:
+      - serialNo
+      properties:
+        itemName: 
+          type: string
+        serialNo: 
+          type: string
+      description: レンタル品登録用DTO
+      type: object
+    AddReservationDto: 
+      required:
+      - endDateTime
+      - rentalItemId
+      - startDateTime
+      - userAccountId
+      properties:
+        endDateTime: 
+          $ref: '#/components/schemas/localDateTime'
+          format: date-time
+          type: string
+        note: 
+          type: string
+        rentalItemId: 
+          format: int32
+          type: integer
+        startDateTime: 
+          $ref: '#/components/schemas/localDateTime'
+          format: date-time
+          type: string
+        userAccountId: 
+          format: int32
+          type: integer
+      description: 予約登録用DTO
+      type: object
+    AddUserAccountDto: 
+      required:
+      - loginId
+      - password
+      - userName
+      - userType
+      properties:
+        contact: 
+          type: string
+        loginId: 
+          type: string
+        password: 
+          type: string
+        phoneNumber: 
+          type: string
+        userName: 
+          type: string
+        userType: 
+          $ref: '#/components/schemas/UserType'
+      description: ユーザ登録用DTO
+      type: object
+    GenericErrorInfo: 
+      properties:
+        errorMessage: 
+          description: 発生した例外に設定されていたメッセージ
+          example: 例外のエラーメッセージ
+          type: string
+        errorReason: 
+          description: エラー理由として発生した例外のクラス名を設定
+          example: 例外クラス名
+          type: string
+      description: エラー情報
+      type: object
+    LoginDto: 
+      required:
+      - loginId
+      - password
+      properties:
+        loginId: 
+          maxLength: 10
+          minLength: 5
+          type: string
+        password: 
+          maxLength: 10
+          minLength: 5
+          type: string
+      description: ログインDTO
+      type: object
+    RentalItemResourceDto: 
+      required:
+      - id
+      - serialNo
+      properties:
+        id: 
+          format: int32
+          type: integer
+        itemName: 
+          type: string
+        serialNo: 
+          type: string
+      description: レンタル品DTO
+      type: object
+    ReservationResourceDto: 
+      required:
+      - endDateTime
+      - id
+      - rentalItemId
+      - startDateTime
+      - userAccountId
+      properties:
+        endDateTime: 
+          $ref: '#/components/schemas/localDateTime'
+          format: date-time
+          type: string
+        id: 
+          format: int32
+          type: integer
+        note: 
+          type: string
+        rentalItemDto: 
+          $ref: '#/components/schemas/RentalItemResourceDto'
+        rentalItemId: 
+          format: int32
+          type: integer
+        startDateTime: 
+          $ref: '#/components/schemas/localDateTime'
+          format: date-time
+          type: string
+        userAccountDto: 
+          $ref: '#/components/schemas/UserAccountResourceDto'
+        userAccountId: 
+          format: int32
+          type: integer
+      description: 予約DTO
+      type: object
+    UserAccountResourceDto: 
+      required:
+      - id
+      - loginId
+      - password
+      - userType
+      properties:
+        contact: 
+          type: string
+        id: 
+          format: int32
+          type: integer
+        loginId: 
+          type: string
+        password: 
+          type: string
+        phoneNumber: 
+          type: string
+        userName: 
+          type: string
+        userType: 
+          $ref: '#/components/schemas/UserType'
+      description: ユーザDTO
+      type: object
+    UserType: 
+      enum:
+      - ADMIN
+      - MEMBER
+      type: string
+    ValidationErrorInfo: 
+      properties:
+        errorMessage: 
+          description: 発生した例外に設定されていたメッセージ
+          example: 例外のエラーメッセージ
+          type: string
+        errorReason: 
+          description: エラー理由として発生した例外のクラス名を設定
+          example: 例外クラス名
+          type: string
+        errorItems: 
+          items: 
+            $ref: '#/components/schemas/ValidationErrorItem'
+          type: array
+      description: パラメータチェックエラー情報
+      type: object
+    ValidationErrorItem: 
+      properties:
+        fieldName: 
+          description: エラーとなった項目
+          type: string
+        message: 
+          description: エラーメッセージ
+          type: string
+      description: 1件ごとのチェックエラー情報
+      type: object
+    localDateTime: 
+      description: 日時型
+      example: 20210314
+      format: yyyyMMdd HH:mm
+      type: string
+  responses:
+    DataDupricate: 
+      headers:
+        Rms-Exception: 
+          description: 発生例外のBusinessFlowExceptionが設定される
+          required: true
+          schema: 
+            type: string
+          style: simple
+      content:
+        application/json: 
+          schema: 
+            $ref: '#/components/schemas/GenericErrorInfo'
+      description: 登録データが既に登録されている
+    DataRefered: 
+      headers:
+        Rms-Exception: 
+          description: 発生例外のBusinessFlowExceptionが設定される
+          required: true
+          schema: 
+            type: string
+          style: simple
+      content:
+        application/json: 
+          schema: 
+            $ref: '#/components/schemas/GenericErrorInfo'
+      description: 操作対象を参照するデータが存在する
+    Forbidden: 
+      headers:
+        Rms-Exception: 
+          description: 発生例外のBusinessFlowExceptionが設定される
+          required: true
+          schema: 
+            type: string
+          style: simple
+      content:
+        application/json: 
+          schema: 
+            $ref: '#/components/schemas/GenericErrorInfo'
+      description: 対象データに対する操作権限がない場合
+    NotFound: 
+      headers:
+        Rms-Exception: 
+          description: 発生例外のBusinessFlowExceptionが設定される
+          required: true
+          schema: 
+            type: string
+          style: simple
+      content:
+        application/json: 
+          schema: 
+            $ref: '#/components/schemas/GenericErrorInfo'
+      description: 該当データがない場合
+    ParameterError: 
+      headers:
+        Rms-Exception: 
+          description: 発生例外のConstraintViolationExceptionが設定される
+          required: true
+          schema: 
+            type: string
+          style: simple
+      content:
+        application/json: 
+          schema: 
+            $ref: '#/components/schemas/ValidationErrorInfo'
+      description: パラメータエラーの場合
+    ServerError: 
+      headers:
+        Rms-Exception: 
+          description: 発生例外のRmsSystemExceptionが設定される
+          required: true
+          schema: 
+            type: string
+          style: simple
+      content:
+        application/json: 
+          schema: 
+            $ref: '#/components/schemas/GenericErrorInfo'
+      description: アプリケーション内部でエラーが発生した場合
+    UnknownData: 
+      headers:
+        Rms-Exception: 
+          description: 発生例外のBusinessFlowExceptionが設定される
+          required: true
+          schema: 
+            type: string
+          style: simple
+      content:
+        application/json: 
+          schema: 
+            $ref: '#/components/schemas/GenericErrorInfo'
+      description: 処理対象データが存在しない場合
+  securitySchemes:
+    RmsJwtAuth: 
+      bearerFormat: JWT
+      description: 認証と認可はMicroProfile JWT RBAC Securityの仕様をもとに行い認証エラーの場合は401を認可エラーの場合は403を返す
+      in: header
+      scheme: bearer
+      type: http
+info: 
+  contact: 
+    name: 課外活動
+    url: https://extact-io.github.io/rms/site/modules/index.html
+  title: レンタル予約システムの公開API
+  version: 0.0.1-SNAPSHOT
+openapi: 3.0.3
+paths:
+  /rms/items: 
+    post: 
+      tags:
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: シリアル番号が既に使われている場合は409を返す
+      operationId: addRentalItem
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/AddRentalItemDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/RentalItemResourceDto'
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '409': 
+          $ref: '#/components/responses/DataDupricate'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: レンタル品を登録する
+    get: 
+      tags:
+      - Member
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: 登録されているすべてのレンタル品を取得する
+      operationId: getAllRentalItems
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/RentalItemResourceDto'
+                type: array
+          description: 検索結果
+      summary: レンタル品の全件を取得する
+    put: 
+      tags:
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: 依頼されたレンタル品を更新する
+      operationId: updateRentalItem
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/RentalItemResourceDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/RentalItemResourceDto'
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: レンタル品を更新する
+  /rms/items/rentable: 
+    get: 
+      tags:
+      - Member
+      parameters:
+      - 
+        description: 利用開始日時
+        in: query
+        name: from
+        required: true
+        schema: 
+          allOf:
+          - 
+            $ref: '#/components/schemas/localDateTime'
+          - 
+            nullable: false
+      - 
+        description: 利用開始日時
+        in: query
+        name: to
+        required: true
+        schema: 
+          allOf:
+          - 
+            $ref: '#/components/schemas/localDateTime'
+          - 
+            nullable: false
+      security:
+      - RmsJwtAuth: []
+      description: 該当期間に予約可能なレンタル品を検索する
+      operationId: findCanRentedItemAtTerm
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/RentalItemResourceDto'
+                type: array
+          description: 検索結果
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 該当期間に予約可能なレンタル品を検索する
+  /rms/items/{rentalItemId}: 
+    delete: 
+      tags:
+      - Admin
+      parameters:
+      - 
+        description: レンタル品ID
+        in: path
+        name: rentalItemId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      security:
+      - RmsJwtAuth: []
+      description: 削除対象のレンタル品を参照する予約が存在する場合は削除は行わずエラーにする
+      operationId: deleteRentalItem
+      responses:
+        '200': 
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '409': 
+          $ref: '#/components/responses/DataRefered'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: レンタル品を削除する
+  /rms/items/{rentalItemId}/rentable: 
+    get: 
+      tags:
+      - Member
+      parameters:
+      - 
+        description: レンタル品ID
+        in: path
+        name: rentalItemId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      - 
+        description: 利用開始日時
+        in: query
+        name: from
+        required: true
+        schema: 
+          allOf:
+          - 
+            $ref: '#/components/schemas/localDateTime'
+          - 
+            nullable: false
+      - 
+        description: 利用開始日時
+        in: query
+        name: to
+        required: true
+        schema: 
+          allOf:
+          - 
+            $ref: '#/components/schemas/localDateTime'
+          - 
+            nullable: false
+      security:
+      - RmsJwtAuth: []
+      description: レンタル品が該当期間に予約可能かを返す
+      operationId: canRentedItemAtTerm
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                type: boolean
+          description: trueならレンタル可
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: レンタル品が該当期間に予約可能かを返す
+  /rms/login: 
+    post: 
+      tags:
+      - Authenticate
+      description: ログイン名とパスワードに一致するユーザを取得する
+      operationId: authenticate
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/LoginDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/UserAccountResourceDto'
+          description: 認証成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/NotFound'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: ユーザ認証を行う
+    get: 
+      tags:
+      - Authenticate
+      parameters:
+      - 
+        description: ログインId
+        in: query
+        name: loginId
+        required: true
+        schema: 
+          maxLength: 10
+          minLength: 5
+          type: string
+      - 
+        description: パスワード
+        in: query
+        name: password
+        required: true
+        schema: 
+          maxLength: 10
+          minLength: 5
+          type: string
+      description: ログイン名とパスワードに一致するユーザを取得する
+      operationId: authenticateForTest
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/UserAccountResourceDto'
+          description: 認証成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/NotFound'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: ユーザ認証を行う（curlのテスト用）
+  /rms/reservations: 
+    post: 
+      tags:
+      - Member
+      security:
+      - RmsJwtAuth: []
+      description: 予約対象のレンタル品が存在しない場合は404を予定期間に別の予約が既に入っている場合は409を返す
+      operationId: addReservation
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/AddReservationDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ReservationResourceDto'
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '409': 
+          $ref: '#/components/responses/DataDupricate'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: レンタル品を予約する
+    get: 
+      tags:
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: 登録されているすべての予約を取得する
+      operationId: getAllReservations
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/ReservationResourceDto'
+                type: array
+          description: 検索結果
+      summary: 予約の全件を取得する
+    put: 
+      tags:
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: 依頼された予約を更新する。ユーザアカウントとレンタル品のエンティティは更新時に使用していないためIDのみ設定すればよい
+      operationId: updateReservation
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/ReservationResourceDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/ReservationResourceDto'
+          description: 登録成功。IDに対するユーザアカウントとレンタル品のエンティティは設定されて返される
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 予約を更新する
+  /rms/reservations/item/{itemId}/startdate/{startDate}: 
+    get: 
+      tags:
+      - Member
+      parameters:
+      - 
+        description: レンタル品ID
+        in: path
+        name: itemId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      - 
+        description: 利用開始日
+        in: path
+        name: startDate
+        required: true
+        schema: 
+          example: 20201230
+          format: yyyyMMdd
+          nullable: false
+          type: string
+      security:
+      - RmsJwtAuth: []
+      description: 指定されたレンタル品と利用開始日に一致する予約を検索する
+      operationId: findReservationByRentalItemAndStartDate
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/ReservationResourceDto'
+                type: array
+          description: 検索結果
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/NotFound'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 指定されたレンタル品と利用開始日で予約を検索する
+  /rms/reservations/item/{rentalItemId}: 
+    get: 
+      tags:
+      - Member
+      parameters:
+      - 
+        description: レンタル品ID
+        in: path
+        name: rentalItemId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      security:
+      - RmsJwtAuth: []
+      description: 指定されたレンタル品に対する予約を検索する
+      operationId: findReservationByRentalItemId
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/ReservationResourceDto'
+                type: array
+          description: 検索結果
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 指定されたレンタル品に対する予約を検索する
+  /rms/reservations/own: 
+    get: 
+      tags:
+      - Member
+      security:
+      - RmsJwtAuth: []
+      description: ログインユーザが予約者となっている予約の一覧を取得する。このAPIは/reservations/reserver/{reserverId}のエイリアスとなっている
+      operationId: getOwnReservations
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/ReservationResourceDto'
+                type: array
+          description: 検索結果
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+      summary: 自分の予約一覧を取得する
+  /rms/reservations/own/{reservationId}: 
+    delete: 
+      tags:
+      - Member
+      parameters:
+      - 
+        description: 予約ID
+        in: path
+        name: reservationId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      security:
+      - RmsJwtAuth: []
+      description: 依頼された予約IDに対する予約をキャンセルする。予約のキャンセルは予約した人しか行えない。他の人が予約キャンセルを行った場合は禁止操作としてエラーにする
+      operationId: cancelReservation
+      responses:
+        '200': 
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '403': 
+          $ref: '#/components/responses/Forbidden'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 予約をキャンセルする
+  /rms/reservations/reserver/{reserverId}: 
+    get: 
+      tags:
+      - Member
+      parameters:
+      - 
+        description: ユーザID
+        in: path
+        name: reserverId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      security:
+      - RmsJwtAuth: []
+      description: 指定されたユーザが予約者の予約を検索する
+      operationId: findReservationByReserverId
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/ReservationResourceDto'
+                type: array
+          description: 検索結果
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 指定されたユーザが予約者の予約を検索する
+  /rms/reservations/{reservationId}: 
+    delete: 
+      tags:
+      - Admin
+      parameters:
+      - 
+        description: 予約ID
+        in: path
+        name: reservationId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      security:
+      - RmsJwtAuth: []
+      description: 予約を削除する
+      operationId: deleteReservation
+      responses:
+        '200': 
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 予約を削除する
+  /rms/users: 
+    post: 
+      tags:
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: ログインIDが既に使われている場合は409を返す
+      operationId: addUserAccount
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/AddUserAccountDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/UserAccountResourceDto'
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '409': 
+          $ref: '#/components/responses/DataDupricate'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: ユーザを登録する
+    get: 
+      tags:
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: 登録されているすべてのユーザを取得する
+      operationId: getAllUserAccounts
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                items: 
+                  $ref: '#/components/schemas/UserAccountResourceDto'
+                type: array
+          description: 検索結果
+      summary: ユーザの全件を取得する
+    put: 
+      tags:
+      - Admin
+      security:
+      - RmsJwtAuth: []
+      description: 依頼されたユーザを更新する
+      operationId: updateUserAccount
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/UserAccountResourceDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/UserAccountResourceDto'
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: ユーザを更新する
+  /rms/users/own: 
+    get: 
+      tags:
+      - Common
+      security:
+      - RmsJwtAuth: []
+      description: ログインしているユーザ自身のプロファイル情報を返す
+      operationId: getOwnUserProfile
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/UserAccountResourceDto'
+          description: プロファイル情報
+        '404': 
+          $ref: '#/components/responses/NotFound'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 自分のプロファイル情報を取得する
+    put: 
+      tags:
+      - Common
+      security:
+      - RmsJwtAuth: []
+      description: 自分以外の情報を更新しようとした場合は禁止操作として403を返す
+      operationId: updateUserProfile
+      requestBody: 
+        content:
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/UserAccountResourceDto'
+      responses:
+        '200': 
+          content:
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/UserAccountResourceDto'
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '403': 
+          $ref: '#/components/responses/Forbidden'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: 自分のプロファイル情報を更新する
+  /rms/users/{userAccountId}: 
+    delete: 
+      tags:
+      - Admin
+      parameters:
+      - 
+        description: ユーザID
+        in: path
+        name: userAccountId
+        required: true
+        schema: 
+          format: int32
+          type: integer
+      security:
+      - RmsJwtAuth: []
+      description: 削除対象のユーザを参照する予約が存在する場合は削除は行わずエラーにする
+      operationId: deleteUserAccount
+      responses:
+        '200': 
+          description: 登録成功
+        '400': 
+          $ref: '#/components/responses/ParameterError'
+        '404': 
+          $ref: '#/components/responses/UnknownData'
+        '409': 
+          $ref: '#/components/responses/DataRefered'
+        '500': 
+          $ref: '#/components/responses/ServerError'
+      summary: ユーザを削除する

@@ -1,0 +1,5 @@
+config_ordinal: 800
+b: yaml
+bb: ${GCM=CyuGtqdglSOPgW4MaUq5XDMFHI8XDS9lahC0lSBJ7DXKdcOxrMTk81zS765ZuSBbz/2d}
+security.config.aes.insecure-passphrase: mamezou
+security.config.require-encryption: false

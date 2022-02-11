@@ -1,0 +1,39 @@
+json.format:
+  date: yyyyMMdd
+  dateTime: yyyyMMdd HH:mm
+
+# https://github.com/eclipse/microprofile-open-api/blob/master/spec/src/main/asciidoc/microprofile-openapi-spec.adoc#core-configurations
+# But Not valid until MP4.0
+mp.openapi.schema:
+  java.time.LocalDateTime : |
+    {
+      "name"："LocalDateTime",
+      "type"： "string",
+      "format"："yyyyMMdd HH:ss",
+      "description"："日時型に対するアプリでの扱い"
+    }
+
+jwt:
+  phrass: privateSecretkey
+  claim:
+    issuer: your-application
+    issuedAt: -1            # 発行日時[-1はnow()]（秒単位）
+    exp: 60                 # 有効期限（分単位）
+    allowedClockSeconds: 30 # 有効期限のズレ許容時間（秒単位）
+  filter:
+    enable: true
+
+healthCheck:
+  memoryLiveness:
+    name: memory-health-check-liveness
+    method: rel # rel:相対評価 or abs:絶対評価
+    threshold: 90
+  memoryReadiness:
+    name: memory-health-check-readiness
+
+exception.mapper.unhandle.404:
+  paths: ["/favicon", "/static"]
+
+debug.sleep:
+  enable: false
+  time: 500 # unit:msec

@@ -1,0 +1,114 @@
+name: release-project
+
+on:
+  workflow_dispatch:  # for dry-run
+    branches: [ main ]
+  push:
+    branches:
+      - "!*"
+    tags:
+      - "v*"
+
+jobs:
+  build_test_deploy-jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build & Test for All
+        run: |
+          mvn -B -Pcli,all clean verify --file pom.xml
+      - name: Deploy for All
+        run: |
+          mvn -B -Pcli,all clean deploy -DskipTests=true --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  make_console_app:
+    needs: [build_test_deploy-jar]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+        include:
+          - os: macos-latest
+            type-name: "mac"
+          - os: windows-latest
+            type-name: "win"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java16
+        uses: actions/setup-java@v1
+        with:
+          java-version: 16 # jpackage required
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Make app-image
+        shell: bash
+        run: |
+          mvn -B -Pcli,copy-libs,local,product clean package -DskipTests=true --file pom.xml
+          cp ./target/rms-client-ui-console.jar ./target/libs
+          APP_NAME=RmsConsole
+          MAIN_JAR=rms-client-ui-console.jar
+          BUIDL_TYPE=app-image
+          JAVA_OPTION="-DconfiguredCdi.register.0.alias=local  -Drms.h2.script=init-rms-demo.ddl"
+          jpackage --name $APP_NAME --input target/libs --main-jar $MAIN_JAR --type $BUIDL_TYPE --java-options "$JAVA_OPTION"
+        working-directory: rms-client-ui-console
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Upload app-image for win
+        if: matrix.type-name == 'win'
+        uses: actions/upload-artifact@v2
+        with:
+          name: RmsConsole_win
+          path: rms-client-ui-console/RmsConsole
+          retention-days: 1
+      - name: Upload app-image for mac
+        if: matrix.type-name == 'mac'
+        uses: actions/upload-artifact@v2
+        with:
+          name: RmsConsole_mac
+          path: rms-client-ui-console/RmsConsole.app
+          retention-days: 1
+
+  release:
+    needs: [make_console_app]
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact of RmsConsole_win
+        uses: actions/download-artifact@v2
+        with:
+          name: RmsConsole_win
+          path: rms-client-ui-console/RmsConsole
+      - name: Download Artifact of RmsConsole_mac
+        uses: actions/download-artifact@v2
+        with:
+          name: RmsConsole_mac
+          path: rms-client-ui-console/RmsConsole.app
+      - name: Zip app-image
+        shell: bash
+        run: |
+          mkdir release
+          cd rms-client-ui-console
+          zip -r ../release/RmsConsoleWin.zip ./RmsConsole
+          zip -r ../release/RmsConsoleMac.zip ./RmsConsole.app
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "release/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

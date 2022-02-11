@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.extact</groupId>
+    <artifactId>rms-parent</artifactId>
+    <version>1.0.0-beta.1</version>
+  </parent>
+  <artifactId>rms-application</artifactId>
+  <packaging>jar</packaging>
+
+  <name>rms-application</name>
+  <description>
+    rms application module
+  </description>
+
+  <properties>
+    <mainClass>io.extact.rms.webapi.WebApiMain</mainClass>
+    <oas.server.host>localhost</oas.server.host>
+    <oas.server.port>7001</oas.server.port>
+    <target.env>develop</target.env>
+  </properties>
+
+  <dependencies>
+    <!-- ======================================== -->
+    <!-- *** module dependencies ***              -->
+    <!-- ======================================== -->
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-platform</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** provided scope dependencies ***      -->
+    <!-- ======================================== -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** compile scope dependencies(APIs) *** -->
+    <!-- ======================================== -->
+    <!-- dependent JakartaEE APIs -->
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.interceptor</groupId>
+      <artifactId>jakarta.interceptor-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.transaction</groupId>
+      <artifactId>jakarta.transaction-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+    </dependency>
+
+    <!-- dependent MicroProfile APIs -->
+    <dependency>
+      <groupId>org.eclipse.microprofile.config</groupId>
+      <artifactId>microprofile-config-api</artifactId>
+    </dependency>
+
+    <!-- utility libraries(by project) -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+    </dependency>
+    <!--
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.4</version>
+    </dependency>
+     -->
+
+
+    <!-- ======================================== -->
+    <!-- *** runtime scope dependencies ***       --><!-- redefines scope at user side -->
+    <!-- ======================================== -->
+    <dependency>
+      <groupId>io.helidon.microprofile.cdi</groupId>
+      <artifactId>helidon-microprofile-cdi</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.microprofile.config</groupId>
+      <artifactId>helidon-microprofile-config</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.config</groupId>
+      <artifactId>helidon-config-encryption</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- for JTA runtimes -->
+    <dependency>
+      <groupId>io.helidon.integrations.cdi</groupId>
+      <artifactId>helidon-integrations-cdi-jta-weld</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.helidon.integrations.cdi</groupId>
+        <artifactId>helidon-integrations-cdi-datasource-hikaricp</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.integrations.cdi</groupId>
+      <artifactId>helidon-integrations-cdi-jpa</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.integrations.cdi</groupId>
+      <artifactId>helidon-integrations-cdi-eclipselink</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>org.eclipse.persistence.jpa</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- for BeanValidation runtimes -->
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.el</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${version.lib.hibernate-validator}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+  </dependencies>
+
+</project>

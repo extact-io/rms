@@ -1,0 +1,30 @@
+config_ordinal: 200
+#----------------------------------
+# Production definition
+#----------------------------------
+rms:
+  server.port: 80
+  server.tls.port: 443
+  sec.require.encrypt: true
+  sec.aes.passphrase: The environment variable SECURE_CONFIG_AES_MASTER_PWD takes precedence
+  h2.user: sa
+  h2.password: ${GCM=sPaKo86vpN6S4oZHrDIzyQzZxB4mTSofeZyzf3CLhtYUBvuFsHfoUHDPNoM=}
+
+#----------------------------------
+# Addition of Production properties
+#----------------------------------
+server.sockets.0:
+  tls:
+    #Truststore setup
+    trust.keystore:
+      passphrase: ${GCM=CyuGtqdglSOPgW4MaUq5XDMFHI8XDS9lahC0lSBJ7DXKdcOxrMTk81zS765ZuSBbz/2d}
+      trust-store: true
+      resource:
+        path: /etc/letsencrypt/live/app.extact.io/app_extact_io.p12
+    #Keystore with private key and server certificate
+    private-key.keystore:
+      passphrase: ${GCM=CyuGtqdglSOPgW4MaUq5XDMFHI8XDS9lahC0lSBJ7DXKdcOxrMTk81zS765ZuSBbz/2d}
+      resource:
+        path: /etc/letsencrypt/live/app.extact.io/app_extact_io.p12
+
+csv.type.temporary.init.data: init-data

@@ -1,0 +1,22 @@
+name: update-toc
+
+on:
+  workflow_dispatch:
+    branches: [ main ]
+  #push:
+  #  branches: [ main ]
+  #  paths: 
+  #    - 'README.md'
+
+jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      # v3.1.4
+      - uses: technote-space/toc-generator@0dd8b397501bb0f924926e8833f62003cef73cf3
+        with:
+          CHECK_ONLY_DEFAULT_BRANCH: true
+          #TOC_TITLE: "目次の展開"
+          #FOLDING: true
+          MAX_HEADER_LEVEL: 1

@@ -1,0 +1,227 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.extact</groupId>
+    <artifactId>rms-parent</artifactId>
+    <version>1.0.0-beta.1</version>
+  </parent>
+  <artifactId>rms-server</artifactId>
+  <packaging>jar</packaging>
+
+  <name>rms-server</name>
+  <description>
+    REST server module
+  </description>
+
+  <properties>
+    <mainClass>io.extact.rms.external.webapi.WebApiMain</mainClass>
+    <oas.server.host>localhost</oas.server.host>
+    <oas.server.port>7001</oas.server.port>
+    <target.env>develop</target.env>
+  </properties>
+
+  <dependencies>
+    <!-- ======================================== -->
+    <!-- *** module dependencies ***              -->
+    <!-- ======================================== -->
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-platform</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-application</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.extact</groupId>
+      <artifactId>rms-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** provided scope dependencies ***      -->
+    <!-- ======================================== -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** compile scope dependencies ***       -->
+    <!-- ======================================== -->
+    <!-- dependent JakartaEE APIs -->
+    <dependency>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.json.bind</groupId>
+      <artifactId>jakarta.json.bind-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.security.enterprise</groupId>
+      <artifactId>javax.security.enterprise-api</artifactId>
+    </dependency>
+
+    <!-- dependent MicroProfile APIs -->
+    <dependency>
+      <groupId>org.eclipse.microprofile.health</groupId>
+      <artifactId>microprofile-health-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.microprofile.jwt</groupId>
+      <artifactId>microprofile-jwt-auth-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.microprofile.openapi</groupId>
+      <artifactId>microprofile-openapi-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.microprofile.cdi</groupId>
+      <artifactId>helidon-microprofile-cdi</artifactId>
+      <scope>compile</scope><!-- for WebApiMain -->
+    </dependency>
+
+
+    <!-- ======================================== -->
+    <!-- *** runtime scope dependencies ***       -->
+    <!-- ======================================== -->
+    <!-- for MicroProfile runtimes -->
+    <dependency>
+      <groupId>io.helidon.microprofile.server</groupId>
+      <artifactId>helidon-microprofile-server</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.microprofile.openapi</groupId>
+      <artifactId>helidon-microprofile-openapi</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.microprofile</groupId>
+      <artifactId>helidon-microprofile-cors</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.microprofile</groupId>
+      <artifactId>helidon-microprofile-access-log</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.webserver</groupId>
+      <artifactId>helidon-webserver-access-log</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!--
+    The jackson dependency was removed in the following issue,
+    but the dependency was added provisionally because the alternative method is unknown.
+    https://github.com/oracle/helidon/issues/1109
+    -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+    </dependency>
+
+
+    <!-- for to use platform-module runtimes -->
+    <dependency>
+      <groupId>io.helidon.microprofile.health</groupId>
+      <artifactId>helidon-microprofile-health</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.helidon.health</groupId>
+      <artifactId>helidon-health-checks</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- for jax-rs ext runtime -->
+    <!-- For binding to application/json. It won't work without this -->
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-binding</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- for validator ext runtime -->
+    <dependency>
+      <groupId>org.glassfish.jersey.ext</groupId>
+      <artifactId>jersey-bean-validation</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+<!-- <dependency>
+  <groupId>io.helidon.microprofile.jwt</groupId>
+  <artifactId>helidon-microprofile-jwt-auth</artifactId>
+</dependency>
+ -->
+
+    <!-- ======================================== -->
+    <!-- *** test scope dependencies ***          -->
+    <!-- ======================================== -->
+    <!-- below are the libraries needed only to run the tests. -->
+    <dependency>
+      <groupId>io.helidon.microprofile.rest-client</groupId>
+      <artifactId>helidon-microprofile-rest-client</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources-filtered</directory>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>env/profile/${target.env}</directory>
+      </resource>
+    </resources>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>product</id>
+      <properties>
+        <target.env>product</target.env>
+        <oas.server.host>app.extact.io</oas.server.host>
+        <oas.server.port>80</oas.server.port>
+      </properties>
+    </profile>
+    <profile>
+      <id>generate-openapi</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>io.extact.rms.external.webapi.GenerateOasFileTest.java</include>
+              </includes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <dependencies>
+      </dependencies>
+    </profile>
+  </profiles>
+
+</project>

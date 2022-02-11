@@ -1,0 +1,43 @@
+name: update-openapi
+
+on:
+  workflow_dispatch:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+    paths: 
+      - 'rms-server/**/EndPointSpec.java'
+      - 'rms-server/**/ApplicationConfig.java'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Java11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Generate OAS File
+      run: |
+        mvn -B -Pcli,generate-openapi test --file pom.xml
+      working-directory: rms-server
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: Commit files
+      run: |
+        cp -f ./target/generated-oas/openapi.yml ../docs
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add ../docs/ && git diff --cached --exit-code --quiet || git commit -m "Add the regenerated file" -a
+      working-directory: rms-server
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

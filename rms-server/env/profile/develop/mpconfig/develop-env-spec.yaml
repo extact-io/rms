@@ -1,0 +1,17 @@
+config_ordinal: 200
+#----------------------------------
+# Development definition
+#----------------------------------
+server.sockets.0:
+  tls:
+    #Truststore setup
+    trust.keystore:
+      passphrase: ${CLEAR=mamezou}
+      trust-store: true
+      resource:
+        resource-path: forTest.p12
+    #Keystore with private key and server certificate
+    private-key.keystore:
+      passphrase: ${CLEAR=mamezou}
+      resource:
+        resource-path: forTest.p12

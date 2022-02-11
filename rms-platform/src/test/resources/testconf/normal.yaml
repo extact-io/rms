@@ -1,0 +1,4 @@
+config_ordinal: 800
+test:
+  config:
+    value: yaml

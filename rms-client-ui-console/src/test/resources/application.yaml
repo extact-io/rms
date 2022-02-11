@@ -1,0 +1,13 @@
+config_ordinal: 199
+configuredCdi:
+  alias:
+    remote:
+      class: io.extact.rms.client.api.adaptor.remote.RentalReservationClientRemoteApi
+      scope: application
+    local:
+      class: io.extact.rms.client.api.adaptor.local.RentalReservationClientLocalApi
+      scope: application
+  register:
+    - alias: remote
+    - class: io.extact.rms.platform.jwt.impl.jose4j.Jose4jJwtGenerator
+    - class: io.extact.rms.platform.jwt.impl.jose4j.Jose4PrivateSecretedTokenValidator

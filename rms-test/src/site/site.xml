@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
+  name="rms-test">
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.9</version>
+  </skin>
+  <publishDate position="bottom"/>
+  <version position="bottom"/>
+  <custom>
+    <fluidoSkin>
+      <topBarEnabled>true</topBarEnabled>
+      <navBarStyle>navbar-inverse</navBarStyle>
+      <gitHub>
+        <projectId>extact-io/rms</projectId>
+        <ribbonOrientation>right</ribbonOrientation>
+      </gitHub>
+      <googleSearch>
+        <sitesearch/>
+      </googleSearch>
+    </fluidoSkin>
+  </custom>
+  <body>
+    <menu ref="parent"/>
+    <menu ref="reports"/>
+  </body>
+</project>

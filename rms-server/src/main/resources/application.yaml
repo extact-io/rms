@@ -1,0 +1,83 @@
+#----------------------------------
+# Defined for each environment
+#----------------------------------
+rms:
+  server.port: 7001
+  server.tls.port: 7011
+  sec.require.encrypt: false
+  sec.aes.passphrase: override-by-secret-file
+  h2.user: sa
+  h2.password: ${CLEAR=}
+  h2.script: init-rms.ddl
+
+#----------------------------------
+# Helidon Configurations
+#----------------------------------
+server:
+  port: ${rms.server.port}
+  sockets:
+    - name: secure
+      port: ${rms.server.tls.port}
+  static.classpath:
+    location: "/pages"
+    welcome: redoc.html
+    context: /static
+  access-log:
+    format: "%t %h %r %s %b %D"
+
+security.config: # encryption settings for {$ GCM = xxx}
+  # set to true for production - if set to true, clear text passwords will cause failure
+  require-encryption: ${rms.sec.require.encrypt}
+  # this should be configured by system property or environment variable for production - the "master" passwords for AES decryption
+  aes.insecure-passphrase: ${rms.sec.aes.passphrase}
+
+javax.sql.DataSource:
+  rmsDataSource:
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    dataSource:
+      url: jdbc:h2:mem:rms;INIT=RUNSCRIPT FROM 'classpath:${rms.h2.script}'
+      # decrypted value => user=sa, password=""
+      user: ${rms.h2.user}
+      password: ${rms.h2.password}
+
+cors.paths:
+  # Keep allow-orgins fully open for convenience so that requests can be executed from Swagger UI
+  - path-pattern: /{+}
+    allow-origins: "*"
+
+mp.openapi.scan:
+  exclude.classes: io.extact.rms.external.webapi.ManagementResource
+
+
+#----------------------------------
+# rmsApplications Configurations
+#----------------------------------
+configuredCdi:
+  register:
+    - class: io.extact.rms.platform.jwt.impl.jose4j.Jose4jJwtGenerator
+    - class: io.extact.rms.platform.jwt.impl.jose4j.Jose4PrivateSecretedTokenValidator
+
+main.manifest.jar: rms-server\.jar$
+
+jwt.claim:
+  issuer: RentalReservationSystem
+
+
+# Set when you want to filter the output.
+# Output the entire amount even if there is no configdump setting itself.
+configdump:
+  # true : Output only the config that matches the prefix to filter.
+  # false: Temporarily disable the filter.
+  filter-enable: true
+  filters:
+    #- filter: security
+    - filter: server
+    #- filter: javax
+    #- filter: cors
+    #- filter: csv
+    #- filter: persistence
+    #- filter: configuredCdi
+    #- filter: json
+    #- filter: mp
+    #- filter: jwt
+    #- filter: healthCheck

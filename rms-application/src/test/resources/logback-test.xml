@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration >
+<configuration>
+
+  <!-- jul-to-slf4j 対応 -->
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date [%-5level] [%logger{1}] [%thread] - %message%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="EclipseLink" level="DEBUG"/>
+  <logger name="ConfigDump" level="DEBUG"/>
+  <logger name="ServerHeaderDump" level="DEBUG"/>
+
+  <!--
+  <logger name="io.helidon.webserver.cors.CorsSupportHelper" level="DEBUG"/>
+  <logger name="io.helidon.webserver.cors.CorsEnabledServiceHelper" level="DEBUG"/>
+  <logger name="org.glassfish.jersey.server.ApplicationHandler" level="DEBUG"/>
+  <logger name="org.jboss.weld.Bootstrap" level="DEBUG"/>
+  <logger name="org.jboss.weld.Reflection" level="DEBUG"/>
+  <logger name="org.glassfish.jersey.ext.cdi1x.internal.CdiComponentProvider" level="DEBUG"/>
+   -->
+
+  <logger name="io.helidon.webserver.AccessLog" level="DEBUG" />
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>

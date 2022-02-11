@@ -1,0 +1,30 @@
+#----------------------------------
+# Defined for each environment
+#----------------------------------
+rms:
+  sec.require.encrypt: false
+  sec.aes.passphrase: override-by-secret-file
+  h2.user: sa
+  h2.password: ${CLEAR=}
+  h2.script: init-rms.ddl
+
+
+#----------------------------------
+# Helidon Configurations
+#----------------------------------
+security.config: # encryption settings for {$ GCM = xxx}
+  # set to true for production - if set to true, clear text passwords will cause failure
+  require-encryption: ${rms.sec.require.encrypt}
+  # this should be configured by system property or environment variable for production - the "master" passwords for AES decryption
+  aes.insecure-passphrase: ${rms.sec.aes.passphrase}
+
+
+javax.sql.DataSource:
+  rmsDataSource:
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    dataSource:
+      url: jdbc:h2:mem:rms;INIT=RUNSCRIPT FROM 'classpath:${rms.h2.script}'
+      # decrypted value => user=sa, password=""
+      user: ${rms.h2.user}
+      password: ${rms.h2.password}
+

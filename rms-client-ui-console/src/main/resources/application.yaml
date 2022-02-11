@@ -1,0 +1,14 @@
+config_ordinal: 150
+server.url: http://localhost:7001
+web-api/mp-rest/url: ${server.url}
+configuredCdi:
+  alias:
+    remote:
+      class: io.extact.rms.client.api.adaptor.remote.RentalReservationClientRemoteApi
+      scope: application
+    local:
+      class: io.extact.rms.client.api.adaptor.local.RentalReservationClientLocalApi
+      scope: application
+  register:
+    - alias: remote
+main.manifest.jar: rms-client-ui-console\.jar$

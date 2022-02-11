@@ -1,0 +1,29 @@
+config_ordinal: 200
+web-api/mp-rest/url: http://localhost:7001
+configuredCdi:
+  alias:
+    remote:
+      class: io.extact.rms.client.api.adaptor.remote.RentalReservationClientRemoteApi
+      scope: application
+    local:
+      class: io.extact.rms.client.api.adaptor.local.RentalReservationClientLocalApi
+      scope: application
+
+# Set when you want to filter the output.
+# Output the entire amount even if there is no configdump setting itself.
+configdump:
+  # true : Output only the config that matches the prefix to filter.
+  # false: Temporarily disable the filter.
+  filter-enable: true
+  filters:
+    #- filter: security
+    - filter: server
+    #- filter: javax
+    #- filter: cors
+    #- filter: csv
+    #- filter: persistence
+    #- filter: configuredCdi
+    #- filter: json
+    #- filter: mp
+    #- filter: jwt
+    #- filter: healthCheck

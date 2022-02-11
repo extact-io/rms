@@ -1,0 +1,42 @@
+#----------------------------------
+# -service.jar Test Configurations
+#----------------------------------
+# DB Conneciton for Unit Test
+test.db.connection:
+  unitname: rms
+  properties:
+    javax.persistence.transactionType: RESOURCE_LOCAL
+    javax.persistence.jdbc.driver: org.h2.jdbcx.JdbcDataSource
+    javax.persistence.jdbc.url: jdbc:h2:mem:rms;INIT=RUNSCRIPT FROM 'classpath:init-rms.ddl'
+    javax.persistence.jdbc.user: sa
+    javax.persistence.jdbc.password:
+    eclipselink.target-server: None
+
+# DB Conneciton for Integration Test
+javax.sql.DataSource:
+  rmsDataSource:
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    dataSource:
+      url: jdbc:h2:mem:rms;INIT=RUNSCRIPT FROM 'classpath:init-rms.ddl'
+      # decrypted value => user=sa, password=""
+      user: ${rms.h2.user}
+      password: ${rms.h2.password}
+
+# Set when you want to filter the output.
+# Output the entire amount even if there is no configdump setting itself.
+configdump:
+  # true : Output only the config that matches the prefix to filter.
+  # false: Temporarily disable the filter.
+  filter-enable: true
+  filters:
+    #- filter: security
+    - filter: server
+    #- filter: javax
+    #- filter: cors
+    #- filter: csv
+    #- filter: persistence
+    #- filter: configuredCdi
+    #- filter: json
+    #- filter: mp
+    #- filter: jwt
+    #- filter: healthCheck

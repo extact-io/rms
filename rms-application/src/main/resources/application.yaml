@@ -1,0 +1,20 @@
+#----------------------------------
+# rmsApplications Configurations
+#----------------------------------
+csv:
+  type: temporary
+  # following only used when type is "permanent" or ""temporary"
+  permanent:
+    directory: ./data
+    fileName:
+      rentalitem: rentalItem.csv
+      reservation: reservation.csv
+      useraccount: userAccount.csv
+  temporary:
+    fileName:
+      rentalitem: temporary/rentalItemTemp.csv
+      reservation: temporary/reservationTemp.csv
+      useraccount: temporary/userAccountTemp.csv
+
+persistence:
+  apiType: jpa
