@@ -30,7 +30,7 @@ import io.extact.rms.platform.role.RoleSecurityDynamicFeature;
 
 /**
  * RESTアプリケーションのコンフィグ情報。
- * REST API全体に関することをOpenAPIのアノテーションで定義している。
+ * REST API全体に関することをOpenAPIのアノテーションで定義している
  */
 @SecurityScheme(
         securitySchemeName = "RmsJwtAuth",

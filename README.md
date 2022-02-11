@@ -33,8 +33,8 @@ Rental Management SystemはOracle Helidonを用いてMicroProfileの利用法や
 # ビルドと動作方法
 ## 手っ取り早くアプリで動かす
 All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリケーションを用意しています。jpackageでOSごとの実行形式ファイルに変換したものでzipファイルを解凍するだけで利用可能です
- - Windows版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta1/RmsConsoleWin.zip)
- - Mac版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta1/RmsConsoleMac.zip)
+ - Windows版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta.1/RmsConsoleWin.zip)
+ - Mac版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta.1/RmsConsoleMac.zip)
 
 解凍後、実行形式ファイル(.exeまたは.app)をダブルクリックするとSwingのコンソールアプリが起動します。起動しますのでデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインしてください
 
@@ -42,7 +42,6 @@ All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリ
 cloneもしくはzipで取得したrepositoryのコードをビルドして実行します。JDK SE 11以上を前提としビルドにはMavenを利用します。上記のAll In Oneアプリとは異なりここでは[Remote&JPA](#remote接続時の物理配置)で動作させます。
 
 1. dependencyのローカルインストール  
-repositoryにバイナリを含んでいるためcloneには若干時間が掛かります...
 ``` shell
 # Clone this repository
 git clone https://github.com/extact-io/rms.git
@@ -57,7 +56,7 @@ mvn -Pcli,all clean install -DskipTests=true
 # Go into the app directory
 cd rms-server
 # Build the app
-mvn -Peclipse,copy-libs clean package
+mvn -Pcli,copy-libs clean package -DskipTests=true
 # Run the app
 java -Drms.h2.script=init-rms-demo.ddl -jar target/rms-server.jar
 ```
@@ -67,7 +66,7 @@ java -Drms.h2.script=init-rms-demo.ddl -jar target/rms-server.jar
 # Go into the app directory
 cd rms/rms-client-ui-console
 # Build the app
-mvn -Peclipse,copy-libs clean package
+mvn -Pcli,copy-libs clean package -DskipTests=true
 # Run the app
 java -jar target/rms-client-ui-console.jar
 ```
@@ -189,6 +188,6 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 |build|[GitHub Actions](/.github/workflows/build-all.yml)|
 |CI|[GitHub Actions](/.github/workflows/build-all.yml)|
 |CD|[GitHub Actions](/.github/workflows/deploy-aws.yml) + [AWS CodeDeploy](/rms-server/env/deployment/appspec.yml)|
-|Static analysis|[SonarClooud](https://sonarcloud.io/summary/overall?id=extact-io_rms), [Mave Site Generator](https://extact-io.github.io/rms/site/modules/index.html)|
+|Static analysis|[SonarClooud](https://sonarcloud.io/summary/overall?id=extact-io_rms), [Mave Site Generator](https://extact-io.github.io/web-site/rms/site/modules/)|
 |API Doc|[Redoc](http://app.extact.io/static/)|
 

@@ -31,7 +31,7 @@
   <description>
     Rental Management System
   </description>
-  <inceptionYear>2021</inceptionYear>
+  <inceptionYear>2022</inceptionYear>
   <organization>
     <name>extact.io Co.,Ltd.</name>
     <url>https://www.extact.io/</url>
@@ -106,7 +106,7 @@
     <site>
       <id>github</id>
       <name>GitHub Pages Site</name>
-      <url>scm:git:https://github.com/extact-io/rms.git</url>
+      <url>scm:git:https://github.com/extact-io/web-site.git</url>
     </site>
     <repository>
       <id>github</id>
@@ -440,8 +440,8 @@
         <version>${version.plugin.maven-scm-publish}</version>
         <configuration>
           <siteOutputEncoding>${site.encoding}</siteOutputEncoding>
-          <subDirectory>docs/site/modules</subDirectory>
-          <scmBranch>github-pages</scmBranch>
+          <subDirectory>rms/site/modules</subDirectory>
+          <scmBranch>main</scmBranch>
         </configuration>
       </plugin>
     </plugins>

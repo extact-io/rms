@@ -169,7 +169,7 @@ jobs:
 
   rms-client-ui-console:
     if: ${{ needs.check.outputs.rms-client-ui-console-updated == 'true' }}
-    needs: [rms-client-api, check]
+    needs: [rms-client-api-remote, rms-server, check]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
