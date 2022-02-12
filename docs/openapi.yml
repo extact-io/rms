@@ -304,7 +304,7 @@ info:
     name: 課外活動
     url: https://extact-io.github.io/rms/site/modules/index.html
   title: レンタル予約システムの公開API
-  version: 0.0.1-SNAPSHOT
+  version: 1.0.0-SNAPSHOT
 openapi: 3.0.3
 paths:
   /rms/items: 

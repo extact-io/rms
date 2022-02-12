@@ -633,7 +633,7 @@
               <inputSpec>docs/openapi.yml</inputSpec>
               <generatorName>javascript</generatorName>
               <configOptions>
-                <projectName>rms-api</projectName>
+                <projectName>@extact-io/rms-generated-client-js</projectName>
                 <apiPackage>api</apiPackage>
                 <usePromises>true</usePromises>
                 <modelPackage>dto</modelPackage>
