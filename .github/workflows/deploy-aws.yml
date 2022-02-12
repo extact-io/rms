@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_test_deploy-jar]
     steps:
-      - name: Download Artifact of ersService
+      - name: Download Artifact of rmsService
         uses: actions/download-artifact@v2
         with:
           name: rmsServiceApp
@@ -63,7 +63,7 @@ jobs:
         env:
           S3_UPLOAD_BUCKET: ${{ secrets.S3_UPLOAD_BUCKET }}
         run: |
-          ZIP_NAME="rmsServiceApp/ersService-"`date "+%Y%m%d_%H%M%S"`.zip
+          ZIP_NAME="rmsServiceApp/rmsService-"`date "+%Y%m%d_%H%M%S"`.zip
           aws deploy push --application-name rmsServiceApplication --s3-location s3://$S3_UPLOAD_BUCKET/$ZIP_NAME --ignore-hidden-files --source ./rmsServiceApp
           aws deploy create-deployment --application-name rmsServiceApplication --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name rmsServiceApplicationGroup --s3-location bucket=$S3_UPLOAD_BUCKET,bundleType=zip,key=$ZIP_NAME
         working-directory: rms-server

@@ -1,6 +1,6 @@
 #!/bin/bash -x
-if [ -f /home/ec2-user/private/ers-secret ]; then
-    . /home/ec2-user/private/ers-secret
+if [ -f /home/ec2-user/private/rms-secret ]; then
+    . /home/ec2-user/private/rms-secret
 fi
 
 cd /home/ec2-user/rmsServiceApp
