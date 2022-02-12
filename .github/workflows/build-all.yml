@@ -146,7 +146,7 @@ jobs:
 
   rms-client-api-remote:
     if: ${{ needs.check.outputs.rms-client-api-remote-updated == 'true' }}
-    needs: [rms-client-api-local, check]
+    needs: [rms-client-api-local, rms-server, check]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -169,7 +169,7 @@ jobs:
 
   rms-client-ui-console:
     if: ${{ needs.check.outputs.rms-client-ui-console-updated == 'true' }}
-    needs: [rms-client-api-remote, rms-server, check]
+    needs: [rms-client-api-remote, check]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
