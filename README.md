@@ -12,7 +12,7 @@ Rental Management SystemはOracle Helidonを用いてMicroProfileの利用法や
 - [アプリケーションの説明](#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E8%AA%AC%E6%98%8E)
 - [ビルドと動作方法](#%E3%83%93%E3%83%AB%E3%83%89%E3%81%A8%E5%8B%95%E4%BD%9C%E6%96%B9%E6%B3%95)
 - [アプリケーションアーキテクチャ](#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3)
-- [プロセスと使用ツール](#%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%A8%E4%BD%BF%E7%94%A8%E3%83%84%E3%83%BC%E3%83%AB)
+- [利用ツール](#%E5%88%A9%E7%94%A8%E3%83%84%E3%83%BC%E3%83%AB)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -105,7 +105,8 @@ CleanArchitectureやヘキサゴナルとかよく聞きますがその最たる
 
 ## 物理構造
 application.jarはserviceレイヤ、persistenceレイヤ、Domainレイヤのモジュールを格納し、server.jarにはWebAPIレイヤのモジュールを格納しています
-![レイヤ](/docs/parts/runtime_overview.png)
+
+![全体物理配置](/docs/parts/runtime_overview.drawio.svg)
 
 ## 配置構造
 レンタル予約システムはLocal接続とRemote接続の2つをサポートし、接続形態ごとに配置に必要となるモジュールは異なります
@@ -113,12 +114,12 @@ application.jarはserviceレイヤ、persistenceレイヤ、Domainレイヤの�
 ### Local接続時の物理配置
 シングルプロセスで動作しapi-local.jarのアダプタ実装からレンタル予約システムアプリの実体であるapplication.jarへ直接依存依存させています
 
-![Local接続時の物理配置](/docs/parts/runtime_local.png)
+![Local接続時の物理配置](/docs/parts/runtime_lolcal.drawio.svg)
 
 ### Remote接続時の物理配置
 Client/Sever方式で動作しClientからSeverモジュールへの直接的な依存はなくserver.jarによるWebAPIを経由しapplication.jarの機能提供を受けます
 
-![Remote接続時の物理配置](/docs/parts/runtime_remote.png)
+![Remote接続時の物理配置](/docs/parts/runtime_remote.drawio.svg)
 
 
 ## 利用ライブラリと準拠API
@@ -134,13 +135,15 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
     - [MicroProfile JWT-AUTH 1.1.1](https://download.eclipse.org/microprofile/microprofile-jwt-auth-1.1.1/microprofile-jwt-auth-spec.html)
     - [MicroProfile Health 2.2](https://download.eclipse.org/microprofile/microprofile-health-2.2/microprofile-health-spec.html)
     - [MicroProfile OpenAPI 1.2](https://download.eclipse.org/microprofile/microprofile-open-api-1.2/microprofile-openapi-spec-1.2.html)
-  - Helidon MP v2.2.0
+  - Helidon MP v2.4.2
     - [ReactiveWebserver](https://helidon.io/docs/v2/#/se/webserver/01_introduction)
     - [Helidon MP JPA](https://helidon.io/docs/v2/#/mp/jpa/01_introduction) (EclipseLink 2.7.5)
     - [CDI extension for HikariCP](https://helidon.io/docs/v2/#/mp/extensions/02_cdi_datasource-hikaricp) (HikariCP 3.4)
     - [CDI extension for JTA](https://helidon.io/docs/v2/#/mp/extensions/05_cdi_jta) (Weld 3.1)
     - [CORS in Helidon MP](https://helidon.io/docs/v2/#/mp/cors/01_introduction)
     - [Configuration Secrets in Helidon Config](https://helidon.io/docs/v2/#/mp/security/03_configuration-secrets)
+  - JWT
+    - [jose4j 0.7.9](https://bitbucket.org/b_c/jose4j/wiki/Home)
   - H2 Database
   - [Text-IO 3.4.1](https://github.com/beryx/text-io) -> コンソールアプリ向けのframework
 - テスト系
@@ -182,10 +185,10 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 | util | [ResourceUtils](/rms-platform/src/main/java/io/extact/rms/platform/util/ResourceUtils.java) | クラスパスリソースの検索ユーティリティ | － |
 | validate | [ValidateParamInterceptor](/rms-platform/src/main/java/io/extact/rms/platform/validate/ValidateParamInterceptor.java) | バリデーショングループも指定可能なメソッドバリデーションの仕組み | JakartaEE Bean Validation |
 
-# プロセスと使用ツール
-| プロセス | 使用ツール |
+# 利用ツール
+| プロセス | 利用ツール |
 |----------|----------|
-|build|[GitHub Actions](/.github/workflows/build-all.yml)|
+|build|Maven|
 |CI|[GitHub Actions](/.github/workflows/build-all.yml)|
 |CD|[GitHub Actions](/.github/workflows/deploy-aws.yml) + [AWS CodeDeploy](/rms-server/env/deployment/appspec.yml)|
 |Static analysis|[SonarClooud](https://sonarcloud.io/summary/overall?id=extact-io_rms), [Mave Site Generator](https://extact-io.github.io/web-site/rms/site/modules/)|

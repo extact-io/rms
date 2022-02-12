@@ -1,0 +1,67 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="713px" height="202px" viewBox="-0.5 -0.5 713 202" content="&lt;mxfile&gt;&lt;diagram id=&quot;HHzF43aHbJedq2K40poE&quot; name=&quot;ページ1&quot;&gt;7VnLctowFP0almT8BpYBkmbRzmQmizZLBQujRrY8skygX98rS/ID28RtCunCMBN8jyVZuueeg1Am7io+fOEo3X1jIaYTxwoPE3c9cZz5bA5/JXBUgG97Cog4CRVkV8AT+YU1aGk0JyHOGg0FY1SQtAluWJLgjWhgiHP21my2ZbT51BRFuAU8bRBto99JKHZ6Wc6swh8wiXbmyXawUHdiZBrrlWQ7FLK3GuTeTdwVZ0yoq/iwwlTmzuRF9bvvuVtOjONEDOqgp5yJo1kcDmGtOkxYAh/LnYgpRDZc4gMRP2rXz3Bt3fg6WkuGLRMcdZAJzl7LTDnydhLeSh4gZClOFHJPKNU9QpTtcKgfo7qvGGW8mKG7LN5wR81dTrh3+RrKWM43upVT5hnqE7MYC36EJhxTJMi+ORTSlRKV7cquj4zAQxxLF7W90JTqmrY9vzmEQDzCQveqKIGL2jQqqCCqmzRHDbxHNNezzckUaj1jFN/8RLxFKVRZKi9jFuYSWyJKIsj6muKtkBlO0YYk0dciWjtWrcUGMokh78s95oKABG71DcFSQLfAWY2ZrS/fEmeJqOHq1cVlULw6i0SOYQpR0yEngQ/nyW4zazqcEGQ0+FZJuMR2Nfn6Vn8tNFg8Q5nbogylZOSqn6tTNXWR5V6ILGc+xBQNUfpLRiZpyVmehKVxddimdWNZQcM6vcXirHnK4BFzAquQ3CosgRWVLiwDNZbjm7gaq4jMYA1fpegF0yXavEbFtA3RId6inApN6j2KCZXdHzDdY1lVhm31rWzbJxVUdX/P5Pt9vV1ff+f0elehnLcmxA+Y/9Aa8roEP6UMVDnKvlf2ntWU/eyKFu0sLqb6qZS9dzHZz0bZN2Tvf57s/U7ZcxwzMW7Nhuvevqbwgw7OUgoJFYQlI2m9pAWfadbeELMesB0zv1yf6ybc7cjGfXUn47+lGY/mW1RB23yDK5nvrCXkDHMo8VHDgzV8VeM1BxkfFPGfHEX9h2JsnosZj2nu8N7b4BXR6XbxX5+bdfya+qiyu4/STotyfrmTtPZ+beIEBXnmM6LsBUGfINKo+YSE2jLNKax1y3h8bZcZXJs9dtRvO+eN6qLHPidndM4Fz+ggrM7ZVe1U/6xw734D&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <path d="M 121 76 L 176.53 76" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="stroke"/>
+        <path d="M 170.76 80 L 178.76 76 L 170.76 72" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 11 51 L 121 51 L 121 101 L 11 101 L 11 91 L 1 91 L 1 81 L 11 81 L 11 71 L 1 71 L 1 61 L 11 61 Z" fill="#f5f5f5" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 11 61 L 21 61 L 21 71 L 11 71 M 11 81 L 21 81 L 21 91 L 11 91" fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="#333333" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="70.5" y="68.5">
+                ui-console.jar
+            </text>
+        </g>
+        <path d="M 191 51 L 311 51 L 311 101 L 191 101 L 191 91 L 181 91 L 181 81 L 191 81 L 191 71 L 181 71 L 181 61 L 191 61 Z" fill="#f5f5f5" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 191 61 L 201 61 L 201 71 L 191 71 M 191 81 L 201 81 L 201 91 L 191 91" fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="#333333" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="255.5" y="68.5">
+                api.jar
+            </text>
+        </g>
+        <path d="M 391.72 25.95 L 315.05 61.61" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="stroke"/>
+        <path d="M 318.59 55.56 L 313.03 62.56 L 321.97 62.81" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 401 1 L 511 1 L 511 51 L 401 51 L 401 41 L 391 41 L 391 31 L 401 31 L 401 21 L 391 21 L 391 11 L 401 11 Z" fill="#f5f5f5" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 401 11 L 411 11 L 411 21 L 401 21 M 401 31 L 411 31 L 411 41 L 401 41" fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="#333333" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="460.5" y="18.5">
+                api-local.jar
+            </text>
+        </g>
+        <path d="M 390.52 125.95 L 315.05 90.41" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="stroke"/>
+        <path d="M 321.96 89.24 L 313.02 89.45 L 318.56 96.48" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 401 101 L 511 101 L 511 151 L 401 151 L 401 141 L 391 141 L 391 131 L 401 131 L 401 121 L 391 121 L 391 111 L 401 111 Z" fill="#f5f5f5" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 401 111 L 411 111 L 411 121 L 401 121 M 401 131 L 411 131 L 411 141 L 401 141" fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="#333333" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="460.5" y="118.5">
+                api-remote.jar
+            </text>
+        </g>
+        <path d="M 601 1 L 711 1 L 711 51 L 601 51 L 601 41 L 591 41 L 591 31 L 601 31 L 601 21 L 591 21 L 591 11 L 601 11 Z" fill="#f5f5f5" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 601 11 L 611 11 L 611 21 L 601 21 M 601 31 L 611 31 L 611 41 L 601 41" fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="#333333" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="660.5" y="18.5">
+                application.jar
+            </text>
+        </g>
+        <path d="M 651 101 L 651 55.47" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="stroke"/>
+        <path d="M 655 61.24 L 651 53.24 L 647 61.24" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 601 101 L 711 101 L 711 151 L 601 151 L 601 141 L 591 141 L 591 131 L 601 131 L 601 121 L 591 121 L 591 111 L 601 111 Z" fill="#f5f5f5" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 601 111 L 611 111 L 611 121 L 601 121 M 601 131 L 611 131 L 611 141 L 601 141" fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="#333333" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="12px">
+            <text x="660.5" y="118.5">
+                server.jar
+            </text>
+        </g>
+        <path d="M 511 26 L 586.53 26" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="6 6" pointer-events="stroke"/>
+        <path d="M 580.76 30 L 588.76 26 L 580.76 22" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 111 151 L 221 151 L 221 201 L 111 201 L 111 191 L 101 191 L 101 181 L 111 181 L 111 171 L 101 171 L 101 161 L 111 161 Z" fill="#f5f5f5" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 111 161 L 121 161 L 121 171 L 111 171 M 111 181 L 121 181 L 121 191 L 111 191" fill="none" stroke="#666666" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="#333333" font-family="Helvetica" font-weight="bold" text-anchor="middle" font-size="11px">
+            <text x="170.5" y="167.5">
+                &lt;&lt;global&gt;&gt;
+            </text>
+            <text x="170.5" y="180.5">
+                platform.jar
+            </text>
+        </g>
+    </g>
+</svg>
