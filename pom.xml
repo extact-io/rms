@@ -27,7 +27,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>rms-parent</name>
+  <name>rms</name>
   <description>
     Rental Management System
   </description>
