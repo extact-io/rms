@@ -23,7 +23,7 @@ server:
     context: /static
     welcome: redoc.html
   static.path:
-    location: override-by-env-setting
+    location: ./static.path.location
     context: /
     welcome: index.html
   access-log:
