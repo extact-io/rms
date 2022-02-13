@@ -20,12 +20,12 @@ server:
       port: ${rms.server.tls.port}
   static.classpath:
     location: "/pages"
-    welcome: redoc.html
     context: /static
+    welcome: redoc.html
   static.path:
-    location: "C:/VSCode_workspaces/rms-ui-react/build"
-    welcome: index.html
+    location: override-by-env-setting
     context: /
+    welcome: index.html
   access-log:
     format: "%t %h %r %s %b %D"
 
