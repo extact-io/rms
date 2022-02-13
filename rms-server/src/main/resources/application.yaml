@@ -22,6 +22,10 @@ server:
     location: "/pages"
     welcome: redoc.html
     context: /static
+  static.path:
+    location: "C:/VSCode_workspaces/rms-ui-react/build"
+    welcome: index.html
+    context: /
   access-log:
     format: "%t %h %r %s %b %D"
 

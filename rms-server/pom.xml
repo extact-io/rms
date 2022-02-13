@@ -18,7 +18,7 @@
   <properties>
     <mainClass>io.extact.rms.external.webapi.WebApiMain</mainClass>
     <oas.server.host>localhost</oas.server.host>
-    <oas.server.port>7001</oas.server.port>
+    <oas.server.port>7011</oas.server.port>
     <target.env>develop</target.env>
   </properties>
 
@@ -201,7 +201,7 @@
       <properties>
         <target.env>product</target.env>
         <oas.server.host>app.extact.io</oas.server.host>
-        <oas.server.port>80</oas.server.port>
+        <oas.server.port>443</oas.server.port>
       </properties>
     </profile>
     <profile>
