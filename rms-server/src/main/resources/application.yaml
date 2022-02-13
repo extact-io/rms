@@ -23,7 +23,7 @@ server:
     context: /static
     welcome: redoc.html
   static.path:
-    location: ./static.path.location
+    location: ./
     context: /
     welcome: index.html
   access-log:
