@@ -41,7 +41,7 @@ import io.extact.rms.platform.role.RoleSecurityDynamicFeature;
         in = SecuritySchemeIn.HEADER)
 @OpenAPIDefinition(
         info = @Info(title = "レンタル予約システムの公開API", version = "1.0.0-SNAPSHOT",
-            contact = @Contact(name = "課外活動", url = "https://extact-io.github.io/web-site/")),
+            contact = @Contact(name = "課外活動", url = "https://extact-io.github.io/rms-website/")),
         components = @Components(
                 schemas = {
                     @Schema(
