@@ -65,7 +65,7 @@ jobs:
           MAIN_JAR=rms-client-ui-console.jar
           BUIDL_TYPE=app-image
           JAVA_OPTION="-DconfiguredCdi.register.0.alias=local  -Drms.h2.script=classpath:init-rms-demo.ddl"
-          jpackage --name $APP_NAME --input target/libs --main-jar $MAIN_JAR --type $BUIDL_TYPE --java-options "$JAVA_OPTION"
+          jpackage --name $APP_NAME --input target/libs --main-jar $MAIN_JAR --type $BUIDL_TYPE --java-options "$JAVA_OPTION"  --icon ./env/profile/product/app.ico
         working-directory: rms-client-ui-console
         env:
           GITHUB_TOKEN: ${{ github.token }}

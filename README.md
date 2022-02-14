@@ -64,7 +64,7 @@ java -Drms.h2.script=classpath:init-rms-demo.ddl -jar target/rms-server.jar
 3. クライアント側（コンソールアプリ）のビルドと起動 *サーバを起動しているコンソールとは別のコンソールで行う
 ``` shell
 # Go into the app directory
-cd /path/to/your_rms_clone_dir
+cd /path/to/your/rms_dir
 cd rms-client-ui-console
 # Build the app
 mvn -Pcli,copy-libs clean package -DskipTests=true
