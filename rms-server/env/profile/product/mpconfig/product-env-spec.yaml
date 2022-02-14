@@ -9,7 +9,7 @@ rms:
   sec.aes.passphrase: The environment variable SECURE_CONFIG_AES_MASTER_PWD takes precedence
   h2.user: sa
   h2.password: ${GCM=sPaKo86vpN6S4oZHrDIzyQzZxB4mTSofeZyzf3CLhtYUBvuFsHfoUHDPNoM=}
-  h2.script: init-rms-demo.ddl
+  h2.script: /home/ec2-user/private/init-rms-prod.ddl
 
 #----------------------------------
 # Addition of Production properties

@@ -6,7 +6,7 @@ rms:
   sec.aes.passphrase: override-by-secret-file
   h2.user: sa
   h2.password: ${CLEAR=}
-  h2.script: init-rms.ddl
+  h2.script: classpath:init-rms.ddl
 
 
 #----------------------------------
@@ -23,7 +23,7 @@ javax.sql.DataSource:
   rmsDataSource:
     dataSourceClassName: org.h2.jdbcx.JdbcDataSource
     dataSource:
-      url: jdbc:h2:mem:rms;INIT=RUNSCRIPT FROM 'classpath:${rms.h2.script}'
+      url: jdbc:h2:mem:rms;INIT=RUNSCRIPT FROM '${rms.h2.script}'
       # decrypted value => user=sa, password=""
       user: ${rms.h2.user}
       password: ${rms.h2.password}

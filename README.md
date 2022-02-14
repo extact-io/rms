@@ -58,13 +58,14 @@ cd rms-server
 # Build the app
 mvn -Pcli,copy-libs clean package -DskipTests=true
 # Run the app
-java -Drms.h2.script=init-rms-demo.ddl -jar target/rms-server.jar
+java -Drms.h2.script=classpath:init-rms-demo.ddl -jar target/rms-server.jar
 ```
 
 3. クライアント側（コンソールアプリ）のビルドと起動 *サーバを起動しているコンソールとは別のコンソールで行う
 ``` shell
 # Go into the app directory
-cd rms/rms-client-ui-console
+cd /path/to/your_rms_clone_dir
+cd rms-client-ui-console
 # Build the app
 mvn -Pcli,copy-libs clean package -DskipTests=true
 # Run the app
