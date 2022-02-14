@@ -28,6 +28,6 @@ server.sockets.0:
       resource:
         path: /etc/letsencrypt/live/app.extact.io/app_extact_io.p12
   static.path:
-    location: ~/www/html
+    location: /home/ec2-user/rmsServiceClient/build
 
 csv.type.temporary.init.data: init-data
