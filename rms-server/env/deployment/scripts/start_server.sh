@@ -4,6 +4,8 @@ if [ -f /home/ec2-user/private/rms-secret ]; then
 fi
 
 cd /home/ec2-user/rmsServiceApp
+export DEBUG_SLEEP_ENABLE=true
+export DEBUG_SLEEP_TIME=200
 export JWT_FILTER_ENABLE=true
 
 echo "[rmsServiceApp]STARTING..."
