@@ -3,7 +3,7 @@
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=extact-io_rms&metric=ncloc)](https://sonarcloud.io/dashboard?id=extact-io_rms)
 [![BCH compliance](https://bettercodehub.com/edge/badge/extact-io/rms?branch=main)](https://bettercodehub.com/)
 # Rental Management System Application
-Rental Management SystemはOracle Helidonを用いてMicroProfileの利用法や効果を確認することを目的としたリファレンス的なアプリケーションです
+> Rental Management SystemはOracle Helidonを用いてMicroProfileの利用法や効果を確認することを目的としたリファレンス的なアプリケーションです
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -32,16 +32,16 @@ Rental Management SystemはOracle Helidonを用いてMicroProfileの利用法や
 
 # ビルドと動作方法
 ## 手っ取り早くアプリで動かす
-All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリケーションを用意しています。jpackageでOSごとの実行形式ファイルに変換したものでzipファイルを解凍するだけで利用可能です
+All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリケーションを用意しています。jpackageでOSごとの実行形式に変換したものでzipファイルを解凍するだけで利用可能です
  - Windows版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta.1/RmsConsoleWin.zip)
  - Mac版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta.1/RmsConsoleMac.zip)
 
-解凍後、実行形式ファイル(.exeまたは.app)をダブルクリックするとSwingのコンソールアプリが起動します。起動しますのでデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインしてください
+解凍後、実行ファイル(.exeまたは.app)をダブルクリックするとSwingのコンソールアプリが起動します。プロンプトが現れたらデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインしてください
 
 ## 自分でビルドして動かす
 cloneもしくはzipで取得したrepositoryのコードをビルドして実行します。JDK SE 11以上を前提としビルドにはMavenを利用します。上記のAll In Oneアプリとは異なりここでは[Remote&JPA](#remote接続時の物理配置)で動作させます。
 
-1. dependencyのローカルインストール  
+1. dependencyのローカルインストール
 ``` shell
 # Clone this repository
 git clone https://github.com/extact-io/rms.git
@@ -82,7 +82,7 @@ java -jar target/rms-client-ui-console.jar
 
 # アプリケーションアーキテクチャ
 ## 論理アーキテクチャ
-論理アーキテクチャはCleanArchitectureでもヘキサゴナルでもなんでもありません  
+論理アーキテクチャはCleanArchitectureでもヘキサゴナルでもなんでもありません
 Domainレイヤをリラックスレイヤにした一般的なレイヤーアーキテクチャになります
 
 ![レイヤ](/docs/parts/logical_arch.png)
@@ -163,7 +163,7 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 
 
 ## platformモジュールの提供機能
-業務依らない基盤的な仕組みとしてplatformモジュールが提供する機能  
+業務依らない基盤的な仕組みとしてplatformモジュールが提供する機能
 (platformモジュールのコメントを1部英語で記載しているためOSSのコードをパクったように見える箇所がありますが全てスクラッチから作成しています:sweat_smile:)
 
 | パッケージ | 主要クラス | 機能 | 実装API |
@@ -192,6 +192,6 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 |build|Maven|
 |CI|[GitHub Actions](/.github/workflows/build-all.yml)|
 |CD|[GitHub Actions](/.github/workflows/deploy-aws.yml) + [AWS CodeDeploy](/rms-server/env/deployment/appspec.yml)|
-|Static analysis|[SonarClooud](https://sonarcloud.io/summary/overall?id=extact-io_rms), [Mave Site Generator](https://extact-io.github.io/web-site/rms/site/modules/)|
+|Static analysis|[SonarClooud](https://sonarcloud.io/summary/overall?id=extact-io_rms), [Mave Site Generator](https://extact-io.github.io/rms-website/generated/site/modules/)|
 |API Doc|[Redoc](http://app.extact.io/static/)|
 
