@@ -193,5 +193,5 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 |CI|[GitHub Actions](/.github/workflows/build-all.yml)|
 |CD|[GitHub Actions](/.github/workflows/deploy-aws.yml) + [AWS CodeDeploy](/rms-server/env/deployment/appspec.yml)|
 |Static analysis|[SonarClooud](https://sonarcloud.io/summary/overall?id=extact-io_rms), [Mave Site Generator](https://extact-io.github.io/rms-website/generated/site/modules/)|
-|API Doc|[Redoc](http://app.extact.io/static/)|
+|API Doc|[Redoc](https://app.extact.io/static/)|
 
