@@ -5,7 +5,7 @@
   <parent>
     <groupId>io.extact</groupId>
     <artifactId>rms-parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>rms-test</artifactId>
   <packaging>jar</packaging>
