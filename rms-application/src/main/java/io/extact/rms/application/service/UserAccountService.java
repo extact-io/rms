@@ -1,5 +1,7 @@
 package io.extact.rms.application.service;
 
+import java.util.function.Consumer;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -29,17 +31,13 @@ public class UserAccountService implements GenericService<UserAccount> {
     }
 
     @Override
-    public UserAccount add(UserAccount addUserAccount) throws BusinessFlowException {
-
-        // ログイン名の重複チェック
-        var existingUserAccount = this.findByLoginId(addUserAccount.getLoginId());
-        if (existingUserAccount != null) {
-            throw new BusinessFlowException("loginId is already registered.", CauseType.DUPRICATE);
-        }
-
-        // 登録
-        repository.add(addUserAccount);
-        return get(addUserAccount.getId());
+    public Consumer<UserAccount> getDuplicateChecker() {
+        return (targetUser) -> {
+            var foundUser = findByLoginId(targetUser.getLoginId());
+            if (foundUser != null && (targetUser.getId() == null || !foundUser.isSameId(targetUser))) {
+                throw new BusinessFlowException("loginId is already registered.", CauseType.DUPRICATE);
+            }
+        };
     }
 
     @Override

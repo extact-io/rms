@@ -245,6 +245,7 @@ class RentalReservationSecurityTest {
                 endPoint.deleteReservation(1);
                 var updateDto = newUserAccountResourceDto();
                 updateDto.setId(3);
+                updateDto.setLoginId("member3");
                 endPoint.updateUserProfile(updateDto);
                 endPoint.deleteUserAccount(3);
         }).doesNotThrowAnyException();
@@ -405,7 +406,7 @@ class RentalReservationSecurityTest {
     private RentalItemResourceDto newRentalItemResourceDto() {
         var dto = new RentalItemResourceDto();
         dto.setId(1);
-        dto.setSerialNo("TEMP0001");
+        dto.setSerialNo("TEMP9999");
         dto.setItemName("レンタル品");
         return dto;
     }

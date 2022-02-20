@@ -109,22 +109,22 @@ public abstract class AbstractReservationRepositoryTest {
                 Reservation.of(1, LocalDateTime.of(2020, 4, 1, 10, 0, 0), LocalDateTime.of(2020, 4, 1, 12, 0, 0), "メモ1", 3, 1)
                 );
 
-        var actual = repository().findOverlappedReservation(LocalDateTime.of(2020, 4, 1, 11, 00), LocalDateTime.of(2020, 4, 1, 14, 00));
+        var actual = repository().findOverlappedReservations(LocalDateTime.of(2020, 4, 1, 11, 00), LocalDateTime.of(2020, 4, 1, 14, 00));
         assertThatToString(actual).containsExactlyElementsOf(expected);
 
 
         // 指定終了時間が既存予約時間帯に含まれるケース
-        actual = repository().findOverlappedReservation(LocalDateTime.of(2020, 4, 1, 9, 00), LocalDateTime.of(2020, 4, 1, 11, 00));
+        actual = repository().findOverlappedReservations(LocalDateTime.of(2020, 4, 1, 9, 00), LocalDateTime.of(2020, 4, 1, 11, 00));
         assertThatToString(actual).containsExactlyElementsOf(expected);
 
 
         // 指定時間帯が既存の予約時間帯を包含するケース
-        actual = repository().findOverlappedReservation(LocalDateTime.of(2020, 4, 1, 9, 00), LocalDateTime.of(2020, 4, 1, 14, 00));
+        actual = repository().findOverlappedReservations(LocalDateTime.of(2020, 4, 1, 9, 00), LocalDateTime.of(2020, 4, 1, 14, 00));
         assertThatToString(actual).containsExactlyElementsOf(expected);
 
 
         // 指定時間帯が既存の予約時間帯に包含されるケース
-        actual = repository().findOverlappedReservation(LocalDateTime.of(2020, 4, 1, 10, 30), LocalDateTime.of(2020, 4, 1, 11, 30));
+        actual = repository().findOverlappedReservations(LocalDateTime.of(2020, 4, 1, 10, 30), LocalDateTime.of(2020, 4, 1, 11, 30));
         assertThatToString(actual).containsExactlyElementsOf(expected);
 
         // 複数件取得するケース
@@ -133,7 +133,7 @@ public abstract class AbstractReservationRepositoryTest {
                 Reservation.of(2, LocalDateTime.of(2020, 4, 1, 16, 0, 0), LocalDateTime.of(2020, 4, 1, 18, 0, 0), "メモ2", 3, 2),
                 Reservation.of(3, LocalDateTime.of(2021, 4, 1, 10, 0, 0), LocalDateTime.of(2021, 4, 1, 12, 0, 0), "メモ3", 3, 1)
                 );
-        actual = repository().findOverlappedReservation(LocalDateTime.of(2020, 4, 1, 0, 0), LocalDateTime.of(2099, 12, 31, 23, 59));
+        actual = repository().findOverlappedReservations(LocalDateTime.of(2020, 4, 1, 0, 0), LocalDateTime.of(2099, 12, 31, 23, 59));
         assertThatToString(actual).containsExactlyElementsOf(expected);
 
     }
@@ -141,7 +141,7 @@ public abstract class AbstractReservationRepositoryTest {
     @Test
     void testFindNullOverlappedReservationUnselectedId() {
         //時間帯が重複しないケース
-        var actual = repository().findOverlappedReservation(LocalDateTime.of(2999, 4, 1, 13, 0), LocalDateTime.of(2999, 4, 1, 15, 30));
+        var actual = repository().findOverlappedReservations(LocalDateTime.of(2999, 4, 1, 13, 0), LocalDateTime.of(2999, 4, 1, 15, 30));
         assertThat(actual).isEmpty();
     }
 

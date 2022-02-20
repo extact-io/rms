@@ -101,7 +101,7 @@ public class RentalReservationApplicationImpl implements RentalReservationApplic
 
     @Override
     public List<RentalItem> findCanRentedItemAtTerm(LocalDateTime from, LocalDateTime to) {
-        var reservedItemIds = reservationService.findOverlappedReservation(from, to).stream()
+        var reservedItemIds = reservationService.findOverlappedReservations(from, to).stream()
                 .map(Reservation::getRentalItemId)
                 .collect(Collectors.toList());
         return rentalItemService.findAll().stream()

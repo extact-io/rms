@@ -237,7 +237,7 @@ class RentalReservationApplicationTest {
 
     @Test
     void testFailToUpdateReservation() {
-        var update = Reservation.of(999, null, null, "memo", 1, 1);
+        var update = Reservation.of(999, LocalDateTime.now(), LocalDateTime.now().plusHours(1), "memo", 1, 1);
         catchThrowableOfType(() ->
             target.updateReservation(update),
             BusinessFlowException.class

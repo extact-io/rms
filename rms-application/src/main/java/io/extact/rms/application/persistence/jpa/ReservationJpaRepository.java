@@ -10,8 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import io.extact.rms.application.domain.Reservation;
-import io.extact.rms.application.persistence.ReservationRepository;
 import io.extact.rms.application.persistence.GenericRepository.ApiType;
+import io.extact.rms.application.persistence.ReservationRepository;
 import io.extact.rms.platform.extension.EnabledIfRuntimeConfig;
 
 @ApplicationScoped
@@ -47,19 +47,25 @@ public class ReservationJpaRepository implements ReservationRepository, JpaCrudR
                     .getResultList();
     }
 
-    @Override
-    public Reservation findOverlappedReservation(int rentalItemId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    //@Override
+    public List<Reservation> findOverlappedReservations(int rentalItemId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         var period = new Reservation.DateTimePeriod(startDateTime, endDateTime);
         return em.createQuery(JPQL_SELECT_BY_RENTAL_ID, Reservation.class)
                     .setParameter(1, rentalItemId)
                     .getResultList().stream()
                     .filter(reservation -> reservation.getReservePeriod().isOverlappedBy(period))
-                    .findFirst()
-                    .orElse(null);
+                    .collect(Collectors.toList());
     }
 
     @Override
-    public List<Reservation> findOverlappedReservation(LocalDateTime from, LocalDateTime to) {
+    public Reservation findOverlappedReservation(int rentalItemId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return this.findOverlappedReservations(rentalItemId, startDateTime, endDateTime).stream()
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public List<Reservation> findOverlappedReservations(LocalDateTime from, LocalDateTime to) {
         var period = new Reservation.DateTimePeriod(from, to);
         return findAll().stream()
                 .filter(reservation -> reservation.getReservePeriod().isOverlappedBy(period))

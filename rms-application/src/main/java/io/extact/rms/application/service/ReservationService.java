@@ -5,6 +5,7 @@ import static io.extact.rms.application.exception.BusinessFlowException.CauseTyp
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -41,8 +42,8 @@ public class ReservationService implements GenericService<Reservation> {
         return repository.findOverlappedReservation(rentalItemId, from, to);
     }
 
-    public List<Reservation> findOverlappedReservation(LocalDateTime from, LocalDateTime to) {
-        return repository.findOverlappedReservation(from, to);
+    public List<Reservation> findOverlappedReservations(LocalDateTime from, LocalDateTime to) {
+        return repository.findOverlappedReservations(from, to);
     }
 
     public boolean hasRefereToRentalItem(int rentalItemId) {
@@ -51,21 +52,6 @@ public class ReservationService implements GenericService<Reservation> {
 
     public boolean hasRefereToUserAccount(int userAccountId) {
         return !findByReserverId(userAccountId).isEmpty();
-    }
-
-    @Override
-    public Reservation add(Reservation addReservation) throws BusinessFlowException {
-        // 重複チェック
-        var reservation = findOverlappedReservation(
-                addReservation.getRentalItemId(),
-                addReservation.getStartDateTime(),
-                addReservation.getEndDateTime());
-        if (reservation != null) {
-            throw new BusinessFlowException("Already reserved.", DUPRICATE);
-        }
-        // 登録
-        repository.add(addReservation);
-        return this.get(addReservation.getId());
     }
 
     public void cancel(int reservationId, int cancelUserId) throws BusinessFlowException {
@@ -82,6 +68,21 @@ public class ReservationService implements GenericService<Reservation> {
                     CauseType.FORBIDDEN);
         }
         repository.delete(reservation);
+    }
+
+    @Override
+    public Consumer<Reservation> getDuplicateChecker() {
+        return (targetReservation) -> {
+            var foundReservations = repository.findOverlappedReservations(
+                    targetReservation.getRentalItemId(),
+                    targetReservation.getStartDateTime(),
+                    targetReservation.getEndDateTime());
+            if (!foundReservations.isEmpty() &&
+                    (targetReservation.getId() == null
+                            || foundReservations.stream().anyMatch(r -> !r.isSameId(targetReservation)))) {
+                throw new BusinessFlowException("Already reserved.", DUPRICATE);
+            }
+        };
     }
 
     @Override

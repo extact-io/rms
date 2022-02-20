@@ -72,10 +72,11 @@ public abstract class AbstractClientScenarioTest {
         // ★:ADMINに切り替え
         service().authenticate("admin", "admin");
         // 名前が重複
-        catchThrowableOfType(
-                () -> service().addUserAccount(addedUser),
-                BusinessFlowClientException.class
-            );
+        newUser.setId(null);
+        var thrown = catchThrowableOfType(
+                () -> service().addUserAccount(newUser),
+                BusinessFlowClientException.class);
+        assertThat(thrown).isNotNull();
 
         // @Order(3)の事前条件として設定
         context.loginUser = loginUser;
@@ -100,10 +101,11 @@ public abstract class AbstractClientScenarioTest {
         // 登録したレンタル品を再登録（重複エラー）
         // -----------------------------------
         // シリアルNoが重複
-        catchThrowableOfType(
-                () -> service().addRentalItem(addedItem),
-                BusinessFlowClientException.class
-            );
+        newItem.setId(null);
+        var thrown = catchThrowableOfType(
+                () -> service().addRentalItem(newItem),
+                BusinessFlowClientException.class);
+        assertThat(thrown).isNotNull();
 
         // @Order(3)の事前条件として設定
         context.addedRentalItem = addedItem;
@@ -173,10 +175,11 @@ public abstract class AbstractClientScenarioTest {
         assertThat(ownReservations).hasSize(1);
 
         // ログインユーザ以外の予約を削除
-        catchThrowableOfType(
+        var thrown = catchThrowableOfType(
             () -> service().cancelReservation(1),
             RentalReservationClientException.class
         );
+        assertThat(thrown).isNotNull();
 
         // キャンセル対象の予約を取得
         var cancelTarget = ownReservations.get(0);

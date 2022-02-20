@@ -1,5 +1,7 @@
 package io.extact.rms.application.service;
 
+import java.util.function.Consumer;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -24,14 +26,13 @@ public class RentalItemService implements GenericService<RentalItem> {
     }
 
     @Override
-    public RentalItem add(RentalItem addRentalItem) {
-        // シリアル番号の重複チェック
-        if (findBySerialNo(addRentalItem.getSerialNo()) != null) {
-            throw new BusinessFlowException("The serialNo is already registered.", CauseType.DUPRICATE);
-        }
-        // 登録
-        repository.add(addRentalItem);
-        return get(addRentalItem.getId());
+    public Consumer<RentalItem> getDuplicateChecker() {
+        return (targetItem) -> {
+            var foundItem = findBySerialNo(targetItem.getSerialNo());
+            if (foundItem != null && (targetItem.getId() == null || !foundItem.isSameId(targetItem))) {
+                throw new BusinessFlowException("The serialNo is already registered.", CauseType.DUPRICATE);
+            }
+        };
     }
 
     @Override

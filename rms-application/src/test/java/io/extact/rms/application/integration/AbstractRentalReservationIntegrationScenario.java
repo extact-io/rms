@@ -10,6 +10,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import io.extact.rms.application.RentalReservationApplication;
 import io.extact.rms.application.common.LoginUserUtils;
@@ -19,10 +22,6 @@ import io.extact.rms.application.domain.Reservation;
 import io.extact.rms.application.domain.UserAccount;
 import io.extact.rms.application.domain.UserAccount.UserType;
 import io.extact.rms.application.exception.BusinessFlowException;
-
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(OrderAnnotation.class)
 abstract class AbstractRentalReservationIntegrationScenario {
@@ -71,9 +70,10 @@ abstract class AbstractRentalReservationIntegrationScenario {
         // 登録したユーザを再登録（重複エラー）
         // -----------------------------------
         // ログインIDが重複
-        assertThatThrownBy(() ->
-            application.addUserAccount(addedUser)
-        ).isInstanceOf(BusinessFlowException.class);
+        assertThatThrownBy(() -> {
+            addedUser.setId(null);
+            application.addUserAccount(addedUser);
+        }).isInstanceOf(BusinessFlowException.class);
 
         // @Order(3)の事前条件として設定
         context.loginUser = loginUser;
@@ -101,11 +101,15 @@ abstract class AbstractRentalReservationIntegrationScenario {
         // 登録したレンタル品を再登録（重複エラー）
         // -----------------------------------
         // シリアル番号が重複
-        assertThatThrownBy(() ->
-            application.addRentalItem(addedItem)
+        int saveId = addedItem.getId();
+        assertThatThrownBy(() -> {
+            addedItem.setId(null); // for add
+            application.addRentalItem(addedItem);
+        }
         ).isInstanceOf(BusinessFlowException.class);
 
         // @Order(3)の事前条件として設定
+        addedItem.setId(saveId);
         context.addedRentalItem = addedItem;
     }
 
