@@ -47,10 +47,11 @@ class RentalReservationApplicationTest {
     @ParameterizedTest
     @CsvSource({ "soramame, hoge", "hoge, soramame", "hoge, hoge" })
     void testCannotAuthenticate(String id, String password) {
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.authenticate(id, password),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
 
@@ -102,10 +103,11 @@ class RentalReservationApplicationTest {
     @CsvSource({ "903, 2004/04/01", "1, 2004/07/10", "903, 2004/07/10" })
     void testCannotFindReservationByRentalItemAndStartDate(int rentalItemId, String date) {
         var pttn = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.findReservationByRentalItemAndStartDate(rentalItemId, LocalDate.parse(date, pttn)),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
@@ -120,20 +122,22 @@ class RentalReservationApplicationTest {
     void testFailToAddReservationForBadItem() {
         // rentalItemId=999はマスタ登録なし
         var addReservation = Reservation.of(null, LocalDateTime.of(2021, 4, 18, 10, 0, 0), LocalDateTime.of(2021, 5, 16, 20, 0, 0), "メモ4", 999, 1);
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.addReservation(addReservation),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
     void testFailToAddReservationForDuplicate() {
         // 2020/4/1 16:00-18:00 で既に予約あり
         var addReservation = Reservation.of(null, LocalDateTime.of(2020, 4, 1, 17, 0, 0), LocalDateTime.of(2020, 4, 1, 19, 0, 0), "メモ4", 3, 1);
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.addReservation(addReservation),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
@@ -195,10 +199,11 @@ class RentalReservationApplicationTest {
     void testFailToAddRentalItem() {
         // "A0004"は既に登録済みのSerialNo
         var addRentalItem = RentalItem.ofTransient("A0004", "レンタル品5号");
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.addRentalItem(addRentalItem),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
@@ -213,10 +218,11 @@ class RentalReservationApplicationTest {
     void testFailToAddUserAccount() {
         // "member1"のloginIdは既に登録済み
         var addUserAccount = UserAccount.ofTransient("member1", "member3", "メンバー3", "030-1111-2222", "連絡先4", UserType.MEMBER);
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.addUserAccount(addUserAccount),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
@@ -238,10 +244,11 @@ class RentalReservationApplicationTest {
     @Test
     void testFailToUpdateReservation() {
         var update = Reservation.of(999, LocalDateTime.now(), LocalDateTime.now().plusHours(1), "memo", 1, 1);
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.updateReservation(update),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
@@ -257,10 +264,11 @@ class RentalReservationApplicationTest {
     @Test
     void testFailToUpdateRentalItem() {
         var update = RentalItem.of(999, null, null);
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.updateRentalItem(update),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
@@ -276,10 +284,11 @@ class RentalReservationApplicationTest {
     @Test
     void testFailToUpdateUserAccount() {
         var updateUser = UserAccount.of(999, "member1", "member3", "メンバー3", "030-1111-2222", "連絡先4", UserType.MEMBER);
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.updateUserAccount(updateUser),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 
     @Test
@@ -336,6 +345,24 @@ class RentalReservationApplicationTest {
     }
 
     @Test
+    void testGetOwnProfile() {
+        LoginUserUtils.set(ServiceLoginUser.of(1, null)); // 事前条件
+        var ownProfile = target.getOwnUserProfile();
+        assertThat(ownProfile).isNotNull();
+        assertThat(ownProfile.getId()).isEqualTo(1);
+    }
+
+    @Test
+    void testFailToGetOwnProfile() {
+        LoginUserUtils.set(ServiceLoginUser.of(99, null)); // 事前条件
+        var thrown = catchThrowableOfType(() ->
+            target.getOwnUserProfile(),
+            BusinessFlowException.class
+        );
+        assertThat(thrown).isNotNull();
+    }
+
+    @Test
     void testUpdateOwnProfile() {
         LoginUserUtils.set(ServiceLoginUser.of(1, null)); // 事前条件
         var updateUser = target.get(UserAccount.class, 1);
@@ -350,9 +377,10 @@ class RentalReservationApplicationTest {
     void testFailToUpdateOwnProfile() {
         LoginUserUtils.set(ServiceLoginUser.of(2, null)); // 事前条件
         var updateUser = target.get(UserAccount.class, 1);
-        catchThrowableOfType(() ->
+        var thrown = catchThrowableOfType(() ->
             target.updateUserProfile(updateUser),
             BusinessFlowException.class
         );
+        assertThat(thrown).isNotNull();
     }
 }

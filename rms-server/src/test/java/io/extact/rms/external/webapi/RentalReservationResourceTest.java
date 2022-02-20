@@ -711,7 +711,14 @@ class RentalReservationResourceTest {
         assertGenericErrorInfo(actual, Status.CONFLICT, BusinessFlowException.class);
     }
 
-
+    @Test
+    @Order(WITHOUT_UPDATE_ORDER)
+    void testGetOwnProfile() {
+        testUser = ServiceLoginUser.of(1, null); // 事前条件の設定(Interceptorで設定するユーザ)
+        var actual = endPoint.getOwnUserProfile();
+        var expected = newUserAccountResourceDto(1, "member1", "member1", "メンバー1", "070-1111-2222", "連絡先1", UserType.MEMBER);
+        assertThatToString(actual).isEqualTo(expected);
+    }
 
     @Test
     @Order(WITH_UPDATE_ORDER)

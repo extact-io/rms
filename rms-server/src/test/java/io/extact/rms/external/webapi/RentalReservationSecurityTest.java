@@ -207,8 +207,13 @@ class RentalReservationSecurityTest {
         assertThat(actual.getResponse().getStatus()).isEqualTo(Status.UNAUTHORIZED.getStatusCode());
 
         actual = catchThrowableOfType(() ->
-                endPoint.updateUserProfile(newUserAccountResourceDto()),
-                WebApplicationException.class);
+                    endPoint.getOwnUserProfile(),
+                    WebApplicationException.class);
+        assertThat(actual.getResponse().getStatus()).isEqualTo(Status.UNAUTHORIZED.getStatusCode());
+
+        actual = catchThrowableOfType(() ->
+                    endPoint.updateUserProfile(newUserAccountResourceDto()),
+                    WebApplicationException.class);
         assertThat(actual.getResponse().getStatus()).isEqualTo(Status.UNAUTHORIZED.getStatusCode());
     }
 
@@ -227,6 +232,7 @@ class RentalReservationSecurityTest {
                 endPoint.canRentedItemAtTerm(3, LocalDateTime.of(2021, 4, 1, 12, 0), LocalDateTime.of(2021, 4, 1, 13, 0));
                 endPoint.addReservation(newAddReservationDto());
                 endPoint.cancelReservation(4); // data of addReservation()
+                endPoint.getOwnUserProfile();
                 endPoint.updateUserProfile(newUserAccountResourceDto());
         }).doesNotThrowAnyException();
 
@@ -246,6 +252,7 @@ class RentalReservationSecurityTest {
                 var updateDto = newUserAccountResourceDto();
                 updateDto.setId(3);
                 updateDto.setLoginId("member3");
+                endPoint.getOwnUserProfile();
                 endPoint.updateUserProfile(updateDto);
                 endPoint.deleteUserAccount(3);
         }).doesNotThrowAnyException();
