@@ -302,9 +302,9 @@ components:
 info: 
   contact: 
     name: 課外活動
-    url: https://extact-io.github.io/web-site/
+    url: https://extact-io.github.io/rms-website/
   title: レンタル予約システムの公開API
-  version: 1.0.0-SNAPSHOT
+  version: 1.0.0
 openapi: 3.0.3
 paths:
   /rms/items: 
