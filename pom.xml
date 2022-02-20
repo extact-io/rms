@@ -440,7 +440,7 @@
         <version>${version.plugin.maven-scm-publish}</version>
         <configuration>
           <siteOutputEncoding>${site.encoding}</siteOutputEncoding>
-          <subDirectory>rms/site/modules</subDirectory>
+          <subDirectory>generated/site/modules</subDirectory>
           <scmBranch>main</scmBranch>
         </configuration>
       </plugin>
