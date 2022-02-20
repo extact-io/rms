@@ -21,7 +21,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
     - name: Build & Test & Deploy for server
       run: |
-        mvn -B -Pcli,server clean deploy --file pom.xml
+        mvn -B -Pcli,server clean package --file pom.xml
       env:
         GITHUB_TOKEN: ${{ github.token }} # for deploy to GitHub Packages.
     - name: make deployment for rms-server
