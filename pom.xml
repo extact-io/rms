@@ -59,7 +59,7 @@
     <version.lib.text-io>3.4.1</version.lib.text-io>
 
     <!-- maven plugin versions -->
-    <version.plugin.maven-compiler>3.9.0</version.plugin.maven-compiler>
+    <version.plugin.maven-compiler>3.10.0</version.plugin.maven-compiler>
     <version.plugin.maven-surefire>3.0.0-M5</version.plugin.maven-surefire>
     <version.plugin.maven-jar>3.2.2</version.plugin.maven-jar>
     <version.plugin.maven-dependency>3.2.0</version.plugin.maven-dependency>
