@@ -90,7 +90,6 @@ class RentalReservationResourceTest {
     @BeforeEach
     void setup() throws Exception {
         this.endPoint = RestClientBuilder.newBuilder()
-                //.baseUri(new URI("http://pmr216n.primo.mamezou.com:7001/rms"))
                 .baseUri(new URI("http://localhost:7001/rms"))
                 .register(RmsTypeParameterFeature.class)
                 .build(WebApiSpec.class);
