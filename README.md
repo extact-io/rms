@@ -3,7 +3,7 @@
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=extact-io_rms&metric=ncloc)](https://sonarcloud.io/dashboard?id=extact-io_rms)
 [![BCH compliance](https://bettercodehub.com/edge/badge/extact-io/rms?branch=main)](https://bettercodehub.com/)
 # Rental Management System Application
-> Rental Management SystemはOracle Helidonを用いてMicroProfileの利用法や効果を確認することを目的としたリファレンス的なアプリケーションです
+> Rental Management Systemは[Helidon](https://helidon.io/)を用いてMicroProfileの利用法や効果を確認することを目的としたリファレンス的なアプリケーションです
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -18,28 +18,28 @@
 
 # アプリケーションの説明
 ## アプリケーション機能
-会員がレンタル品を予約するアプリケーションで管理機能といてマスターデータなどをメンテナンスする機能を持っています。なお、実装している機能は予約するまでで実際にレンタルを行う機能はまだ持っていません
+会員がレンタル品を予約するアプリケーションで管理機能としてマスターデータをメンテナンスする機能を持っています。なお、実装している機能は予約まででレンタルを行う機能はまだ持っていません
 | 分類 | 機能 | 内容 |
 |------|------|------|
-|会員機能|レンタル品検索|レンタル品を検索し予約状況の確認や予約も行うことができます|
+|会員機能|レンタル品検索|レンタル品を検索し予約状況の確認ができます|
 ||レンタル品予約|予約したいレンタル品を選択しレンタル期間を指定した予約ができます|
 ||予約確認|自分の予約を確認したりキャンセルしたりすることができます|
 |管理機能|レンタル品管理|レンタル品の登録や更新などを行うことができます|
 ||予約管理|登録されたレンタル予約の削除や変更を行うことができます|
 ||ユーザ管理|ユーザの登録や更新、削除などを行うことができます|
 
-このリポジトリから提供されるアプリのUIはコンソールによるCUIとなります。ReactによるSPAなUIも別途用意していますので、興味があるかたは[こちら](https://github.com/extact-io/rms-ui-react)へどうぞ
+UIはコンソールUIとなりますが別途ReactによるSPAなUIもあります。興味があるかたは[こちら](https://github.com/extact-io/rms-ui-react)へ
 
 # ビルドと動作方法
 ## 手っ取り早くアプリで動かす
-All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリケーションを用意しています。jpackageでOSごとの実行形式に変換したものでzipファイルを解凍するだけで利用可能です
+All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリケーションを用意しています。jpackageでOSごとの実行形式に変換しているためzipファイルを解凍するだけで実行可能です
  - Windows版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta.1/RmsConsoleWin.zip)
  - Mac版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta.1/RmsConsoleMac.zip)
 
-解凍後、実行ファイル(.exeまたは.app)をダブルクリックするとSwingのコンソールアプリが起動します。プロンプトが現れたらデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインしてください
+解凍後、実行ファイル(.exeまたは.app)をダブルクリックするとSwingのコンソールアプリが起動します。プロンプトが現れたらデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインできます
 
 ## 自分でビルドして動かす
-cloneもしくはzipで取得したrepositoryのコードをビルドして実行します。JDK SE 11以上を前提としビルドにはMavenを利用します。上記のAll In Oneアプリとは異なりここでは[Remote&JPA](#remote接続時の物理配置)で動作させます。
+cloneもしくはzipで取得したrepositoryのコードをビルドして実行します。JDK SE 11以上とMavenが前提となります。上記のAll In Oneアプリとは異なりこちらは[Remote&JPA](#remote接続時の物理配置)で動作させます
 
 1. dependencyのローカルインストール
 ``` shell
@@ -82,7 +82,7 @@ java -jar target/rms-client-ui-console.jar
 
 # アプリケーションアーキテクチャ
 ## 論理アーキテクチャ
-論理アーキテクチャはCleanArchitectureでもヘキサゴナルでもなんでもありません
+論理アーキテクチャはCleanArchitectureでもヘキサゴナルでもなんでもありません。
 Domainレイヤをリラックスレイヤにした一般的なレイヤーアーキテクチャになります
 
 ![レイヤ](/docs/parts/logical_arch.png)
@@ -96,13 +96,11 @@ Domainレイヤをリラックスレイヤにした一般的なレイヤーア�
 - Persistenceレイヤ・・データの永続化
 - Platformレイヤ・・業務依らない基盤的な仕組み
 
-なお、レイヤ間やパッケージや他ライブラリへの依存関係のルールはArchUnitの実装で定義しています。詳細に興味があるかたは[そちら](/rms-client-ui-console/src/test/java/io/extact/rms/client/console/LayerDependencyArchUnitTest.java)もどうぞ
+なお、レイヤ間やパッケージや他ライブラリへの依存関係のルールは[ArchUnitの実装](/rms-client-ui-console/src/test/java/io/extact/rms/client/console/LayerDependencyArchUnitTest.java)で定義しています
 
 :pushpin: POINT
 レンタル予約システムのアプリケーションの実体であるServiceレイヤへの接続は利用するAPIレイヤの実装を切り替えるだけでRemoto/Localのどちらでも動作するようになっています。また、Persistenceレイヤも設定を切り替えるだけでFileによる永続化とJPAを使ったRBDへの永続化のどちらでも使えるようにしています
 
-:speech_balloon:（ボソボソ）
-CleanArchitectureやヘキサゴナルとかよく聞きますがその最たるモチベーションは外部と接するモジュールをプラガブルに切り替えられるようにすることと考えています。今回のレンタル予約システムはレイヤーアーキテクチャを採っていますがUIと永続化のプラガブルな切り替えは実現できています。ですので、CleanArchitectureやヘキサゴナルと下層のDomainレイヤなどをリラックスレイヤと定義したレイヤーアーキテクチャと本質的な違いやメリットを理解できません。これらはモノの見方や考え方の違いだけで実質的な違いはないと思うので、個人的にはレイヤーアーキテクチャで考えた方が直観的で管理しやすいのではないかとは感じています
 
 ## 物理構造
 application.jarはserviceレイヤ、persistenceレイヤ、Domainレイヤのモジュールを格納し、server.jarにはWebAPIレイヤのモジュールを格納しています
@@ -118,9 +116,10 @@ application.jarはserviceレイヤ、persistenceレイヤ、Domainレイヤの�
 ![Local接続時の物理配置](/docs/parts/runtime_lolcal.drawio.svg)
 
 ### Remote接続時の物理配置
-Client/Sever方式で動作しClientからSeverモジュールへの直接的な依存はなくserver.jarによるWebAPIを経由しapplication.jarの機能提供を受けます
+Client/Sever方式で動作しClientからSeverモジュールへの直接的な依存はなくserver.jarによるWebAPIを経由しapplication.jarの機能提供を受けます。また、[別リポジトリ](https://github.com/extact-io/rms-ui-react)のReactUIもコンソールUIと同じserver.jarのWebAPIと連携します
 
 ![Remote接続時の物理配置](/docs/parts/runtime_remote.drawio.svg)
+
 
 
 ## 利用ライブラリと準拠API
@@ -166,25 +165,25 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 業務依らない基盤的な仕組みとしてplatformモジュールが提供する機能
 (platformモジュールのコメントを1部英語で記載しているためOSSのコードをパクったように見える箇所がありますが全てスクラッチから作成しています:sweat_smile:)
 
-| パッケージ | 主要クラス | 機能 | 実装API |
-|------------|-------------|------|---------|
-| config | [ExternalPathConfigProvider](/rms-platform/src/main/java/io/extact/rms/platform/config/ExternalPathConfigProvider.java) | システムプロパティで指定された設定ファイルの読み込み | MicroProfile Config |
-|  | [ResourcePathUnderConfigProvider](/rms-platform/src/main/java/io/extact/rms/platform/config/ResourcePathUnderConfigProvider.java) | 特定のリソースパス配下に配置されている設定ファイルの自動読み込み | MicroProfile Config |
-| evn | [Environment](/rms-platform/src/main/java/io/extact/rms/platform/env/Environment.java) | `MANIFEST.MF`などから取得した環境情報の提供 | － |
-| extension | [ApplicationInitializerCdiExtension](/rms-platform/src/main/java/io/extact/rms/platform/extension/ApplicationInitializerCdiExtension.java) | CDIExtensions<br/>・設定ファイルで指定されたクラスをCDIBeanとして登録する<br/>・アノテーションと設定ファイルの情報からCDIBeanの有効/無効化を行う | JakartaEE CDI |
-| health | [MemoryHealthCheck](/rms-platform/src/main/java/io/extact/rms/platform/health/MemoryHealthCheck.java) | メモリ状況をもとにlivenessとreadnessの応答を返す |
-| jwt | [JsonWebTokenGenerator](/rms-platform/src/main/java/io/extact/rms/platform/jwt/provider/JsonWebTokenGenerator.java) | 認証情報をJsonWebTonkenにする | MicroProfile JWT |
-|  | [JsonWebTokenValidator](/rms-platform/src/main/java/io/extact/rms/platform/jwt/consumer/JsonWebTokenValidator.java) | 受け取ったJsonWebTokenを検証する | MicroProfile JWT |
-| log | [MpConfigDump](/rms-platform/src/main/java/io/extact/rms/platform/debug/MpConfigDump.java) | 優先度と上書き設定が解決済みの設定情報を一覧でログ出力する | － |
-  |  | [ServerHeaderDumpFilter](/rms-platform/src/main/java/io/extact/rms/platform/debug/ServerHeaderDumpFilter.java) | RESTリソースに対するリクエストのヘッダ情報をログ出力する |
-|  | [SessionLogBridge](/rms-platform/src/main/java/io/extact/rms/platform/debug/ext/SessionLogBridge.java) | EclipseLinkログのSLF4Jブリッジ | (EclipseLink) |
-| provider | [JsonbRmsConfig](/rms-platform/src/main/java/io/extact/rms/platform/jaxrs/converter/JsonbRmsConfig.java) | JSON変換に適用するアプリ独自のコンバータ | JakartaEE JSONB |
-|  | [ParamRmsConverterProvider](/rms-platform/src/main/java/io/extact/rms/platform/jaxrs/converter/ParamRmsConverterProvider.java) | リクエストパラメータに適用するアプリ独自のコンバータ | JakartaEE JAX-RS |
-|  | [PageNotFoundExceptionMapper](rms-platform/src/main/java/io/extact/rms/platform/jaxrs/mapper/PageNotFoundExceptionMapper.java) | ステータスコード404に対する例外ハンドラ | JakartaEE JAX-RS |
-|  | [UnhandledExceptionMapper](rms-platform/src/main/java/io/extact/rms/platform/jaxrs/mapper/UnhandledExceptionMapper.java) | 未捕捉例外をハンドルしてログ出力する例外ハンドラ | JakartaEE JAX-RS |
-| role | [RoleSecurityDynamicFeature](/rms-platform/src/main/java/io/extact/rms/platform/role/RoleSecurityDynamicFeature.java) | RESTリソースに対するRoleベースの認可制御 | JakartaEE Security API |
-| util | [ResourceUtils](/rms-platform/src/main/java/io/extact/rms/platform/util/ResourceUtils.java) | クラスパスリソースの検索ユーティリティ | － |
-| validate | [ValidateParamInterceptor](/rms-platform/src/main/java/io/extact/rms/platform/validate/ValidateParamInterceptor.java) | バリデーショングループも指定可能なメソッドバリデーションの仕組み | JakartaEE Bean Validation |
+| パッケージ | 機能 | 主要クラス | 実装API |
+|------------|------|-------------|---------|
+| config | システムプロパティで指定された設定ファイルの読み込み | [ExternalPathConfigProvider](/rms-platform/src/main/java/io/extact/rms/platform/config/ExternalPathConfigProvider.java) | MicroProfile Config |
+|  | 特定のリソースパス配下に配置されている設定ファイルの自動読み込み | [ResourcePathUnderConfigProvider](/rms-platform/src/main/java/io/extact/rms/platform/config/ResourcePathUnderConfigProvider.java) | MicroProfile Config |
+| evn | `MANIFEST.MF`などから取得した環境情報の提供 | [MainJarInfo](/rms-platform/src/main/java/io/extact/rms/platform/env/MainJarInfo.java) | － |
+| extension | CDIExtensions<br/>・設定ファイルで指定されたクラスをCDIBeanとして登録する<br/>・アノテーションと設定ファイルの情報からCDIBeanの有効/無効化を行う | [ApplicationInitializerCdiExtension](/rms-platform/src/main/java/io/extact/rms/platform/extension/ApplicationInitializerCdiExtension.java) | JakartaEE CDI |
+| health | メモリ状況をもとにlivenessとreadnessの応答を返す | [MemoryHealthCheck](/rms-platform/src/main/java/io/extact/rms/platform/health/MemoryHealthCheck.java) |MicroProfile Health|
+| jwt | 認証情報をJsonWebTonkenにする | [Jose4jJwtGenerator](/rms-platform/src/main/java/io/extact/rms/platform/jwt/impl/jose4j/Jose4jJwtGenerator.java) | MicroProfile JWT |
+|  | 受け取ったJsonWebTokenを検証する | [Jose4PrivateSecretedTokenValidator](/rms-platform/src/main/java/io/extact/rms/platform/jwt/impl/jose4j/Jose4PrivateSecretedTokenValidator.java) | MicroProfile JWT |
+| log | 優先度と上書き設定が解決済みの設定情報を一覧でログ出力する | [MpConfigDump](/rms-platform/src/main/java/io/extact/rms/platform/debug/MpConfigDump.java) | － |
+  |  | RESTリソースに対するリクエストのヘッダ情報をログ出力する | [ServerHeaderDumpFilter](/rms-platform/src/main/java/io/extact/rms/platform/debug/ServerHeaderDumpFilter.java) |
+|  | EclipseLinkログのSLF4Jブリッジ | [SessionLogBridge](/rms-platform/src/main/java/io/extact/rms/platform/debug/ext/SessionLogBridge.java) | (EclipseLink) |
+| provider | JSON変換時に適用するアプリ独自のコンバータ | [JsonbRmsConfig](/rms-platform/src/main/java/io/extact/rms/platform/jaxrs/converter/JsonbRmsConfig.java) | JakartaEE JSONB |
+|  | リクエストパラメータに適用するアプリ独自のコンバータ | [ParamRmsConverterProvider](/rms-platform/src/main/java/io/extact/rms/platform/jaxrs/converter/ParamRmsConverterProvider.java) | JakartaEE JAX-RS |
+|  | ステータスコード404に対する例外ハンドラ | [PageNotFoundExceptionMapper](rms-platform/src/main/java/io/extact/rms/platform/jaxrs/mapper/PageNotFoundExceptionMapper.java) | JakartaEE JAX-RS |
+|  | 未捕捉例外をハンドルしてログ出力する例外ハンドラ | [UnhandledExceptionMapper](rms-platform/src/main/java/io/extact/rms/platform/jaxrs/mapper/UnhandledExceptionMapper.java) | JakartaEE JAX-RS |
+| role | RESTリソースに対するRoleベースの認可制御 | [RoleSecurityDynamicFeature](/rms-platform/src/main/java/io/extact/rms/platform/role/RoleSecurityDynamicFeature.java) | JakartaEE Security API |
+| util | クラスパスリソースの検索ユーティリティ | [ResourceUtils](/rms-platform/src/main/java/io/extact/rms/platform/util/ResourceUtils.java) | － |
+| validate | バリデーショングループも指定可能なメソッドバリデーションの仕組み | [ValidateParamInterceptor](/rms-platform/src/main/java/io/extact/rms/platform/validate/ValidateParamInterceptor.java) | JakartaEE Bean Validation |
 
 # 利用ツール
 | プロセス | 利用ツール |
