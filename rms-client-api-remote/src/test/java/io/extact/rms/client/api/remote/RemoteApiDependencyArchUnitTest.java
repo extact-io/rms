@@ -31,7 +31,7 @@ public class RemoteApiDependencyArchUnitTest {
     static final ArchRule test_アプリが依存してOKなライブラリの定義 =
             classes()
                 .that()
-                    .resideInAPackage("io.extact.rms.client.api.remote..")
+                    .resideInAPackage("io.extact.rms.client.api.adaptor.remote..")
                 .should()
                     .onlyDependOnClassesThat(
                             resideInAnyPackage(

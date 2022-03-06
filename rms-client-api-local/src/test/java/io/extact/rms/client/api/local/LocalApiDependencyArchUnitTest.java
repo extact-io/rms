@@ -29,7 +29,7 @@ public class LocalApiDependencyArchUnitTest {
     static final ArchRule test_アプリが依存してOKなライブラリの定義 =
             classes()
                 .that()
-                    .resideInAPackage("io.extact.rms.client.api.local..")
+                    .resideInAPackage("io.extact.rms.client.api.adaptor.local..")
                 .should()
                     .onlyDependOnClassesThat(
                             resideInAnyPackage(

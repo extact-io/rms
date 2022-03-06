@@ -114,7 +114,7 @@ public class ApplicationDependencyArchUnitTest {
     /**
      * javax.persistence.*への依存はjpaパッケージのみの定義
      * <pre>
-     * ・javax.persistence.*に依存するのはpersistence.jpaパッケージとentityパッケージの2つであること
+     * ・javax.persistence.*に依存するのはpersistence.jpaパッケージとdomain(entity)パッケージの2つであること
      * </pre>
      */
     @ArchTest
@@ -131,20 +131,20 @@ public class ApplicationDependencyArchUnitTest {
                         );
 
     /**
-     * entityパッケージ内部の依存関係の定義
+     * domainパッケージ内部の依存関係の定義
      * <pre>
-     * ・entityパッケージ直下のクラスが使ってよいライブラリは条件で定義されたモノのみ
+     * ・domainパッケージ直下のクラスが使ってよいライブラリは条件で定義されたモノのみ
      * </pre>
      */
     @ArchTest
-    static final ArchRule test_entityパッケージのクラスが依存してよいパッケージの定義 =
+    static final ArchRule test_domainパッケージのクラスが依存してよいパッケージの定義 =
             classes()
                 .that()
-                    .resideInAPackage("io.extact.rms.application.entity..")
+                    .resideInAPackage("io.extact.rms.application.domain..")
                 .should()
                     .onlyDependOnClassesThat()
                         .resideInAnyPackage(
-                                "io.extact.rms.application.entity..",
+                                "io.extact.rms.application.domain..",
                                 "org.apache.commons.lang3..",
                                 "javax.persistence..",
                                 "javax.validation..",
