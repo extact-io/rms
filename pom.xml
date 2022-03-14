@@ -52,7 +52,7 @@
     <version.lib.assertj>3.22.0</version.lib.assertj>
     <version.lib.archunit>0.23.1</version.lib.archunit>
     <version.lib.doxia-module-markdown>1.11.1</version.lib.doxia-module-markdown>
-    <version.lib.hibernate-validator>6.1.2.Final</version.lib.hibernate-validator>
+    <version.lib.hibernate-validator>7.0.4.Final</version.lib.hibernate-validator>
     <version.lib.commons-lang>3.12.0</version.lib.commons-lang>
     <version.lib.commons-csv>1.9.0</version.lib.commons-csv>
     <version.lib.lombok>1.18.22</version.lib.lombok>
