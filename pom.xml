@@ -62,7 +62,7 @@
     <version.plugin.maven-compiler>3.10.0</version.plugin.maven-compiler>
     <version.plugin.maven-surefire>3.0.0-M5</version.plugin.maven-surefire>
     <version.plugin.maven-jar>3.2.2</version.plugin.maven-jar>
-    <version.plugin.maven-dependency>3.2.0</version.plugin.maven-dependency>
+    <version.plugin.maven-dependency>3.3.0</version.plugin.maven-dependency>
     <version.plugin.maven-site>3.11.0</version.plugin.maven-site>
     <version.plugin.maven-reports>3.2.2</version.plugin.maven-reports>
     <version.plugin.maven-wagon-scm>3.5.1</version.plugin.maven-wagon-scm>
@@ -76,7 +76,7 @@
     <version.plugin.jdepend>2.0</version.plugin.jdepend>
     <version.plugin.stopbugs>4.5.3.0</version.plugin.stopbugs>
     <version.plugin.pmd>3.16.0</version.plugin.pmd>
-    <version.plugin.jxr>3.1.1</version.plugin.jxr>
+    <version.plugin.jxr>3.2.0</version.plugin.jxr>
     <!-- sonarcloud setting -->
     <sonar.projectKey>extact-io_rms</sonar.projectKey>
     <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
