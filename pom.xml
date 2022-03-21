@@ -47,7 +47,7 @@
     <!-- library versions -->
     <version.helidon>2.4.2</version.helidon>
     <version.lib.security-api>1.0</version.lib.security-api>
-    <version.lib.jose4j>0.7.10</version.lib.jose4j>
+    <version.lib.jose4j>0.7.11</version.lib.jose4j>
     <version.lib.junit-platform>1.8.2</version.lib.junit-platform>
     <version.lib.assertj>3.22.0</version.lib.assertj>
     <version.lib.archunit>0.23.1</version.lib.archunit>
