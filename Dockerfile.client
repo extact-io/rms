@@ -1,0 +1,32 @@
+# $ docker run -it --link rms-server:rms-server --rm extactmame/rms-client:v0.1
+# 1st stage, build the app
+FROM maven:3.6-jdk-11 as build
+
+WORKDIR /rms
+
+ADD pom.xml .
+ADD rms-test rms-test
+ADD rms-platform rms-platform
+ADD rms-client-api rms-client-api
+ADD rms-client-api-local rms-client-api-local
+ADD rms-client-api-remote rms-client-api-remote
+ADD rms-client-ui-console rms-client-ui-console
+ADD rms-application rms-application
+ADD rms-server rms-server
+ADD rms-coverage rms-coverage
+RUN mvn -Pcli,all clean install -DskipTests=true
+
+WORKDIR /rms/rms-client-ui-console
+RUN mvn -Pcli,copy-libs clean package -DskipTests=true
+RUN echo "done!"
+
+# 2nd stage, build the runtime image
+FROM openjdk:11-jre-slim
+RUN apt-get update && apt-get -y install --no-install-recommends curl
+
+WORKDIR /rms/rms-client-ui-console
+ADD docker-wait-for-server.sh .
+
+# Copy the binary built in the 1st stage
+COPY --from=build /rms/rms-client-ui-console/target/rms-client-ui-console.jar ./
+COPY --from=build /rms/rms-client-ui-console/target/libs ./libs

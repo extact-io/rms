@@ -1,0 +1,30 @@
+## $ docker run -d -p 7001:7001 -p 7011:7011 --rm --name rms-server rms-server
+# 1st stage, build the app
+FROM maven:3.6-jdk-11 as build
+
+WORKDIR /rms
+
+ADD pom.xml .
+ADD rms-application rms-application
+ADD rms-platform rms-platform
+ADD rms-server rms-server
+ADD rms-test rms-test
+RUN mvn -Pcli,server clean install -DskipTests=true
+
+WORKDIR /rms/rms-server
+RUN mvn -Pcli,copy-libs clean package -DskipTests=true
+RUN echo "done!"
+
+# 2nd stage, build the runtime image
+FROM openjdk:11-jre-slim
+RUN apt-get update && apt-get -y install --no-install-recommends curl
+WORKDIR /rms/rms-server
+
+# Copy the binary built in the 1st stage
+COPY --from=build /rms/rms-server/target/rms-server.jar ./
+COPY --from=build /rms/rms-server/target/libs ./libs
+
+CMD ["java", "-Drms.h2.script=classpath:init-rms-demo.ddl", "-jar", "rms-server.jar"]
+
+EXPOSE 7001
+EXPOSE 7011
