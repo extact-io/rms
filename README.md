@@ -33,7 +33,7 @@ UIはコンソールUIとなりますが別途ReactによるSPAなUIもありま
 # ビルドと動作方法
 ## 手っ取り早くアプリで動かす
 All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリケーションを用意しています。jpackageでOSごとの実行形式に変換しているためzipファイルを解凍するだけで実行可能です
- - Windows版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0-beta.1/RmsConsoleWin.zip)
+ - Windows版は[こちらから](https://github.com/extact-io/rms/releases/download/v1.0.0/RmsConsoleWin.zip)
  - ~~Mac版はこちらから~~ ※準備中
 
 解凍後、実行ファイル(.exeまたは.app)をダブルクリックするとSwingのコンソールアプリが起動します。プロンプトが現れたらデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインできます

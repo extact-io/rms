@@ -47,7 +47,7 @@
     <!-- library versions -->
     <version.helidon>2.4.2</version.helidon>
     <version.lib.security-api>1.0</version.lib.security-api>
-    <version.lib.jose4j>0.7.10</version.lib.jose4j>
+    <version.lib.jose4j>0.7.11</version.lib.jose4j>
     <version.lib.junit-platform>1.8.2</version.lib.junit-platform>
     <version.lib.assertj>3.22.0</version.lib.assertj>
     <version.lib.archunit>0.23.1</version.lib.archunit>
@@ -59,10 +59,10 @@
     <version.lib.text-io>3.4.1</version.lib.text-io>
 
     <!-- maven plugin versions -->
-    <version.plugin.maven-compiler>3.10.0</version.plugin.maven-compiler>
+    <version.plugin.maven-compiler>3.10.1</version.plugin.maven-compiler>
     <version.plugin.maven-surefire>3.0.0-M5</version.plugin.maven-surefire>
     <version.plugin.maven-jar>3.2.2</version.plugin.maven-jar>
-    <version.plugin.maven-dependency>3.2.0</version.plugin.maven-dependency>
+    <version.plugin.maven-dependency>3.3.0</version.plugin.maven-dependency>
     <version.plugin.maven-site>3.11.0</version.plugin.maven-site>
     <version.plugin.maven-reports>3.2.2</version.plugin.maven-reports>
     <version.plugin.maven-wagon-scm>3.5.1</version.plugin.maven-wagon-scm>
@@ -74,9 +74,9 @@
     <version.plugin.jacoco>0.8.7</version.plugin.jacoco>
     <version.plugin.openapi-gen>5.4.0</version.plugin.openapi-gen>
     <version.plugin.jdepend>2.0</version.plugin.jdepend>
-    <version.plugin.stopbugs>4.5.3.0</version.plugin.stopbugs>
+    <version.plugin.stopbugs>4.6.0.0</version.plugin.stopbugs>
     <version.plugin.pmd>3.16.0</version.plugin.pmd>
-    <version.plugin.jxr>3.1.1</version.plugin.jxr>
+    <version.plugin.jxr>3.2.0</version.plugin.jxr>
     <!-- sonarcloud setting -->
     <sonar.projectKey>extact-io_rms</sonar.projectKey>
     <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
