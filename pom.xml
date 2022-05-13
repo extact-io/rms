@@ -17,7 +17,7 @@
     ※その他profileはgenJavaClient, genJsClient, genC#Client
 
     <コンテンツ系>
-    1. サイトの生成（./target/stagingに生成される）
+    1. サイトの生成（./target/stagingに生成される） 
     mvn -Pcli,all clean site site:stage
     2. サイトの生成 and Upload（./target/stagingと同期される）
     mvn -Pcli,all clean site site:stage scm-publish:publish-scm
@@ -132,7 +132,7 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
-  </repositories>
+</repositories>
 
   <dependencyManagement>
     <dependencies>
@@ -192,13 +192,6 @@
         <groupId>io.helidon.microprofile.cdi</groupId>
         <artifactId>helidon-microprofile-cdi</artifactId>
         <version>${version.helidon}</version>
-        <!-- Explicitly exclude slf4j-jdk14 as it is bound to JUL -->
-        <exclusions>
-          <exclusion>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-          </exclusion>
-        </exclusions>
       </dependency>
       <dependency>
         <groupId>javax.security.enterprise</groupId>
