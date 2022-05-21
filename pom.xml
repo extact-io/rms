@@ -47,7 +47,7 @@
     <!-- library versions -->
     <version.helidon>2.5.0</version.helidon>
     <version.lib.security-api>1.0</version.lib.security-api>
-    <version.lib.jose4j>0.7.11</version.lib.jose4j>
+    <version.lib.jose4j>0.7.12</version.lib.jose4j>
     <version.lib.junit-platform>1.8.2</version.lib.junit-platform>
     <version.lib.assertj>3.22.0</version.lib.assertj>
     <version.lib.archunit>0.23.1</version.lib.archunit>
@@ -55,7 +55,7 @@
     <version.lib.hibernate-validator>6.1.2.Final</version.lib.hibernate-validator>
     <version.lib.commons-lang>3.12.0</version.lib.commons-lang>
     <version.lib.commons-csv>1.9.0</version.lib.commons-csv>
-    <version.lib.lombok>1.18.22</version.lib.lombok>
+    <version.lib.lombok>1.18.24</version.lib.lombok>
     <version.lib.text-io>3.4.1</version.lib.text-io>
 
     <!-- maven plugin versions -->
@@ -64,17 +64,17 @@
     <version.plugin.maven-jar>3.2.2</version.plugin.maven-jar>
     <version.plugin.maven-dependency>3.3.0</version.plugin.maven-dependency>
     <version.plugin.maven-site>3.11.0</version.plugin.maven-site>
-    <version.plugin.maven-reports>3.2.2</version.plugin.maven-reports>
+    <version.plugin.maven-reports>3.3.0</version.plugin.maven-reports>
     <version.plugin.maven-wagon-scm>3.5.1</version.plugin.maven-wagon-scm>
     <version.plugin.maven-maven-scm-api>1.12.2</version.plugin.maven-maven-scm-api>
     <version.plugin.maven-scm-publish>3.1.0</version.plugin.maven-scm-publish>
-    <version.plugin.javadoc>3.3.2</version.plugin.javadoc>
+    <version.plugin.javadoc>3.4.0</version.plugin.javadoc>
     <version.plugin.jandex>1.1.0</version.plugin.jandex>
     <version.plugin.helidon-build-tools>2.3.3</version.plugin.helidon-build-tools>
     <version.plugin.jacoco>0.8.8</version.plugin.jacoco>
     <version.plugin.openapi-gen>5.4.0</version.plugin.openapi-gen>
     <version.plugin.jdepend>2.0</version.plugin.jdepend>
-    <version.plugin.stopbugs>4.6.0.0</version.plugin.stopbugs>
+    <version.plugin.stopbugs>4.7.0.0</version.plugin.stopbugs>
     <version.plugin.pmd>3.16.0</version.plugin.pmd>
     <version.plugin.jxr>3.2.0</version.plugin.jxr>
     <!-- sonarcloud setting -->
