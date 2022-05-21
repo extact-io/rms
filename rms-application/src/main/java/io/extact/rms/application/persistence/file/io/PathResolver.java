@@ -73,7 +73,6 @@ public interface PathResolver {
     public static class TempDirPathResolver implements PathResolver {
 
         /** 生成したtempディレクトリ */
-
         private Path tempDir;
         /**
          * コンストラクタ。

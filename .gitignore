@@ -9,6 +9,13 @@
 .classpath
 .settings
 
+# VSCode
+.vscode
+
+# IntelliJ
+.idea
+*.iml
+
 # OS
 Thumbs.db
 .DS_Store

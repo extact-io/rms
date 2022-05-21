@@ -38,6 +38,20 @@ All In Oneで[Local&JPA](#local接続時の物理配置)で起動するアプリ
 
 解凍後、実行ファイル(.exeまたは.app)をダブルクリックするとSwingのコンソールアプリが起動します。プロンプトが現れたらデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインできます
 
+## Dockerでサーバアプリとクラアントアプリを動かす
+実行可能imageをDocker Hubに登録しています。Docker Composeを使ってコマンド一発でサーバーとコンソールアプリを起動できます。
+
+``` shell
+# Clone this repository
+git clone https://github.com/extact-io/rms.git
+# Go into the repository
+cd rms
+# Run the app
+docker-compose run rms-client
+```
+
+コンソールアプリが起動しますので、プロンプトが現れたらデフォルトで用意している[こちら](#デフォルトで用意しているidpassword)のID/passwordを使ってログインできます
+
 ## 自分でビルドして動かす
 cloneもしくはzipで取得したrepositoryのコードをビルドして実行します。JDK SE 11以上とMavenが前提となります。上記のAll In Oneアプリとは異なりこちらは[Remote&JPA](#remote接続時の物理配置)で動作させます
 
@@ -47,7 +61,7 @@ cloneもしくはzipで取得したrepositoryのコードをビルドして実�
 git clone https://github.com/extact-io/rms.git
 # Go into the repository
 cd rms
-# Install dependencies
+# Run the app
 mvn -Pcli,all clean install -DskipTests=true
 ```
 

@@ -17,7 +17,6 @@ import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
-import org.junit.jupiter.api.extension.Extension;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
@@ -43,7 +42,7 @@ import org.junit.platform.commons.support.AnnotationSupport;
  *   }
  * </pre>
  */
-public class JpaTransactionalExtension implements Extension,
+public class JpaTransactionalExtension implements 
         BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback,
         BeforeTestExecutionCallback, AfterTestExecutionCallback, ParameterResolver {
 
