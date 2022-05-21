@@ -143,15 +143,15 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
   - [MicroProfile 3.3](https://download.eclipse.org/microprofile/microprofile-3.3/microprofile-spec-3.3.html)
     - Server（Netty 4.1）
     - CDI 2.0（Weld 3.1）
-    - JAX-RS 2.1（Jersey 2.32）
+    - JAX-RS 2.1（Jersey 2.3）
     - [MicroProfile Rest Client 1.4](https://download.eclipse.org/microprofile/microprofile-rest-client-1.4.0/microprofile-rest-client-1.4.0.html)
     - [MicroProfile Config 1.4](https://download.eclipse.org/microprofile/microprofile-config-1.4/microprofile-config-spec.html)
     - [MicroProfile JWT-AUTH 1.1.1](https://download.eclipse.org/microprofile/microprofile-jwt-auth-1.1.1/microprofile-jwt-auth-spec.html)
     - [MicroProfile Health 2.2](https://download.eclipse.org/microprofile/microprofile-health-2.2/microprofile-health-spec.html)
     - [MicroProfile OpenAPI 1.2](https://download.eclipse.org/microprofile/microprofile-open-api-1.2/microprofile-openapi-spec-1.2.html)
-  - Helidon MP v2.4.2
+  - Helidon MP v2.5.0
     - [ReactiveWebserver](https://helidon.io/docs/v2/#/se/webserver/01_introduction)
-    - [Helidon MP JPA](https://helidon.io/docs/v2/#/mp/jpa/01_introduction) (EclipseLink 2.7.5)
+    - [Helidon MP JPA](https://helidon.io/docs/v2/#/mp/jpa/01_introduction) (EclipseLink 2.7)
     - [CDI extension for HikariCP](https://helidon.io/docs/v2/#/mp/extensions/02_cdi_datasource-hikaricp) (HikariCP 3.4)
     - [CDI extension for JTA](https://helidon.io/docs/v2/#/mp/extensions/05_cdi_jta) (Weld 3.1)
     - [CORS in Helidon MP](https://helidon.io/docs/v2/#/mp/cors/01_introduction)
@@ -162,7 +162,7 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
   - [Text-IO 3.4.1](https://github.com/beryx/text-io) -> コンソールアプリ向けのframework
 - テスト系
   - JUnit 5.7
-  - [ArchUnit 0.22](https://www.archunit.org/)
+  - [ArchUnit 0.23](https://www.archunit.org/)
   - [Helidon MP Testing with JUnit5](https://helidon.io/docs/v2/#/mp/testing/01_testing)
 
 *カッコ内は利用している実装
