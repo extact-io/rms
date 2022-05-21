@@ -60,7 +60,7 @@
 
     <!-- maven plugin versions -->
     <version.plugin.maven-compiler>3.10.1</version.plugin.maven-compiler>
-    <version.plugin.maven-surefire>3.0.0-M5</version.plugin.maven-surefire>
+    <version.plugin.maven-surefire>3.0.0-M6</version.plugin.maven-surefire>
     <version.plugin.maven-jar>3.2.2</version.plugin.maven-jar>
     <version.plugin.maven-dependency>3.3.0</version.plugin.maven-dependency>
     <version.plugin.maven-site>3.11.0</version.plugin.maven-site>
@@ -74,7 +74,7 @@
     <version.plugin.jacoco>0.8.7</version.plugin.jacoco>
     <version.plugin.openapi-gen>5.4.0</version.plugin.openapi-gen>
     <version.plugin.jdepend>2.0</version.plugin.jdepend>
-    <version.plugin.stopbugs>4.6.0.0</version.plugin.stopbugs>
+    <version.plugin.stopbugs>4.7.0.0</version.plugin.stopbugs>
     <version.plugin.pmd>3.16.0</version.plugin.pmd>
     <version.plugin.jxr>3.2.0</version.plugin.jxr>
     <!-- sonarcloud setting -->
