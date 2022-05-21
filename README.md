@@ -110,7 +110,7 @@ Domainレイヤをリラックスレイヤにした一般的なレイヤーア�
 - Persistenceレイヤ・・データの永続化
 - Platformレイヤ・・業務依らない基盤的な仕組み
 
-なお、レイヤ間やパッケージや他ライブラリへの依存関係のルールは[ArchUnitの実装](/rms-client-ui-console/src/test/java/io/extact/rms/client/console/LayerDependencyArchUnitTest.java)で定義しています
+なお、レイヤ間やパッケージや他ライブラリへの依存関係のルールは[ArchUnitの実装](https://github.com/extact-io/rms/wiki/ArchUnit%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E5%AE%9A%E7%BE%A9)で定義しています
 
 :pushpin: POINT
 レンタル予約システムのアプリケーションの実体であるServiceレイヤへの接続は利用するAPIレイヤの実装を切り替えるだけでRemoto/Localのどちらでも動作するようになっています。また、Persistenceレイヤも設定を切り替えるだけでFileによる永続化とJPAを使ったRBDへの永続化のどちらでも使えるようにしています
