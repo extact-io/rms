@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.eclipse.microprofile.config.spi.ConfigSourceProvider;
@@ -34,6 +33,6 @@ public class ResourcePathUnderConfigProvider implements ConfigSourceProvider {
         }
         return configUrls.stream()
                     .map(url -> MpConfigFactory.newInstance().createFromUrl(url))
-                    .collect(Collectors.toList());
+                    .toList();
     }
 }

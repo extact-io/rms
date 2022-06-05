@@ -3,7 +3,6 @@ package io.extact.rms.external.webapi;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
@@ -57,7 +56,7 @@ public class RentalReservationResource implements WebApiSpec {
         return application.findReservationByRentalItemAndStartDate(rentalItemId, date)
                 .stream()
                 .map(ReservationResourceDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Authenticated
@@ -67,7 +66,7 @@ public class RentalReservationResource implements WebApiSpec {
         return application.findReservationByReserverId(reserverId)
                 .stream()
                 .map(ReservationResourceDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Authenticated
@@ -84,7 +83,7 @@ public class RentalReservationResource implements WebApiSpec {
         return application.getAllRentalItems()
                 .stream()
                 .map(RentalItemResourceDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Authenticated
@@ -111,7 +110,7 @@ public class RentalReservationResource implements WebApiSpec {
         return application.findReservationByRentalItemId(rentalItemId)
                 .stream()
                 .map(ReservationResourceDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // for react-ui
@@ -122,7 +121,7 @@ public class RentalReservationResource implements WebApiSpec {
         return application.findCanRentedItemAtTerm(from, to)
                 .stream()
                 .map(RentalItemResourceDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // for react-ui
@@ -166,7 +165,7 @@ public class RentalReservationResource implements WebApiSpec {
         return application.getAllReservations()
                 .stream()
                 .map(ReservationResourceDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // for react-ui
@@ -193,7 +192,7 @@ public class RentalReservationResource implements WebApiSpec {
         return application.getAllUserAccounts()
                 .stream()
                 .map(UserAccountResourceDto::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Authenticated

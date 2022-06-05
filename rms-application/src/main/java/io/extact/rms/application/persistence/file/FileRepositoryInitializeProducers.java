@@ -11,8 +11,6 @@ import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.Config;
 
-import lombok.extern.slf4j.Slf4j;
-
 import io.extact.rms.application.domain.RentalItem;
 import io.extact.rms.application.domain.Reservation;
 import io.extact.rms.application.domain.UserAccount;
@@ -22,6 +20,7 @@ import io.extact.rms.application.persistence.file.converter.ReservationArrayConv
 import io.extact.rms.application.persistence.file.converter.UserAccountArrayConverter;
 import io.extact.rms.application.persistence.file.io.FileAccessor;
 import io.extact.rms.application.persistence.file.io.PathResolver;
+import lombok.extern.slf4j.Slf4j;
 
 @Dependent
 @Slf4j
@@ -56,17 +55,11 @@ public class FileRepositoryInitializeProducers {
         var fileName = config.getValue(fileNameConfigKey, String.class);
 
         // フィルパスの取得
-        Path filePath;
-        switch (fileType) {
-            case "permanent":
-                filePath = new PathResolver.FixedDirPathResolver().resolve(fileName);
-                break;
-            case "temporary":
-                filePath =  FileAccessor.copyResourceToRealPath(fileName, new PathResolver.TempDirPathResolver());
-                break;
-            default:
-                throw new IllegalArgumentException("unknown fileType -> " + fileType);
-        }
+        Path filePath = switch (fileType) {
+            case "permanent" -> new PathResolver.FixedDirPathResolver().resolve(fileName);
+            case "temporary" -> FileAccessor.copyResourceToRealPath(fileName, new PathResolver.TempDirPathResolver());
+            default -> throw new IllegalArgumentException("unknown fileType -> " + fileType);
+        };
         log.info("[{}]モードでファイルをオープンしました。PATH={}", fileType, filePath);
 
         return new FileAccessor(filePath);

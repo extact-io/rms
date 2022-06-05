@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -167,12 +166,12 @@ class RentalReservationApplicationTest {
     void testFindCanRentedItemAtTerm() {
         // 4/1 9:00-11:00で予約可能なレンタル品 => 1, 2, 4
         var actual = target.findCanRentedItemAtTerm(LocalDateTime.of(2020, 4, 1, 9, 0), LocalDateTime.of(2020, 4, 1, 11, 0));
-        var actualIds = actual.stream().map(RentalItem::getId).collect(Collectors.toList());
+        var actualIds = actual.stream().map(RentalItem::getId).toList();
         assertThat(actualIds).containsOnly(1, 2, 4);
 
         // 4/2 9:00-11:00で予約可能なレンタル品 => 1, 2, 3, 4
         actual = target.findCanRentedItemAtTerm(LocalDateTime.of(2020, 4, 2, 9, 0), LocalDateTime.of(2020, 4, 2, 11, 0));
-        actualIds = actual.stream().map(RentalItem::getId).collect(Collectors.toList());
+        actualIds = actual.stream().map(RentalItem::getId).toList();
         assertThat(actualIds).containsOnly(1, 2, 3, 4);
     }
 

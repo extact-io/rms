@@ -1,17 +1,18 @@
 package io.extact.rms.client.api.dto;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor // for JSON Seserialize
 @AllArgsConstructor(staticName = "of")
+@EqualsAndHashCode
+@ToString
 public class RentalItemClientDto implements Convertable {
 
     private Integer id;
@@ -20,10 +21,5 @@ public class RentalItemClientDto implements Convertable {
 
     public static RentalItemClientDto ofTransient(String serialNo, String itemName) {
         return of(null, serialNo, itemName);
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

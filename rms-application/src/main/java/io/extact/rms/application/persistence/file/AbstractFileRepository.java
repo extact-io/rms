@@ -48,7 +48,7 @@ public class AbstractFileRepository<T extends Transformable & IdAccessable> impl
     public List<T> findAll() {
         return load().stream()
                 .map(entityConverter::toEntity)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @ValidateParam
@@ -72,7 +72,7 @@ public class AbstractFileRepository<T extends Transformable & IdAccessable> impl
                     }
                     return items;
                 })
-                .collect(Collectors.toList());
+                .toList();
         if (!replaced.get()) {
             return null;
         }
@@ -103,7 +103,7 @@ public class AbstractFileRepository<T extends Transformable & IdAccessable> impl
     public void delete(Integer id) {
         var excludedData = load().stream()
                 .filter(items -> Integer.parseInt(items[0])  != id) // numberはpos:0は共通
-                .collect(Collectors.toList());
+                .toList();
         saveAll(excludedData);
     }
 

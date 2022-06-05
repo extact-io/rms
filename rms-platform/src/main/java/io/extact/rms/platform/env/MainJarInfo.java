@@ -13,10 +13,9 @@ import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.config.Config;
 
+import io.extact.rms.platform.util.ResourceUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-
-import io.extact.rms.platform.util.ResourceUtils;
 
 @Getter
 @Slf4j
@@ -88,7 +87,7 @@ public class MainJarInfo {
             List<URL> metainfUrls = Collections.list(metainfResources).stream()
                                 .filter(url -> url.getProtocol().equals("jar"))
                                 .filter(url -> findJarMatcher.test(ResourceUtils.extractFilePathStringOfUrl(url)))
-                                .collect(Collectors.toList());
+                                .toList();
 
             // resolve metainf resource url
             if (metainfUrls.isEmpty()) {

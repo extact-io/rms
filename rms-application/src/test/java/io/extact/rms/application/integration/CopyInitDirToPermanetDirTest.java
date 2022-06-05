@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -40,7 +39,7 @@ class CopyInitDirToPermanetDirTest {
 
         List<String> fileNames = Files.list(Paths.get(TEST_PERMANENT_DIR))
                 .map(path -> path.getFileName().toString())
-                .collect(Collectors.toList());
+                .toList();
 
         assertThat(fileNames).containsExactlyInAnyOrderElementsOf(expected);
     }

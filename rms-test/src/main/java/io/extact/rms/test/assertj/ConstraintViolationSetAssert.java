@@ -2,7 +2,6 @@ package io.extact.rms.test.assertj;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 
@@ -24,7 +23,7 @@ public class ConstraintViolationSetAssert extends AbstractAssert<ConstraintViola
         if (actual.size() != size) {
             List<String> messages = actual.stream()
                     .map(ConstraintViolation::getMessageTemplate)
-                    .collect(Collectors.toList());
+                    .toList();
             failWithMessage("Expecting %s violations, but there are %s violations. Violation messages: <%s>", size, actual.size(), messages);
         }
         return this;
@@ -35,7 +34,7 @@ public class ConstraintViolationSetAssert extends AbstractAssert<ConstraintViola
         if (!containsViolationWithPath(actual, path)) {
             List<String> paths = actual.stream()
                     .map(violation -> violation.getPropertyPath().toString())
-                    .collect(Collectors.toList());
+                    .toList();
 
             failWithMessage("There was no violation with path <%s>. Violation paths: <%s>", path, paths);
         }
@@ -47,7 +46,7 @@ public class ConstraintViolationSetAssert extends AbstractAssert<ConstraintViola
         if (!containsViolationWithPathContaining(actual, path)) {
             List<String> paths = actual.stream()
                     .map(violation -> violation.getPropertyPath().toString())
-                    .collect(Collectors.toList());
+                    .toList();
 
             failWithMessage("There was no violation with path constaining <%s>. Violation paths: <%s>", path, paths);
         }
@@ -59,8 +58,7 @@ public class ConstraintViolationSetAssert extends AbstractAssert<ConstraintViola
         if (!containsViolationWithMessageEndingWith(actual, suffix)) {
             List<String> messages = actual.stream()
                     .map(ConstraintViolation::getMessageTemplate)
-                    .collect(Collectors.toList());
-
+                    .toList();
             failWithMessage("There was no violation with message ending with <%s> . Violation messages: <%s>", suffix, messages);
         }
         return this;
@@ -71,7 +69,7 @@ public class ConstraintViolationSetAssert extends AbstractAssert<ConstraintViola
         if (!actual.isEmpty()) {
             List<String> messages = actual.stream()
                     .map(ConstraintViolation::getMessageTemplate)
-                    .collect(Collectors.toList());
+                    .toList();
             failWithMessage("Expecting no violations, but there are %s violations. Violation messages: <%s>", actual.size(), messages);
         }
         return this;

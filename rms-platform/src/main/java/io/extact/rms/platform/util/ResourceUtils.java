@@ -116,7 +116,7 @@ public class ResourceUtils {
 
         List<File> jarFiles = inJarUrls.stream()
                             .map(ResourceUtils::toJarFileFromResourceUrl)
-                            .collect(Collectors.toList());
+                            .toList();
 
 
         // --- Scan in JarFile ---
@@ -143,7 +143,7 @@ public class ResourceUtils {
                         }
                         return "jar:file:" + filePath + "!/" + entry.getName();})
                     .map(ResourceUtils::toUrl)
-                    .collect(Collectors.toList());
+                    .toList();
             }
             targetUrls.addAll(urls);
         }

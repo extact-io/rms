@@ -89,13 +89,11 @@ public class MemoryHealthCheck {
         boolean liveness(MemoryUsage memoryUsage);
 
         static MemoryLivenessEvaluator of(String method, long threshold) {
-            switch (method) {
-            case "abs":
-                return new EvaluateHolder("abs", absoluteFunction, threshold);
-            case "rel":
-            default:
-                return new EvaluateHolder("rel", relativeFunction, threshold);
-            }
+            return switch (method) {
+                case "abs" -> new EvaluateHolder("abs", absoluteFunction, threshold);
+                case "rel" -> new EvaluateHolder("rel", relativeFunction, threshold);
+                default -> new EvaluateHolder("rel", relativeFunction, threshold);
+            };
         }
     }
 

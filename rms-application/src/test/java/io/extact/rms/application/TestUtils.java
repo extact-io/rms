@@ -93,13 +93,13 @@ public class TestUtils {
     public static List<String[]> getAllRecords(Path filePath) throws IOException {
         try (CSVParser parser = CSVParser.parse(filePath, StandardCharsets.UTF_8, CSVFormat.RFC4180)) {
             return parser.getRecords().stream()
-                    .map(record -> StreamSupport.stream(record.spliterator(), false).collect(Collectors.toList()))
+                    .map(record -> StreamSupport.stream(record.spliterator(), false).toList())
                     .map(values -> {
                         var array = new String[values.size()];
                         values.toArray(array);
                         return array;
                     })
-                    .collect(Collectors.toList());
+                    .toList();
         }
     }
 

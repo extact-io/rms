@@ -42,7 +42,7 @@ import org.junit.platform.commons.support.AnnotationSupport;
  *   }
  * </pre>
  */
-public class JpaTransactionalExtension implements 
+public class JpaTransactionalExtension implements
         BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback,
         BeforeTestExecutionCallback, AfterTestExecutionCallback, ParameterResolver {
 
@@ -136,7 +136,7 @@ public class JpaTransactionalExtension implements
         var config = ConfigProvider.getConfig();
         var keys = StreamSupport.stream(config.getPropertyNames().spliterator(), false)
                 .filter(key -> key.startsWith("test.db.connection.properties."))
-                .collect(Collectors.toList());
+                .toList();
         return keys.stream().collect(Collectors.toMap(
                     key -> StringUtils.remove(key, "test.db.connection.properties."), // prop-key
                     key -> config.getValue(key, String.class) // prop-value

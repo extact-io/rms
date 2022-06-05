@@ -3,10 +3,6 @@ package io.extact.rms.client.console.ui.admin;
 import static io.extact.rms.client.console.ui.ClientConstants.*;
 import static io.extact.rms.client.console.ui.textio.TextIoUtils.*;
 
-import java.util.stream.Collectors;
-
-import lombok.RequiredArgsConstructor;
-
 import io.extact.rms.client.api.RentalReservationClientApi;
 import io.extact.rms.client.api.dto.UserAccountClientDto;
 import io.extact.rms.client.api.dto.UserAccountClientDto.ClientUserType;
@@ -16,6 +12,7 @@ import io.extact.rms.client.console.ui.TransitionMap.RmsScreen;
 import io.extact.rms.client.console.ui.TransitionMap.Transition;
 import io.extact.rms.client.console.ui.textio.RmsStringInputReader.PatternMessage;
 import io.extact.rms.client.console.ui.textio.TextIoUtils;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class EditUserScreen implements RmsScreen {
@@ -42,7 +39,7 @@ public class EditUserScreen implements RmsScreen {
                 .withSelectableValues(
                         users.stream()
                             .map(UserAccountClientDto::getId)
-                            .collect(Collectors.toList()),
+                            .toList(),
                         SCREEN_BREAK_VALUE)
                 .read("ユーザ番号");
         if (TextIoUtils.isBreak(selectNumber)) {

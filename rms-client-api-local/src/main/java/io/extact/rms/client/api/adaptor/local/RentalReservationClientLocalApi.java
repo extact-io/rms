@@ -2,7 +2,6 @@ package io.extact.rms.client.api.adaptor.local;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -39,14 +38,14 @@ public class RentalReservationClientLocalApi implements RentalReservationClientA
             throws BusinessFlowClientException {
         return application.findReservationByRentalItemAndStartDate(itemId, startDate).stream()
                     .map(ReservationDtoConverter::toDto)
-                    .collect(Collectors.toList());
+                    .toList();
     }
 
     @Override
     public List<ReservationClientDto> findReservationByReserverId(int reserverId) {
         return application.findReservationByReserverId(reserverId).stream()
                     .map(ReservationDtoConverter::toDto)
-                    .collect(Collectors.toList());
+                    .toList();
     }
 
     @Override
@@ -58,14 +57,14 @@ public class RentalReservationClientLocalApi implements RentalReservationClientA
     public List<RentalItemClientDto> getAllRentalItems() {
         return application.getAllRentalItems().stream()
                     .map(RentalItemDtoConverter::toDto)
-                    .collect(Collectors.toList());
+                    .toList();
     }
 
     @Override
     public List<UserAccountClientDto> getAllUserAccounts() {
         return application.getAllUserAccounts().stream()
                     .map(UserAccountDtoConverter::toDto)
-                    .collect(Collectors.toList());
+                    .toList();
     }
 
     @Override
