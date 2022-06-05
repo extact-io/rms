@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -77,7 +76,7 @@ public class ConfiguredCdiBeanBinder {
                 .map(s -> s.substring(0, endPosOfPrefix + s.indexOf('.', endPosOfPrefix) - (endPosOfPrefix)))
                 .distinct()
                 .map(s -> new AliasKey(s.substring(endPosOfPrefix), s))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 
@@ -186,7 +185,7 @@ public class ConfiguredCdiBeanBinder {
                     .filter(s -> s.startsWith(parent.listRegisterPrefix))
                     .map(s -> s.substring(0, endPosOfPrefix + s.indexOf('.', endPosOfPrefix) - endPosOfPrefix))
                     .distinct()
-                    .collect(Collectors.toList());
+                    .toList();
 
             List<ConfiguredCdiBean> configCdiBeans = new ArrayList<>();
             for (int i = 0; i < keys.size(); i++) {

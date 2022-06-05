@@ -17,7 +17,7 @@
     ※その他profileはgenJavaClient, genJsClient, genC#Client
 
     <コンテンツ系>
-    1. サイトの生成（./target/stagingに生成される） 
+    1. サイトの生成（./target/stagingに生成される）
     mvn -Pcli,all clean site site:stage
     2. サイトの生成 and Upload（./target/stagingと同期される）
     mvn -Pcli,all clean site site:stage scm-publish:publish-scm
@@ -41,7 +41,7 @@
   <properties>
     <!-- environment settings -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
     <!-- library versions -->

@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,8 +18,8 @@ import io.extact.rms.application.domain.RentalItem;
 import io.extact.rms.application.domain.Reservation;
 import io.extact.rms.application.domain.UserAccount;
 import io.extact.rms.application.exception.BusinessFlowException;
-import io.extact.rms.application.exception.RmsSystemException;
 import io.extact.rms.application.exception.BusinessFlowException.CauseType;
+import io.extact.rms.application.exception.RmsSystemException;
 import io.extact.rms.application.service.RentalItemService;
 import io.extact.rms.application.service.ReservationService;
 import io.extact.rms.application.service.UserAccountService;
@@ -80,7 +79,7 @@ public class RentalReservationApplicationImpl implements RentalReservationApplic
         }
         return reservations.stream()
                 .map(this::toTraversedReservation)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -88,7 +87,7 @@ public class RentalReservationApplicationImpl implements RentalReservationApplic
         var reservations = reservationService.findByReserverId(reserverId);
         return reservations.stream()
                 .map(this::toTraversedReservation)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -96,17 +95,17 @@ public class RentalReservationApplicationImpl implements RentalReservationApplic
         var reservations = reservationService.findByRentalItemId(rentalItemId);
         return reservations.stream()
                 .map(this::toTraversedReservation)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<RentalItem> findCanRentedItemAtTerm(LocalDateTime from, LocalDateTime to) {
         var reservedItemIds = reservationService.findOverlappedReservations(from, to).stream()
                 .map(Reservation::getRentalItemId)
-                .collect(Collectors.toList());
+                .toList();
         return rentalItemService.findAll().stream()
                 .filter(item -> !reservedItemIds.contains(item.getId()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -119,7 +118,7 @@ public class RentalReservationApplicationImpl implements RentalReservationApplic
         var reservations = reservationService.findAll();
         return reservations.stream()
                 .map(this::toTraversedReservation)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

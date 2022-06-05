@@ -3,10 +3,6 @@ package io.extact.rms.client.console.ui.member;
 import static io.extact.rms.client.console.ui.ClientConstants.*;
 import static io.extact.rms.client.console.ui.textio.TextIoUtils.*;
 
-import java.util.stream.Collectors;
-
-import lombok.RequiredArgsConstructor;
-
 import io.extact.rms.client.api.RentalReservationClientApi;
 import io.extact.rms.client.api.dto.RentalItemClientDto;
 import io.extact.rms.client.api.dto.ReservationClientDto;
@@ -16,6 +12,7 @@ import io.extact.rms.client.console.ui.ClientConstants;
 import io.extact.rms.client.console.ui.TransitionMap.RmsScreen;
 import io.extact.rms.client.console.ui.TransitionMap.Transition;
 import io.extact.rms.client.console.ui.textio.TextIoUtils;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class ReserveRentalItemScreen implements RmsScreen {
@@ -42,7 +39,7 @@ public class ReserveRentalItemScreen implements RmsScreen {
                 .withSelectableValues(
                         items.stream()
                             .map(RentalItemClientDto::getId)
-                            .collect(Collectors.toList()),
+                            .toList(),
                         SCREEN_BREAK_VALUE)
                 .read("レンタル品番号");
         if (TextIoUtils.isBreak(selectedItem)) {

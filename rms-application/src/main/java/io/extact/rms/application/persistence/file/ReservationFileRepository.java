@@ -3,7 +3,6 @@ package io.extact.rms.application.persistence.file;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -30,7 +29,7 @@ public class ReservationFileRepository extends AbstractFileRepository<Reservatio
                 .map(this.getConverter()::toEntity)
                 .filter(reservation -> reservation.getStartDateTime().toLocalDate().equals(startDate))
                 .filter(reservation -> reservation.getRentalItemId() == rentalItemId)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -38,7 +37,7 @@ public class ReservationFileRepository extends AbstractFileRepository<Reservatio
         return this.load().stream()
                 .map(this.getConverter()::toEntity)
                 .filter(reservation -> reservation.getUserAccountId() == reserverId)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -46,7 +45,7 @@ public class ReservationFileRepository extends AbstractFileRepository<Reservatio
         return this.load().stream()
                 .map(this.getConverter()::toEntity)
                 .filter(reservation -> reservation.getRentalItemId() == rentalItemId)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     //@Override
@@ -56,7 +55,7 @@ public class ReservationFileRepository extends AbstractFileRepository<Reservatio
                 .map(this.getConverter()::toEntity)
                 .filter(reservation -> reservation.getRentalItemId() == rentalItemId)
                 .filter(reservation -> reservation.getReservePeriod().isOverlappedBy(conditionOfPeriod))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -72,6 +71,6 @@ public class ReservationFileRepository extends AbstractFileRepository<Reservatio
         return this.load().stream()
                 .map(this.getConverter()::toEntity)
                 .filter(reservation -> reservation.getReservePeriod().isOverlappedBy(conditionOfPeriod))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

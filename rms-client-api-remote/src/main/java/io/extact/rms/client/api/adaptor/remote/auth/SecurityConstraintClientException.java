@@ -18,13 +18,10 @@ public class SecurityConstraintClientException extends RentalReservationClientEx
     }
 
     private static String getMessage(Response response) {
-        switch (response.getStatus()) {
-            case 401:
-                return "認証エラー";
-            case 403:
-                return "認可エラー";
-            default:
-                return "不明のエラー";
-        }
+        return switch (response.getStatus()) {
+            case 401 -> "認証エラー";
+            case 403 -> "認可エラー";
+            default -> "不明のエラー";
+        };
     }
 }

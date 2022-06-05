@@ -9,16 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 
-import lombok.Cleanup;
-
 import io.extact.rms.application.persistence.file.IoSystemException;
+import lombok.Cleanup;
 
 /**
  * ファイルアクセスクラス
@@ -60,7 +58,7 @@ public class FileAccessor {
     public int load(List<String[]> dataList) throws IOException {
         @Cleanup CSVParser parser = CSVParser.parse(filePath, StandardCharsets.UTF_8, CSVFormat.RFC4180);
         parser.getRecords().stream()
-                .map(record -> StreamSupport.stream(record.spliterator(), false).collect(Collectors.toList()))
+                .map(record -> StreamSupport.stream(record.spliterator(), false).toList())
                 .map(values -> {
                     var array = new String[values.size()];
                     values.toArray(array);

@@ -2,7 +2,6 @@ package io.extact.rms.external.webapi.mapper;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -12,11 +11,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 
-import lombok.extern.slf4j.Slf4j;
-
 import io.extact.rms.application.exception.BusinessFlowException;
 import io.extact.rms.application.exception.RmsSystemException;
 import io.extact.rms.external.webapi.mapper.ValidationErrorInfo.ValidationErrorItem;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ServerExceptionMappers {
@@ -36,21 +34,11 @@ public class ServerExceptionMappers {
 
             var errorInfo = new GenericErrorInfo(exception.getClass().getSimpleName(), exception.getMessage());
 
-            Status status;
-            switch (exception.getCauseType()) {
-                case NOT_FOUND:
-                    status =  Status.NOT_FOUND;
-                    break;
-                case DUPRICATE:
-                case REFERED:
-                    status =  Status.CONFLICT;
-                    break;
-                case FORBIDDEN:
-                    status =  Status.FORBIDDEN;
-                    break;
-                default:
-                    throw new IllegalStateException("unknown causeType:" + exception.getCauseType(), exception);
-            }
+            Status status = switch (exception.getCauseType()) {
+                case NOT_FOUND          -> Status.NOT_FOUND;
+                case DUPRICATE, REFERED -> Status.CONFLICT;
+                case FORBIDDEN          -> Status.FORBIDDEN;
+            };
 
             return Response
                         .status(status)
@@ -87,7 +75,7 @@ public class ServerExceptionMappers {
             Set<ConstraintViolation<?>> constraintViolations = exception.getConstraintViolations();
             List<ValidationErrorItem> errorItems = constraintViolations.stream()
                     .map(v -> new ValidationErrorItem(v.getPropertyPath().toString(), v.getMessage()))
-                    .collect(Collectors.toList());
+                    .toList();
 
             var validationErrorInfo = new ValidationErrorInfo(
                     exception.getClass().getSimpleName(),

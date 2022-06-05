@@ -16,6 +16,13 @@ import io.extact.rms.platform.env.Environment;
 
 @Slf4j
 public class ConsoleMain {
+    private static final String START_UP_LOGO ="""
+                ____    __  ___  _____
+               / __ \\  /  |/  / / ___/
+              / /_/ / / /|_/ /  \\__ \\
+             / _, _/ / /  / /_ ___/ /
+            /_/ |_(_)_/  /_/(_)____(_)
+            """;
 
     public static void main(String[] args) throws Exception {
 
@@ -65,12 +72,6 @@ public class ConsoleMain {
     }
 
     private static void startupLogo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("    ____    __  ___  _____").append(System.lineSeparator());
-        sb.append("   / __ \\  /  |/  / / ___/").append(System.lineSeparator());
-        sb.append("  / /_/ / / /|_/ /  \\__ \\").append(System.lineSeparator());
-        sb.append(" / _, _/ / /  / /_ ___/ /").append(System.lineSeparator());
-        sb.append("/_/ |_(_)_/  /_/(_)____(_)");
-        TextIoUtils.println(sb.toString());
+        TextIoUtils.println(START_UP_LOGO);
     }
 }

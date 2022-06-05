@@ -138,7 +138,7 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 
 ## 利用ライブラリと準拠API
 - ランタイム系
-  - Java11（OpenJDK v11.0.8）
+  - Java17（OpenJDK v17.0.3）
   - Bean Validation 2.0(Hibernate Validator 6.1.2)
   - [MicroProfile 3.3](https://download.eclipse.org/microprofile/microprofile-3.3/microprofile-spec-3.3.html)
     - Server（Netty 4.1）

@@ -3,7 +3,6 @@ package io.extact.rms.application.persistence.jpa;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -29,7 +28,7 @@ public class ReservationJpaRepository implements ReservationRepository, JpaCrudR
                     .setParameter(1, rentalItemId)
                     .getResultList().stream()
                     .filter(reservation -> reservation.getStartDateTime().toLocalDate().equals(startDate))
-                    .collect(Collectors.toList());
+                    .toList();
     }
 
     @Override
@@ -54,7 +53,7 @@ public class ReservationJpaRepository implements ReservationRepository, JpaCrudR
                     .setParameter(1, rentalItemId)
                     .getResultList().stream()
                     .filter(reservation -> reservation.getReservePeriod().isOverlappedBy(period))
-                    .collect(Collectors.toList());
+                    .toList();
     }
 
     @Override
@@ -69,7 +68,7 @@ public class ReservationJpaRepository implements ReservationRepository, JpaCrudR
         var period = new Reservation.DateTimePeriod(from, to);
         return findAll().stream()
                 .filter(reservation -> reservation.getReservePeriod().isOverlappedBy(period))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
