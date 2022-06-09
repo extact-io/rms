@@ -49,7 +49,7 @@
     <version.lib.security-api>1.0</version.lib.security-api>
     <version.lib.jose4j>0.7.12</version.lib.jose4j>
     <version.lib.junit-platform>1.8.2</version.lib.junit-platform>
-    <version.lib.assertj>3.22.0</version.lib.assertj>
+    <version.lib.assertj>3.23.1</version.lib.assertj>
     <version.lib.archunit>0.23.1</version.lib.archunit>
     <version.lib.doxia-module-markdown>1.11.1</version.lib.doxia-module-markdown>
     <version.lib.hibernate-validator>6.1.2.Final</version.lib.hibernate-validator>
@@ -66,13 +66,13 @@
     <version.plugin.maven-site>3.12.0</version.plugin.maven-site>
     <version.plugin.maven-reports>3.3.0</version.plugin.maven-reports>
     <version.plugin.maven-wagon-scm>3.5.1</version.plugin.maven-wagon-scm>
-    <version.plugin.maven-maven-scm-api>1.12.2</version.plugin.maven-maven-scm-api>
+    <version.plugin.maven-maven-scm-api>1.13.0</version.plugin.maven-maven-scm-api>
     <version.plugin.maven-scm-publish>3.1.0</version.plugin.maven-scm-publish>
     <version.plugin.javadoc>3.4.0</version.plugin.javadoc>
     <version.plugin.jandex>1.1.0</version.plugin.jandex>
     <version.plugin.helidon-build-tools>2.3.5</version.plugin.helidon-build-tools>
     <version.plugin.jacoco>0.8.8</version.plugin.jacoco>
-    <version.plugin.openapi-gen>5.4.0</version.plugin.openapi-gen>
+    <version.plugin.openapi-gen>6.0.0</version.plugin.openapi-gen>
     <version.plugin.jdepend>2.0</version.plugin.jdepend>
     <version.plugin.stopbugs>4.7.0.0</version.plugin.stopbugs>
     <version.plugin.pmd>3.16.0</version.plugin.pmd>
