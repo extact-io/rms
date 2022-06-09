@@ -91,7 +91,7 @@
     </dependency>
     <dependency>
       <groupId>io.helidon.config</groupId>
-      <artifactId>helidon-config-yaml</artifactId>
+      <artifactId>helidon-config-yaml-mp</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
