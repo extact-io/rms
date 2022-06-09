@@ -9,5 +9,6 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
- 
+    ignore:
+      - dependency-name: "org.hibernate.validator-hibernate-validator-7.0.4.Final" # use jakarta.* package
       
