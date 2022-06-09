@@ -75,7 +75,7 @@
     <version.plugin.openapi-gen>6.0.0</version.plugin.openapi-gen>
     <version.plugin.jdepend>2.0</version.plugin.jdepend>
     <version.plugin.stopbugs>4.7.0.0</version.plugin.stopbugs>
-    <version.plugin.pmd>3.16.0</version.plugin.pmd>
+    <version.plugin.pmd>3.17.0</version.plugin.pmd>
     <version.plugin.jxr>3.2.0</version.plugin.jxr>
     <!-- sonarcloud setting -->
     <sonar.projectKey>extact-io_rms</sonar.projectKey>
