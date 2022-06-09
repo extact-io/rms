@@ -45,7 +45,7 @@
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
     <!-- library versions -->
-    <version.helidon>2.5.0</version.helidon>
+    <version.helidon>2.5.1</version.helidon>
     <version.lib.security-api>1.0</version.lib.security-api>
     <version.lib.jose4j>0.7.12</version.lib.jose4j>
     <version.lib.junit-platform>1.8.2</version.lib.junit-platform>
