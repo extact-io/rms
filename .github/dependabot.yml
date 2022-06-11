@@ -10,5 +10,6 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
-      - dependency-name: "org.hibernate.validator-hibernate-validator-7.0.4.Final" # use jakarta.* package
-      
+      - dependency-name: "org.hibernate.validator:hibernate-validator" # use jakarta.* package
+      - dependency-name: "org.apache.maven.plugins:maven-site-plugin" # JDepnd plugins fails
+      - dependency-name: "org.apache.maven.plugins:maven-javadoc-plugin" # depending on the version of maven-site-plugin
