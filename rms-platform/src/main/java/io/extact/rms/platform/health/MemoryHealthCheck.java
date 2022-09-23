@@ -5,17 +5,16 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
 import java.util.function.BiFunction;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Liveness;
 import org.eclipse.microprofile.health.Readiness;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
 @ApplicationScoped
@@ -53,7 +52,7 @@ public class MemoryHealthCheck {
                 .withData("max", memoryUsage.getMax() / (1024 * 1024))   // MByte
                 .withData("method", evaluator.name())
                 .withData("threshold", evaluator.threshold())
-                .state(evaluator.liveness(memoryUsage))
+                .status(evaluator.liveness(memoryUsage))
                 .build();
         };
     }

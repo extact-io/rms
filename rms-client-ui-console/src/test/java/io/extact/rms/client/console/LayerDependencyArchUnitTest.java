@@ -119,7 +119,7 @@ public class LayerDependencyArchUnitTest {
      * ・Apache Commons Lang(org.apache.commons.lang3..)
      * ・SLF4J(org.slf4j..)
      * ・MicroProfile API(org.eclipse.microprofile..)
-     * ・JavaEE API(javax..)
+     * ・JavaEE API(jakarta..)
      * ・JavaSE API(java..)
      * </pre>
      * エントリポイントとなるMainクラス以外はHelidon(io.helidon..)に直接依存しないこと
@@ -143,7 +143,7 @@ public class LayerDependencyArchUnitTest {
                                 "org.apache.commons.lang3..",
                                 "org.slf4j..",
                                 "org.eclipse.microprofile..",
-                                "javax..",
+                                "jakarta..",
                                 "java.."
                             )
                             // https://github.com/TNG/ArchUnit/issues/183 による配列型の個別追加

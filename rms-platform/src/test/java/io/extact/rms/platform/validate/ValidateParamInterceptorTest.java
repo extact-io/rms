@@ -2,13 +2,13 @@ package io.extact.rms.platform.validate;
 
 import static org.assertj.core.api.Assertions.*;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.groups.Default;
-import javax.ws.rs.DELETE;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.groups.Default;
+import jakarta.ws.rs.DELETE;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

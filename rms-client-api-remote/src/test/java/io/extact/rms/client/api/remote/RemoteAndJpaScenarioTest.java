@@ -2,8 +2,8 @@ package io.extact.rms.client.api.remote;
 
 import static org.assertj.core.api.Assertions.*;
 
-import javax.inject.Inject;
-import javax.ws.rs.WebApplicationException;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.WebApplicationException;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;

@@ -4,7 +4,7 @@ import static io.extact.rms.client.console.ui.ClientConstants.*;
 
 import java.util.logging.LogManager;
 
-import javax.enterprise.inject.spi.CDI;
+import jakarta.enterprise.inject.spi.CDI;
 
 import org.slf4j.bridge.SLF4JBridgeHandler;
 

@@ -1,7 +1,7 @@
 package io.extact.rms.platform.jwt;
 
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
+import jakarta.ws.rs.core.Feature;
+import jakarta.ws.rs.core.FeatureContext;
 
 import io.extact.rms.platform.jwt.consumer.JwtValidateRequestFilter;
 import io.extact.rms.platform.jwt.provider.JwtProvideResponseFilter;

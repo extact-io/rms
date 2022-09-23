@@ -22,8 +22,8 @@ public class RemoteApiDependencyArchUnitTest {
      * ・Apache Commons Lang(org.apache.commons.lang3..)
      * ・SLF4J(org.slf4j..)
      * ・MicroProfile RestClient
-     * ・CDI(javax..)
-     * ・JAX-RS(javax..)
+     * ・CDI(jakarta..)
+     * ・JAX-RS(jakarta..)
      * ・JavaSE API(java..)
      * </pre>
      */
@@ -39,12 +39,12 @@ public class RemoteApiDependencyArchUnitTest {
                                 "org.apache.commons.lang3..",
                                 "org.slf4j..",
                                 "org.eclipse.microprofile.rest.client..",
-                                "javax.annotation..",
-                                "javax.inject..",
-                                "javax.enterprise.inject..",
-                                "javax.enterprise.context..",
-                                "javax.enterprise.event..",
-                                "javax.ws.rs..",
+                                "jakarta.annotation..",
+                                "jakarta.inject..",
+                                "jakarta.enterprise.inject..",
+                                "jakarta.enterprise.context..",
+                                "jakarta.enterprise.event..",
+                                "jakarta.ws.rs..",
                                 "java.."
                             )
                             // https://github.com/TNG/ArchUnit/issues/183 による配列型の個別追加

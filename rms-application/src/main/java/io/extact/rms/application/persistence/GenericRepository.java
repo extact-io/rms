@@ -2,7 +2,7 @@ package io.extact.rms.application.persistence;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import io.extact.rms.platform.validate.ValidateParam;
 

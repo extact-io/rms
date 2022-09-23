@@ -1,7 +1,7 @@
 package io.extact.rms.external.webapi.mapper;
 
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
+import jakarta.ws.rs.core.Feature;
+import jakarta.ws.rs.core.FeatureContext;
 
 import io.extact.rms.external.webapi.mapper.ServerExceptionMappers.BusinessFlowExceptionMapper;
 import io.extact.rms.external.webapi.mapper.ServerExceptionMappers.ConstraintExceptionMapper;

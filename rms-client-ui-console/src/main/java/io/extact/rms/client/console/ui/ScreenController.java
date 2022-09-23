@@ -1,8 +1,8 @@
 package io.extact.rms.client.console.ui;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 import io.extact.rms.client.api.RentalReservationClientApi;
 import io.extact.rms.client.api.login.LoggedInEvent;

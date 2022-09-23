@@ -2,25 +2,24 @@ package io.extact.rms.application.persistence.jpa;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.validation.Valid;
-
 import io.extact.rms.application.domain.IdAccessable;
 import io.extact.rms.application.domain.constraint.ValidationGroups.Add;
 import io.extact.rms.application.domain.constraint.ValidationGroups.Update;
 import io.extact.rms.application.persistence.GenericRepository;
 import io.extact.rms.platform.validate.ValidateGroup;
 import io.extact.rms.platform.validate.ValidateParam;
+import jakarta.persistence.EntityManager;
+import jakarta.validation.Valid;
 
-public interface JpaCrudRepository<T extends IdAccessable> extends GenericRepository<T> {
+public abstract class JpaCrudRepository<T extends IdAccessable> implements GenericRepository<T> {
 
     @Override
-    default T get(int id) {
+    public T get(int id) {
         return this.getEntityManage().find(this.getTargetClass(), id);
     }
 
     @Override
-    default List<T> findAll() {
+    public List<T> findAll() {
         var jpql = "select e from " + this.getTargetClass().getSimpleName() + " e order by e.id";
         return this.getEntityManage().createQuery(jpql, this.getTargetClass())
                 .getResultList();
@@ -29,7 +28,7 @@ public interface JpaCrudRepository<T extends IdAccessable> extends GenericReposi
     @ValidateParam
     @ValidateGroup(groups = Add.class)
     @Override
-    default void add(@Valid T entity) {
+    public void add(@Valid T entity) {
         this.getEntityManage().persist(entity);
         this.getEntityManage().flush();
     }
@@ -37,7 +36,7 @@ public interface JpaCrudRepository<T extends IdAccessable> extends GenericReposi
     @ValidateParam
     @ValidateGroup(groups = Update.class)
     @Override
-    default T update(@Valid T entity) {
+    public T update(@Valid T entity) {
         if (!this.getEntityManage().contains(entity) && get(entity.getId()) == null) {
             return null;
         }
@@ -47,12 +46,12 @@ public interface JpaCrudRepository<T extends IdAccessable> extends GenericReposi
     }
 
     @Override
-    default void delete(T entity) {
+    public void delete(T entity) {
         this.getEntityManage().remove(entity);
         this.getEntityManage().flush();
     }
 
-    EntityManager getEntityManage();
+    protected abstract EntityManager getEntityManage();
 
-    Class<T> getTargetClass();
+    protected abstract Class<T> getTargetClass();
 }

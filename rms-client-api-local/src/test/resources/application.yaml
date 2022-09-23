@@ -14,7 +14,7 @@ configdump:
   filters:
     #- filter: security
     - filter: server
-    #- filter: javax
+    #- filter: jakarta
     #- filter: cors
     #- filter: csv
     #- filter: persistence

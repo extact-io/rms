@@ -3,7 +3,7 @@ package io.extact.rms.platform.jwt.impl.jose4j;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.security.enterprise.CallerPrincipal;
+import jakarta.security.enterprise.CallerPrincipal;
 
 import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;

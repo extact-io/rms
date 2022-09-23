@@ -22,9 +22,9 @@ public class WebApiDependencyArchUnitTest {
      * ・Apache Commons Lang(org.apache.commons.lang3..)
      * ・SLF4J(org.slf4j..)
      * ・MicroProfile OpenAPI
-     * ・CDI(javax..)
-     * ・JAX-RS(javax..)
-     * ・BeanValidation(javax..)
+     * ・CDI(jakarta..)
+     * ・JAX-RS(jakarta..)
+     * ・BeanValidation(jakarta..)
      * ・JavaSE API(java..)
      * </pre>
      */
@@ -42,12 +42,12 @@ public class WebApiDependencyArchUnitTest {
                                 "org.slf4j..",
                                 "org.eclipse.microprofile.jwt..",
                                 "org.eclipse.microprofile.openapi..",
-                                "javax.annotation..",
-                                "javax.inject..",
-                                "javax.enterprise.inject..",
-                                "javax.enterprise.context..",
-                                "javax.validation..",
-                                "javax.ws.rs..",
+                                "jakarta.annotation..",
+                                "jakarta.inject..",
+                                "jakarta.enterprise.inject..",
+                                "jakarta.enterprise.context..",
+                                "jakarta.validation..",
+                                "jakarta.ws.rs..",
                                 "java.."
                             )
                             // https://github.com/TNG/ArchUnit/issues/183 による配列型の個別追加

@@ -2,8 +2,8 @@ package io.extact.rms.application.integration;
 
 import static org.assertj.core.api.Assertions.*;
 
-import javax.enterprise.inject.spi.CDI;
-import javax.validation.ConstraintViolationException;
+import jakarta.enterprise.inject.spi.CDI;
+import jakarta.validation.ConstraintViolationException;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

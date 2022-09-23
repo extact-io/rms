@@ -4,7 +4,7 @@ import static io.extact.rms.platform.jwt.impl.jose4j.KeyCreators.*;
 
 import java.util.Objects;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.jwt.Claims;

@@ -1,7 +1,7 @@
 package io.extact.rms.platform.jaxrs.converter;
 
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
+import jakarta.ws.rs.core.Feature;
+import jakarta.ws.rs.core.FeatureContext;
 
 // register by @RegisterProvider or Application#getClasseses()
 public class RmsTypeParameterFeature implements Feature {

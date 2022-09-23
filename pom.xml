@@ -45,14 +45,13 @@
     <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
     <!-- library versions -->
-    <version.helidon>2.5.1</version.helidon>
-    <version.lib.security-api>1.0</version.lib.security-api>
+    <version.helidon>3.0.1</version.helidon>
+    <version.lib.security-api>2.0.0</version.lib.security-api>
     <version.lib.jose4j>0.7.12</version.lib.jose4j>
     <version.lib.junit-platform>1.8.2</version.lib.junit-platform>
     <version.lib.assertj>3.23.1</version.lib.assertj>
     <version.lib.archunit>0.23.1</version.lib.archunit>
     <version.lib.doxia-module-markdown>1.11.1</version.lib.doxia-module-markdown>
-    <version.lib.hibernate-validator>6.1.2.Final</version.lib.hibernate-validator>
     <version.lib.commons-lang>3.12.0</version.lib.commons-lang>
     <version.lib.commons-csv>1.9.0</version.lib.commons-csv>
     <version.lib.lombok>1.18.24</version.lib.lombok>
@@ -194,8 +193,8 @@
         <version>${version.helidon}</version>
       </dependency>
       <dependency>
-        <groupId>javax.security.enterprise</groupId>
-        <artifactId>javax.security.enterprise-api</artifactId>
+        <groupId>jakarta.security.enterprise</groupId>
+        <artifactId>jakarta.security.enterprise-api</artifactId>
         <version>${version.lib.security-api}</version>
       </dependency>
       <dependency>
@@ -232,6 +231,11 @@
         <groupId>org.beryx</groupId>
         <artifactId>text-io</artifactId>
         <version>${version.lib.text-io}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.4.200</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -4,11 +4,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.extension.AfterAllCallback;
@@ -23,6 +18,11 @@ import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.platform.commons.support.AnnotationSupport;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 
 /**
  * Acquire and release EntityManager in pre-processing and post-processing for each test.
@@ -139,7 +139,7 @@ public class JpaTransactionalExtension implements
                 .toList();
         return keys.stream().collect(Collectors.toMap(
                     key -> StringUtils.remove(key, "test.db.connection.properties."), // prop-key
-                    key -> config.getValue(key, String.class) // prop-value
+                    key -> config.getOptionalValue(key, String.class).orElse("") // prop-value
                 ));
     }
 

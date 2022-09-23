@@ -1,18 +1,17 @@
 package io.extact.rms.application.persistence.jpa;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-
 import io.extact.rms.application.domain.UserAccount;
-import io.extact.rms.application.persistence.UserAccountRepository;
 import io.extact.rms.application.persistence.GenericRepository.ApiType;
+import io.extact.rms.application.persistence.UserAccountRepository;
 import io.extact.rms.platform.extension.EnabledIfRuntimeConfig;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 
 @ApplicationScoped
 @EnabledIfRuntimeConfig(propertyName = ApiType.PROP_NAME, value = ApiType.JPA)
-public class UserAccountJpaRepository implements UserAccountRepository, JpaCrudRepository<UserAccount> {
+public class UserAccountJpaRepository extends JpaCrudRepository<UserAccount> implements UserAccountRepository {
 
     @PersistenceContext
     private EntityManager em;

@@ -22,7 +22,7 @@ public class ConsoleDependencyArchUnitTest {
      * ・Apache Commons Lang(org.apache.commons.lang3..)
      * ・SLF4J(org.slf4j..)
      * ・MicroProfile Config(org.eclipse.microprofile.config..)
-     * ・CDI API(javax.inject.., javax.context..)
+     * ・CDI API(jakarta.inject.., jakarta.context..)
      * ・JavaSE API(java..)
      * </pre>
      * エントリポイントとなるMainクラス以外はHelidon(io.helidon..)に直接依存しないこと
@@ -41,9 +41,9 @@ public class ConsoleDependencyArchUnitTest {
                                 "org.slf4j..",
                                 "org.eclipse.microprofile.config..",
                                 "org.beryx.textio..",
-                                "javax.inject..",  // part of CDI
-                                "javax.enterprise.context..", // part of CDI
-                                "javax.enterprise.event..", // part of CDI
+                                "jakarta.inject..",  // part of CDI
+                                "jakarta.enterprise.context..", // part of CDI
+                                "jakarta.enterprise.event..", // part of CDI
                                 "java.."
                             )
                             // https://github.com/TNG/ArchUnit/issues/183 による配列型の個別追加

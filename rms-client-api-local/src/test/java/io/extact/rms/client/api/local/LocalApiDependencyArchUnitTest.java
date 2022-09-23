@@ -21,7 +21,7 @@ public class LocalApiDependencyArchUnitTest {
      * ・アプリ自身のクラス(io.extact.rms..)
      * ・Apache Commons Lang(org.apache.commons.lang3..)
      * ・SLF4J(org.slf4j..)
-     * ・Interceptor API(javax..)
+     * ・Interceptor API(jakarta..)
      * ・JavaSE API(java..)
      * </pre>
      */
@@ -36,9 +36,9 @@ public class LocalApiDependencyArchUnitTest {
                                 "io.extact.rms..",
                                 "org.apache.commons.lang3..",
                                 "org.slf4j..",
-                                "javax.inject..",
-                                "javax.interceptor..",
-                                "javax.annotation..",
+                                "jakarta.inject..",
+                                "jakarta.interceptor..",
+                                "jakarta.annotation..",
                                 "java.."
                             )
                             // https://github.com/TNG/ArchUnit/issues/183 による配列型の個別追加

@@ -42,13 +42,13 @@ public class ApplicationDependencyArchUnitTest {
                                 "org.apache.commons.lang3..",
                                 "org.slf4j..",
                                 "org.eclipse.microprofile.config..",
-                                "javax.inject..",
-                                "javax.enterprise.inject..",
-                                "javax.enterprise.context..",
-                                "javax.enterprise.event..",
-                                "javax.validation..",
-                                "javax.transaction..",
-                                "javax.persistence..",
+                                "jakarta.inject..",
+                                "jakarta.enterprise.inject..",
+                                "jakarta.enterprise.context..",
+                                "jakarta.enterprise.event..",
+                                "jakarta.validation..",
+                                "jakarta.transaction..",
+                                "jakarta.persistence..",
                                 "java.."
                             )
                             // https://github.com/TNG/ArchUnit/issues/183 による配列型の個別追加
@@ -112,9 +112,9 @@ public class ApplicationDependencyArchUnitTest {
                         );
 
     /**
-     * javax.persistence.*への依存はjpaパッケージのみの定義
+     * jakarta.persistence.*への依存はjpaパッケージのみの定義
      * <pre>
-     * ・javax.persistence.*に依存するのはpersistence.jpaパッケージとdomain(entity)パッケージの2つであること
+     * ・jakarta.persistence.*に依存するのはpersistence.jpaパッケージとdomain(entity)パッケージの2つであること
      * </pre>
      */
     @ArchTest
@@ -127,7 +127,7 @@ public class ApplicationDependencyArchUnitTest {
             .should()
                 .dependOnClassesThat()
                     .resideInAnyPackage(
-                        "javax.persistence.."
+                        "jakarta.persistence.."
                         );
 
     /**
@@ -146,8 +146,8 @@ public class ApplicationDependencyArchUnitTest {
                         .resideInAnyPackage(
                                 "io.extact.rms.application.domain..",
                                 "org.apache.commons.lang3..",
-                                "javax.persistence..",
-                                "javax.validation..",
+                                "jakarta.persistence..",
+                                "jakarta.validation..",
                                 "java.."
                                 );
 }

@@ -1,18 +1,17 @@
 package io.extact.rms.application.persistence.jpa;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-
 import io.extact.rms.application.domain.RentalItem;
-import io.extact.rms.application.persistence.RentalItemRepository;
 import io.extact.rms.application.persistence.GenericRepository.ApiType;
+import io.extact.rms.application.persistence.RentalItemRepository;
 import io.extact.rms.platform.extension.EnabledIfRuntimeConfig;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 
 @ApplicationScoped
 @EnabledIfRuntimeConfig(propertyName = ApiType.PROP_NAME, value = ApiType.JPA)
-public class RentalItemJpaRepository implements RentalItemRepository, JpaCrudRepository<RentalItem> {
+public class RentalItemJpaRepository extends JpaCrudRepository<RentalItem> implements RentalItemRepository {
 
     @PersistenceContext
     private EntityManager em;

@@ -7,12 +7,19 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.ConfigValue;
 import org.eclipse.microprofile.config.spi.ConfigSource;
+import org.eclipse.microprofile.config.spi.Converter;
 import org.jboss.weld.exceptions.UnsupportedOperationException;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 public class MapConfig implements Config {
 
     private Map<String, Object> configMap = new HashMap<>();
+
+    // -------------------------------------------------------- implements Config.
 
     @SuppressWarnings("unchecked")
     @Override
@@ -37,6 +44,30 @@ public class MapConfig implements Config {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public ConfigValue getConfigValue(String propertyName) {
+        return new ConfigValueImpl(propertyName, configMap.get(propertyName).toString(),
+                configMap.get(propertyName).toString(), this.toString(), 0);
+    }
+
+    @Override
+    public <T> Optional<Converter<T>> getConverter(Class<T> forType) {
+        return Optional.empty();
+    }
+
+    @Override
+    public <T> T unwrap(Class<T> type) {
+        if (type.equals(MapConfig.class)) {
+            return type.cast(this);
+        }
+        if (type.equals(Config.class)) {
+            return type.cast(this);
+        }
+        throw new UnsupportedOperationException("Cannot unwrap config into " + type.getName());
+    }
+
+    // -------------------------------------------------------- service methods.
+
     public void addThroghPath(String path) {
         long count = configMap.keySet().stream()
                     .filter(name -> name.startsWith(CONFIG_PREFIX + "passthrough"))
@@ -60,5 +91,17 @@ public class MapConfig implements Config {
     }
     public void setAllowedClockSeconds(int seconds) {
         configMap.put(CONFIG_PREFIX + "claim.allowedClockSeconds", seconds);
+    }
+
+    // -------------------------------------------------------- inner class.
+
+    @AllArgsConstructor
+    @Getter
+    static class ConfigValueImpl implements ConfigValue {
+        private String name;
+        private String value;
+        private String rawValue;
+        private String sourceName;
+        private int sourceOrdinal;
     }
 }

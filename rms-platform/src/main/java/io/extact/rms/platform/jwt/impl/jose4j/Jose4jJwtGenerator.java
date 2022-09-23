@@ -5,7 +5,7 @@ import static org.jose4j.jws.AlgorithmIdentifiers.*;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.config.Config;
 import org.jose4j.jws.JsonWebSignature;

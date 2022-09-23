@@ -3,7 +3,7 @@ package io.extact.rms.client.console.ui;
 import static io.extact.rms.client.console.ui.ClientConstants.*;
 import static io.extact.rms.client.console.ui.textio.TextIoUtils.*;
 
-import javax.enterprise.event.Event;
+import jakarta.enterprise.event.Event;
 
 import lombok.RequiredArgsConstructor;
 

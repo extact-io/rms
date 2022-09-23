@@ -1,7 +1,7 @@
 package io.extact.rms.client.console.login;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 
 import lombok.extern.slf4j.Slf4j;
 

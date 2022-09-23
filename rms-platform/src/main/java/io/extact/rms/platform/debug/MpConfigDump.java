@@ -6,13 +6,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-
 import org.eclipse.microprofile.config.Config;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Initialized;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -50,20 +49,20 @@ public class MpConfigDump {
                     .toList();
         }
 
-        Predicate<String> containsForwardMatch = new ContainsForwardMatch(filters);
+        Predicate<String> containsKeyword = new ContainsKeyworkWithForwardMatch(filters);
         String configDump = StreamSupport.stream(config.getPropertyNames().spliterator(), false)
-            .filter(containsForwardMatch)
-            .map(name -> name + "=" + config.getValue(name, String.class))
+            .filter(containsKeyword)
+            .map(name -> name + "=" + config.getOptionalValue(name, String.class).orElse(""))
             .sorted()
             .collect(Collectors.joining(System.lineSeparator()));
 
         log.debug(System.lineSeparator() + configDump);
     }
 
-    static class ContainsForwardMatch implements Predicate<String> {
+    static class ContainsKeyworkWithForwardMatch implements Predicate<String> {
 
         private List<String> filters;
-        ContainsForwardMatch(List<String> filters) {
+        ContainsKeyworkWithForwardMatch(List<String> filters) {
             this.filters = filters;
         }
 

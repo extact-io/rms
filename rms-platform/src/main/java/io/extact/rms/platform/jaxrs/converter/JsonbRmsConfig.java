@@ -2,10 +2,10 @@ package io.extact.rms.platform.jaxrs.converter;
 
 import java.time.format.DateTimeFormatter;
 
-import javax.json.bind.Jsonb;
-import javax.json.bind.JsonbBuilder;
-import javax.json.bind.JsonbConfig;
-import javax.ws.rs.ext.ContextResolver;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
+import jakarta.json.bind.JsonbConfig;
+import jakarta.ws.rs.ext.ContextResolver;
 
 import org.eclipse.microprofile.config.ConfigProvider;
 

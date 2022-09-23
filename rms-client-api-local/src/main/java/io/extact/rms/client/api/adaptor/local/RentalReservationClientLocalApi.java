@@ -3,7 +3,7 @@ package io.extact.rms.client.api.adaptor.local;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import io.extact.rms.application.RentalReservationApplication;
 import io.extact.rms.application.common.LoginUserUtils;

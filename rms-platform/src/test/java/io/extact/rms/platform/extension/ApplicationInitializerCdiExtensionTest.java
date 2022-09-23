@@ -2,10 +2,10 @@ package io.extact.rms.platform.extension;
 
 import static org.assertj.core.api.Assertions.*;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.spi.CDI;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.spi.CDI;
+import jakarta.inject.Inject;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

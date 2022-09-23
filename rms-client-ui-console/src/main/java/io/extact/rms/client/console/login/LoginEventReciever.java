@@ -2,8 +2,8 @@ package io.extact.rms.client.console.login;
 
 import java.time.LocalDateTime;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

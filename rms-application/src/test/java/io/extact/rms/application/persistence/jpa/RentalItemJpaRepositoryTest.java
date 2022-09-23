@@ -2,7 +2,7 @@ package io.extact.rms.application.persistence.jpa;
 
 import static io.extact.rms.test.assertj.ToStringAssert.*;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

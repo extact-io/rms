@@ -2,8 +2,8 @@ package io.extact.rms.application.service;
 
 import java.util.function.Consumer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import io.extact.rms.application.domain.RentalItem;
 import io.extact.rms.application.exception.BusinessFlowException;

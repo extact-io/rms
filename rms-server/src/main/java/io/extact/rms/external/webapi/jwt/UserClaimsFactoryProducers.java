@@ -1,7 +1,7 @@
 package io.extact.rms.external.webapi.jwt;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
 
 import io.extact.rms.platform.jwt.provider.JsonWebTokenGenerator.UserClaimsFactory;
 

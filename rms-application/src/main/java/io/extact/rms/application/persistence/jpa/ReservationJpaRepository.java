@@ -4,18 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import io.extact.rms.application.domain.Reservation;
 import io.extact.rms.application.persistence.GenericRepository.ApiType;
 import io.extact.rms.application.persistence.ReservationRepository;
 import io.extact.rms.platform.extension.EnabledIfRuntimeConfig;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @ApplicationScoped
 @EnabledIfRuntimeConfig(propertyName = ApiType.PROP_NAME, value = ApiType.JPA)
-public class ReservationJpaRepository implements ReservationRepository, JpaCrudRepository<Reservation> {
+public class ReservationJpaRepository extends JpaCrudRepository<Reservation> implements ReservationRepository {
 
     private static final String JPQL_SELECT_BY_RENTAL_ID = "select r from Reservation r where r.rentalItemId = ?1 order by r.id";
 
