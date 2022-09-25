@@ -139,31 +139,31 @@ Client/Sever方式で動作しClientからSeverモジュールへの直接的な
 ## 利用ライブラリと準拠API
 - ランタイム系
   - Java17（OpenJDK v17.0.3）
-  - Bean Validation 2.0(Hibernate Validator 6.1.2)
-  - [MicroProfile 3.3](https://download.eclipse.org/microprofile/microprofile-3.3/microprofile-spec-3.3.html)
+  - Bean Validation 3.0(Hibernate Validator 7.0.2)
+  - [MicroProfile 5.0](https://download.eclipse.org/microprofile/microprofile-5.0/microprofile-spec-5.0.html)
     - Server（Netty 4.1）
-    - CDI 2.0（Weld 3.1）
-    - JAX-RS 2.1（Jersey 2.3）
-    - [MicroProfile Rest Client 1.4](https://download.eclipse.org/microprofile/microprofile-rest-client-1.4.0/microprofile-rest-client-1.4.0.html)
-    - [MicroProfile Config 1.4](https://download.eclipse.org/microprofile/microprofile-config-1.4/microprofile-config-spec.html)
-    - [MicroProfile JWT-AUTH 1.1.1](https://download.eclipse.org/microprofile/microprofile-jwt-auth-1.1.1/microprofile-jwt-auth-spec.html)
-    - [MicroProfile Health 2.2](https://download.eclipse.org/microprofile/microprofile-health-2.2/microprofile-health-spec.html)
-    - [MicroProfile OpenAPI 1.2](https://download.eclipse.org/microprofile/microprofile-open-api-1.2/microprofile-openapi-spec-1.2.html)
+    - CDI 3.0（Weld 3.1）
+    - JAX-RS 3.0（Jersey 3.0）
+    - [MicroProfile Rest Client 3.0](https://download.eclipse.org/microprofile/microprofile-rest-client-3.0/microprofile-rest-client-spec-3.0.html)
+    - [MicroProfile Config 3.0.1](https://download.eclipse.org/microprofile/microprofile-config-3.0.1/microprofile-config-spec-3.0.1.html)
+    - [MicroProfile JWT-AUTH 2.0](https://download.eclipse.org/microprofile/microprofile-jwt-auth-2.0/microprofile-jwt-auth-spec-2.0.html)
+    - [MicroProfile Health 4.0](https://download.eclipse.org/microprofile/microprofile-health-4.0/microprofile-health-spec-4.0.html)
+    - [MicroProfile OpenAPI 3.0](https://download.eclipse.org/microprofile/microprofile-open-api-3.0/microprofile-openapi-spec-3.0.html)
   - Helidon MP v2.5.0
-    - [ReactiveWebserver](https://helidon.io/docs/v2/#/se/webserver/01_introduction)
-    - [Helidon MP JPA](https://helidon.io/docs/v2/#/mp/jpa/01_introduction) (EclipseLink 2.7)
-    - [CDI extension for HikariCP](https://helidon.io/docs/v2/#/mp/extensions/02_cdi_datasource-hikaricp) (HikariCP 3.4)
-    - [CDI extension for JTA](https://helidon.io/docs/v2/#/mp/extensions/05_cdi_jta) (Weld 3.1)
-    - [CORS in Helidon MP](https://helidon.io/docs/v2/#/mp/cors/01_introduction)
-    - [Configuration Secrets in Helidon Config](https://helidon.io/docs/v2/#/mp/security/03_configuration-secrets)
+    - [ReactiveWebserver](https://helidon.io/docs/v3/#/se/webserver)
+    - [Helidon MP JPA](https://helidon.io/docs/v3/#/mp/persistence#JPA) (EclipseLink 3.0.2)
+    - [CDI extension for HikariCP](https://helidon.io/docs/v3/#/mp/persistence#DS-HikariCP-Project-Setup) (HikariCP 5.0)
+    - [CDI extension for JTA](https://helidon.io/docs/v3/#/mp/persistence#JTA) (Weld 4.0)
+    - [CORS in Helidon MP](https://helidon.io/docs/v3/#/mp/cors/cors)
+    - [Configuration Secrets in Helidon Config](https://helidon.io/docs/v3/#/mp/security/configuration-secrets)
   - JWT
-    - [jose4j 0.7.9](https://bitbucket.org/b_c/jose4j/wiki/Home)
+    - [jose4j 0.7.12](https://bitbucket.org/b_c/jose4j/wiki/Home)
   - H2 Database
   - [Text-IO 3.4.1](https://github.com/beryx/text-io) -> コンソールアプリ向けのframework
 - テスト系
   - JUnit 5.7
   - [ArchUnit 0.23](https://www.archunit.org/)
-  - [Helidon MP Testing with JUnit5](https://helidon.io/docs/v2/#/mp/testing/01_testing)
+  - [Helidon MP Testing with JUnit5](https://helidon.io/docs/v3/#/mp/testing)
 
 *カッコ内は利用している実装
 
