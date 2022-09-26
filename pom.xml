@@ -71,7 +71,7 @@
     <version.plugin.jandex>1.1.0</version.plugin.jandex>
     <version.plugin.helidon-build-tools>2.3.5</version.plugin.helidon-build-tools>
     <version.plugin.jacoco>0.8.8</version.plugin.jacoco>
-    <version.plugin.openapi-gen>6.0.0</version.plugin.openapi-gen>
+    <version.plugin.openapi-gen>6.2.0</version.plugin.openapi-gen>
     <version.plugin.jdepend>2.0</version.plugin.jdepend>
     <version.plugin.stopbugs>4.7.0.0</version.plugin.stopbugs>
     <version.plugin.pmd>3.17.0</version.plugin.pmd>
